@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  @apply box-border;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white text-gray-700 font-sans;
+}
+
+section[id] {
+  scroll-margin-top: 72px;
+}
+
+.btn-primary {
+  @apply px-6 py-3 bg-primary text-white font-semibold rounded-lg
+         hover:bg-primary-dark transition-colors duration-200 shadow-sm;
+}
+
+.btn-outline {
+  @apply px-6 py-3 border-2 border-primary text-primary font-semibold
+         rounded-lg hover:bg-primary hover:text-white transition-colors duration-200;
+}
+
+.section-divider {
+  @apply w-12 h-1 bg-primary rounded-full mt-3 mb-6;
+}
