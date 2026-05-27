@@ -3,6 +3,8 @@ import { programas } from '../data/programas'
 import { CreditCard, Star, Sun, ArrowRight, Check } from 'lucide-react'
 import SectionHeader from './ui/SectionHeader'
 import Card from './ui/Card'
+import { getFormulariosActivos } from '../services/formularios.service.js'
+import { USE_LOCAL_STORAGE } from '../services/api.js'
 
 const iconMap = { CreditCard, Star, Sun }
 
@@ -16,31 +18,30 @@ const programaMap = {
 export default function Programas({ onProgramaClick }) {
   const [programasActivos, setProgramasActivos] = useState({})
 
-  // Leer formularios activos del localStorage del sistema
   useEffect(() => {
-    const leerFormulariosActivos = () => {
-      const formulariosStr = localStorage.getItem('sc_formularios')
-      const formularios = formulariosStr ? JSON.parse(formulariosStr) : []
+    let cancelled = false
 
-      // Crear mapa de programas activos
-      const activos = {}
-      formularios.forEach(f => {
-        if (f.activo) {
-          activos[f.programa] = {
-            formularioId: f.id,
-            activo: true,
-          }
-        }
-      })
-
-      setProgramasActivos(activos)
+    const cargar = async () => {
+      try {
+        const formularios = await getFormulariosActivos()
+        if (cancelled) return
+        const activos = {}
+        formularios.forEach(f => {
+          if (f.activo) activos[f.programa] = { formularioId: f.id, activo: true }
+        })
+        setProgramasActivos(activos)
+      } catch {
+        // silencioso: los programas quedan inactivos
+      }
     }
 
-    leerFormulariosActivos()
+    cargar()
 
-    // Escuchar cambios en localStorage desde otra pestaña/ventana
-    window.addEventListener('storage', leerFormulariosActivos)
-    return () => window.removeEventListener('storage', leerFormulariosActivos)
+    if (USE_LOCAL_STORAGE) {
+      window.addEventListener('storage', cargar)
+      return () => { cancelled = true; window.removeEventListener('storage', cargar) }
+    }
+    return () => { cancelled = true }
   }, [])
 
   return (

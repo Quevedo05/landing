@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { AlertCircle, CheckCircle, X } from 'lucide-react'
+import { crearTicket } from '../services/tickets.service.js'
 
 export default function FormularioDinamico({ formularioId, programa, title, onClose }) {
   const [formData, setFormData] = useState({
@@ -41,33 +42,20 @@ export default function FormularioDinamico({ formularioId, programa, title, onCl
         throw new Error('Email inválido')
       }
 
-      // Crear ticket en el localStorage del sistema
-      const ticketsStr = localStorage.getItem('sc_tickets') || '[]'
-      const tickets = JSON.parse(ticketsStr)
-
-      const nuevoTicket = {
-        id: 'uuid-' + Date.now(),
-        numero: (tickets.length || 0) + 1,
-        titulo: `Solicitud: ${programa}`,
-        descripcion: formData.descripcion || 'Sin detalles adicionales',
-        estado: 'abierto',
-        prioridad: 'media',
-        formularioId: formularioId,
+      const resultado = await crearTicket({
+        formularioId,
+        programa,
         ciudadanoNombre: formData.nombreCiudadano,
         ciudadanoEmail: formData.emailCiudadano,
         ciudadanoTelefono: formData.telefonoCiudadano || null,
-        creadoEn: new Date().toISOString(),
-        comentarios: [],
-      }
-
-      tickets.push(nuevoTicket)
-      localStorage.setItem('sc_tickets', JSON.stringify(tickets))
+        descripcion: formData.descripcion || 'Sin detalles adicionales',
+      })
 
       setMensaje({
         tipo: 'exito',
         titulo: 'Solicitud enviada exitosamente',
-        numero: nuevoTicket.numero,
-        detalle: `Su número de seguimiento es: ${nuevoTicket.numero}`,
+        numero: resultado.numero,
+        detalle: `Su número de seguimiento es: ${resultado.numero}`,
       })
 
       // Limpiar formulario después de 2 segundos

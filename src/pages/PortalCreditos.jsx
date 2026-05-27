@@ -3,6 +3,8 @@ import SectionHeader from '../components/ui/SectionHeader'
 import Card from '../components/ui/Card'
 import FormularioDinamico from '../components/FormularioDinamico'
 import { CreditCard, ArrowRight, Check, AlertCircle } from 'lucide-react'
+import { getFormulariosActivos } from '../services/formularios.service.js'
+import { USE_LOCAL_STORAGE } from '../services/api.js'
 
 // Mapeo para identificar créditos
 const programaMap = {
@@ -17,18 +19,26 @@ export default function PortalCreditos() {
   const [cargando, setCargando] = useState(true)
 
   useEffect(() => {
-    const cargarFormularios = () => {
-      const formulariosStr = localStorage.getItem('sc_formularios')
-      const datos = formulariosStr ? JSON.parse(formulariosStr) : []
-      setFormularios(datos)
-      setCargando(false)
+    let cancelled = false
+
+    const cargarFormularios = async () => {
+      try {
+        const datos = await getFormulariosActivos()
+        if (!cancelled) setFormularios(datos)
+      } catch {
+        if (!cancelled) setFormularios([])
+      } finally {
+        if (!cancelled) setCargando(false)
+      }
     }
 
     cargarFormularios()
 
-    // Escuchar cambios en tiempo real
-    window.addEventListener('storage', cargarFormularios)
-    return () => window.removeEventListener('storage', cargarFormularios)
+    if (USE_LOCAL_STORAGE) {
+      window.addEventListener('storage', cargarFormularios)
+      return () => { cancelled = true; window.removeEventListener('storage', cargarFormularios) }
+    }
+    return () => { cancelled = true }
   }, [])
 
   const formulariosActivos = formularios.filter(f => f.activo)
