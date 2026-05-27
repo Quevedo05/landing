@@ -41,7 +41,7 @@ export default function PortalCreditos() {
     return () => { cancelled = true }
   }, [])
 
-  const formulariosActivos = formularios.filter(f => f.activo)
+  const formulariosActivos = formularios
 
   return (
     <main className="pt-[72px] min-h-screen bg-gray-50">
