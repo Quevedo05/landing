@@ -5,5 +5,6 @@ export async function getFormulariosActivos() {
     const str = localStorage.getItem('sc_formularios')
     return str ? JSON.parse(str) : []
   }
-  return api.get('/formularios/publicos/activos')
+  const data = await api.get('/formularios/publicos/activos')
+  return data.formularios || []
 }
