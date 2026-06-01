@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import SectionHeader from '../components/ui/SectionHeader'
-import Card from '../components/ui/Card'
 import FormularioDinamico from '../components/FormularioDinamico'
 import { CreditCard, ArrowRight, Check, AlertCircle } from 'lucide-react'
 import { getFormulariosActivos } from '../services/formularios.service.js'
@@ -81,45 +80,59 @@ export default function PortalCreditos() {
               </p>
             </div>
 
-            {/* Grid de créditos disponibles */}
-            <div className="grid md:grid-cols-2 gap-8 mt-12">
-              {formulariosActivos.map(formulario => (
-                <Card
+            {/* Lista de créditos disponibles */}
+            <div className="mt-8 space-y-4">
+              {formulariosActivos.map((formulario, index) => (
+                <div
                   key={formulario.id}
-                  className="flex flex-col p-8 hover:shadow-xl transition-all border-2 border-green-500 bg-gradient-to-br from-white to-green-50"
+                  className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md hover:border-orange-200 transition-all duration-200"
                 >
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center">
-                      <CreditCard size={24} className="text-orange-600" />
+                  <div className="flex items-center gap-6 p-6">
+                    {/* Número de índice */}
+                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center">
+                      <span className="text-sm font-bold text-orange-600">{index + 1}</span>
                     </div>
-                    <div className="flex items-center gap-1 bg-green-100 px-3 py-1 rounded-full">
-                      <Check size={16} className="text-green-600" />
-                      <span className="text-xs font-semibold text-green-600">Disponible</span>
+
+                    {/* Ícono */}
+                    <div className="flex-shrink-0 w-12 h-12 bg-orange-50 rounded-lg flex items-center justify-center border border-orange-100">
+                      <CreditCard size={22} className="text-orange-600" />
+                    </div>
+
+                    {/* Contenido */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-3 mb-1">
+                        <h3 className="text-base font-bold text-gray-900 truncate">
+                          {formulario.programa}
+                        </h3>
+                        <span className="flex-shrink-0 inline-flex items-center gap-1 bg-green-50 border border-green-200 px-2.5 py-0.5 rounded-full">
+                          <Check size={12} className="text-green-600" />
+                          <span className="text-xs font-semibold text-green-700">Disponible</span>
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-500 leading-relaxed line-clamp-2">
+                        {formulario.descripcion}
+                      </p>
+                    </div>
+
+                    {/* Botón */}
+                    <div className="flex-shrink-0">
+                      <button
+                        onClick={() =>
+                          setFormularioActivo({
+                            formularioId: formulario.id,
+                            programa: formulario.programa,
+                            title: formulario.programa,
+                          })
+                        }
+                        className="inline-flex items-center gap-2 bg-orange-600 text-white px-5 py-2.5
+                                   rounded-lg font-semibold hover:bg-orange-700 active:bg-orange-800
+                                   transition-colors text-sm whitespace-nowrap"
+                      >
+                        Solicitar <ArrowRight size={15} />
+                      </button>
                     </div>
                   </div>
-
-                  <h3 className="text-lg font-bold text-gray-900 mb-3">
-                    {formulario.programa}
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed flex-1">
-                    {formulario.descripcion}
-                  </p>
-
-                  <button
-                    onClick={() =>
-                      setFormularioActivo({
-                        formularioId: formulario.id,
-                        programa: formulario.programa,
-                        title: formulario.programa,
-                      })
-                    }
-                    className="mt-6 inline-flex items-center gap-2 bg-orange-600 text-white px-6 py-3
-                               rounded-lg font-semibold hover:bg-orange-700 transition-colors text-sm
-                               w-full justify-center"
-                  >
-                    Solicitar Crédito <ArrowRight size={16} />
-                  </button>
-                </Card>
+                </div>
               ))}
             </div>
 
