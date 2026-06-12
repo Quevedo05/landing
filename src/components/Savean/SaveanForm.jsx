@@ -38,12 +38,6 @@ export default function SaveanForm({ onGuiaCreated }) {
       acopladoPatente: '',
       precintos: '',
     },
-    pago: {
-      comprobante: '',
-      banco: '',
-      sucursal: '',
-      fecha: '',
-    },
   })
 
   const [errors, setErrors] = useState({})
@@ -133,11 +127,11 @@ export default function SaveanForm({ onGuiaCreated }) {
       {/* Progress Bar */}
       <div className="mb-12">
         <div className="flex justify-between mb-4">
-          {[1, 2, 3, 4].map((s) => (
+          {[1, 2, 3].map((s) => (
             <div key={s} className={`h-2 flex-1 mx-1 rounded ${step >= s ? 'bg-primary' : 'bg-gray-200'}`} />
           ))}
         </div>
-        <p className="text-sm text-gray-600">Paso {step} de 4</p>
+        <p className="text-sm text-gray-600">Paso {step} de 3</p>
       </div>
 
       {/* Error Messages */}
@@ -531,56 +525,6 @@ export default function SaveanForm({ onGuiaCreated }) {
             </div>
           </div>
 
-          <hr />
-
-          <div>
-            <h3 className="text-xl font-bold text-gray-900 mb-6">Pago</h3>
-            <div className="space-y-4">
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Comprobante</label>
-                  <input
-                    type="text"
-                    value={formData.pago.comprobante}
-                    onChange={(e) => handleInputChange('pago', 'comprobante', e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none"
-                    placeholder="Nº de comprobante"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Banco</label>
-                  <input
-                    type="text"
-                    value={formData.pago.banco}
-                    onChange={(e) => handleInputChange('pago', 'banco', e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none"
-                    placeholder="Banco de origen"
-                  />
-                </div>
-              </div>
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Sucursal</label>
-                  <input
-                    type="text"
-                    value={formData.pago.sucursal}
-                    onChange={(e) => handleInputChange('pago', 'sucursal', e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none"
-                    placeholder="Sucursal"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Fecha de Pago</label>
-                  <input
-                    type="date"
-                    value={formData.pago.fecha}
-                    onChange={(e) => handleInputChange('pago', 'fecha', e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       )}
 

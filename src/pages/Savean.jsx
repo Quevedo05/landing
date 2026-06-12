@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { X } from 'lucide-react'
-import SectionHeader from '../components/ui/SectionHeader'
 import SaveanForm from '../components/Savean/SaveanForm'
 
 export default function SaveanPage() {
@@ -43,65 +42,56 @@ export default function SaveanPage() {
 function SaveanLanding({ onClickEmitir }) {
   return (
     <div className="space-y-12">
-      <SectionHeader
-        title="SAVEAN - Sistema Digital de Guías"
-        subtitle="Gestión digital de guías de origen y sanidad vegetal y animal para San Juan"
-        centered
-      />
+      {/* Hero */}
+      <div
+        className="rounded-2xl overflow-hidden text-center py-20 px-8"
+        style={{ background: 'linear-gradient(135deg, #ea580c 0%, #f97316 50%, #fbbf24 100%)' }}
+      >
+        <span className="inline-block bg-white/20 text-white text-xs font-bold tracking-widest uppercase px-5 py-2 rounded-full mb-8 border border-white/30">
+          Programa Provincial
+        </span>
+        <h1 className="text-7xl font-extrabold text-white mb-3 tracking-tight">SAVEAN</h1>
+        <p className="text-2xl italic text-white/90 mb-8 font-medium">
+          Sanidad Vegetal y Animal de San Juan
+        </p>
+        <p className="text-white/80 text-base max-w-2xl mx-auto mb-12 leading-relaxed">
+          Sistema de control fitozoosanitario que protege la producción agrícola de la provincia
+          mediante la fiscalización en puestos de barrera estratégicos.
+        </p>
+        <button
+          onClick={onClickEmitir}
+          className="inline-flex items-center gap-3 bg-white text-orange-600 font-bold px-10 py-4 rounded-xl hover:bg-orange-50 transition-colors text-lg shadow-lg"
+        >
+          Completar Guía de Origen →
+        </button>
+      </div>
 
-      <div className="grid md:grid-cols-2 gap-12 items-center">
-        <div>
-          <h3 className="text-2xl font-bold text-gray-900 mb-4">
-            Sistema de Apoyo a la Verificación y Emisión de Avales Nacionales
-          </h3>
-          <p className="text-gray-600 leading-relaxed mb-6">
-            SAVEAN es un sistema integral de control fitozoosanitario que facilita la emisión digital de guías de origen para productos agrícolas, permitiendo trazabilidad completa y verificación en tiempo real mediante códigos QR.
-          </p>
+      {/* ¿Qué es SAVEAN? */}
+      <div>
+        <h3 className="text-2xl font-bold text-gray-900 mb-5 border-l-4 border-orange-500 pl-4">
+          ¿Qué es SAVEAN?
+        </h3>
+        <p className="text-gray-700 leading-relaxed text-base">
+          El <strong>Servicio de Sanidad Vegetal y Animal</strong> (SAVEAN) es el programa de la Agencia
+          Calidad San Juan encargado de la fiscalización fitozoosanitaria en la provincia. Operamos bajo
+          la <strong>Ley N° 1887-I</strong>, controlando el tránsito de mercadería vegetal y animal para
+          prevenir el ingreso y dispersión de plagas como la <em>Lobesia Botrana</em> (Polilla de la Vid)
+          y <em>Ceratitis Capitata</em> (Mosca de los Frutos).
+        </p>
+      </div>
 
-          <div className="space-y-4">
-            {[
-              'Emisión instantánea de guías digitales',
-              'Códigos QR verificables',
-              'PDF de 4 copias para distribución',
-              'Verificación en barreras fitozoosanitarias',
-              'Vencimiento automático (20 días)',
-            ].map((feature) => (
-              <div key={feature} className="flex items-start gap-3">
-                <span className="text-primary font-bold text-xl">✓</span>
-                <span className="text-gray-700">{feature}</span>
-              </div>
-            ))}
+      {/* Stats */}
+      <div className="grid grid-cols-3 gap-6">
+        {[
+          { value: '8', label: 'Puestos de control activos' },
+          { value: '24/7', label: 'Fiscalización continua' },
+          { value: '20 días', label: 'Validez de cada guía' },
+        ].map(({ value, label }) => (
+          <div key={label} className="bg-orange-50 border-l-4 border-orange-500 p-6 rounded-r-xl">
+            <p className="text-3xl font-extrabold text-orange-600 mb-1">{value}</p>
+            <p className="text-gray-600 text-sm">{label}</p>
           </div>
-
-          <button
-            onClick={onClickEmitir}
-            className="mt-8 btn-primary bg-primary text-white hover:bg-orange-600"
-          >
-            Emitir Nueva Guía
-          </button>
-        </div>
-
-        <div className="bg-white rounded-2xl shadow-lg p-8">
-          <h4 className="text-lg font-bold text-gray-900 mb-6">Destinos Permitidos</h4>
-          <div className="space-y-4">
-            <div className="border-l-4 border-primary pl-4">
-              <p className="font-semibold text-gray-900">Productos Cubiertos</p>
-              <p className="text-sm text-gray-600">Vid, Tomate, Pimiento, Olivo, Pistacho, Ajo, Cebolla</p>
-            </div>
-            <div className="border-l-4 border-primary pl-4">
-              <p className="font-semibold text-gray-900">Válidas por</p>
-              <p className="text-sm text-gray-600">20 días desde su emisión</p>
-            </div>
-            <div className="border-l-4 border-primary pl-4">
-              <p className="font-semibold text-gray-900">Documentación</p>
-              <p className="text-sm text-gray-600">PDF descargable con 4 copias</p>
-            </div>
-            <div className="border-l-4 border-primary pl-4">
-              <p className="font-semibold text-gray-900">Verificación</p>
-              <p className="text-sm text-gray-600">Mediante código QR en barreras</p>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   )
