@@ -1,85 +1,41 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import { X } from 'lucide-react'
 import SectionHeader from '../components/ui/SectionHeader'
 import SaveanForm from '../components/Savean/SaveanForm'
-import SaveanVerification from '../components/Savean/SaveanVerification'
-import SaveanPanel from '../components/Savean/SaveanPanel'
 
 export default function SaveanPage() {
-  const [activeTab, setActiveTab] = useState('landing')
-  const [guias, setGuias] = useState([])
-
-  useEffect(() => {
-    // Cargar guías del localStorage
-    const savedGuias = localStorage.getItem('savean_guias')
-    if (savedGuias) {
-      setGuias(JSON.parse(savedGuias))
-    }
-  }, [])
+  const [modalOpen, setModalOpen] = useState(false)
 
   const handleNewGuia = (guiaData) => {
-    const newGuias = [...guias, guiaData]
-    setGuias(newGuias)
-    localStorage.setItem('savean_guias', JSON.stringify(newGuias))
-    setActiveTab('confirmation')
+    const savedGuias = JSON.parse(localStorage.getItem('savean_guias') || '[]')
+    localStorage.setItem('savean_guias', JSON.stringify([...savedGuias, guiaData]))
   }
 
   return (
     <main className="pt-[72px] min-h-screen bg-gray-50">
-      {/* Navigation Tabs */}
-      <div className="bg-white border-b sticky top-[72px] z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex gap-4 overflow-x-auto">
-            <button
-              onClick={() => setActiveTab('landing')}
-              className={`px-4 py-4 font-medium border-b-2 transition-colors whitespace-nowrap ${
-                activeTab === 'landing'
-                  ? 'border-primary text-primary'
-                  : 'border-transparent text-gray-600 hover:text-primary'
-              }`}
-            >
-              Inicio SAVEAN
-            </button>
-            <button
-              onClick={() => setActiveTab('emitir')}
-              className={`px-4 py-4 font-medium border-b-2 transition-colors whitespace-nowrap ${
-                activeTab === 'emitir'
-                  ? 'border-primary text-primary'
-                  : 'border-transparent text-gray-600 hover:text-primary'
-              }`}
-            >
-              Emitir Guía
-            </button>
-            <button
-              onClick={() => setActiveTab('verificar')}
-              className={`px-4 py-4 font-medium border-b-2 transition-colors whitespace-nowrap ${
-                activeTab === 'verificar'
-                  ? 'border-primary text-primary'
-                  : 'border-transparent text-gray-600 hover:text-primary'
-              }`}
-            >
-              Verificar Guía
-            </button>
-            <button
-              onClick={() => setActiveTab('panel')}
-              className={`px-4 py-4 font-medium border-b-2 transition-colors whitespace-nowrap ${
-                activeTab === 'panel'
-                  ? 'border-primary text-primary'
-                  : 'border-transparent text-gray-600 hover:text-primary'
-              }`}
-            >
-              Panel Inspectores
-            </button>
-          </div>
-        </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <SaveanLanding onClickEmitir={() => setModalOpen(true)} />
       </div>
 
-      {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {activeTab === 'landing' && <SaveanLanding onClickEmitir={() => setActiveTab('emitir')} />}
-        {activeTab === 'emitir' && <SaveanForm onGuiaCreated={handleNewGuia} />}
-        {activeTab === 'verificar' && <SaveanVerification guias={guias} />}
-        {activeTab === 'panel' && <SaveanPanel guias={guias} setGuias={setGuias} />}
-      </div>
+      {/* Modal Emitir Guía */}
+      {modalOpen && (
+        <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/50 overflow-y-auto py-8 px-4">
+          <div className="bg-gray-50 rounded-2xl w-full max-w-4xl relative">
+            <div className="flex items-center justify-between p-6 border-b bg-white rounded-t-2xl">
+              <h2 className="text-xl font-bold text-gray-900">Emitir Nueva Guía</h2>
+              <button
+                onClick={() => setModalOpen(false)}
+                className="p-2 hover:bg-gray-100 rounded-lg text-gray-500"
+              >
+                <X size={22} />
+              </button>
+            </div>
+            <div className="p-6">
+              <SaveanForm onGuiaCreated={handleNewGuia} />
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   )
 }
@@ -109,7 +65,6 @@ function SaveanLanding({ onClickEmitir }) {
               'PDF de 4 copias para distribución',
               'Verificación en barreras fitozoosanitarias',
               'Vencimiento automático (20 días)',
-              'Panel para inspectores y administradores',
             ].map((feature) => (
               <div key={feature} className="flex items-start gap-3">
                 <span className="text-primary font-bold text-xl">✓</span>
