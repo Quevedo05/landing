@@ -3,7 +3,6 @@ import Hero from '../components/Hero'
 import QuienesSomos from '../components/QuienesSomos'
 import MisionVisionValores from '../components/MisionVisionValores'
 import Programas from '../components/Programas'
-import SaveanSection from '../components/SaveanSection'
 import FormularioDinamico from '../components/FormularioDinamico'
 
 export default function Home() {
@@ -15,7 +14,6 @@ export default function Home() {
       <QuienesSomos />
       <MisionVisionValores />
       <Programas onProgramaClick={setFormularioActivo} />
-      <SaveanSection />
 
       {/* Formulario dinámico modal */}
       {formularioActivo && (
