@@ -4,7 +4,7 @@ export default function SectionHeader({ title, subtitle, centered = false }) {
       <h2 className="text-3xl font-bold text-gray-900">{title}</h2>
       <div className={`section-divider ${centered ? 'mx-auto' : ''}`} />
       {subtitle && (
-        <p className="text-gray-600 text-lg max-w-2xl leading-relaxed">{subtitle}</p>
+        <p className={`text-gray-600 text-lg max-w-2xl leading-relaxed ${centered ? 'mx-auto' : ''}`}>{subtitle}</p>
       )}
     </div>
   )
