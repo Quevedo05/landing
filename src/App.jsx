@@ -9,7 +9,7 @@ import Contacto from './pages/Contacto'
 import PortalCreditos from './pages/PortalCreditos'
 import Mantenimiento from './pages/Mantenimiento'
 
-const MANTENIMIENTO = false
+const MANTENIMIENTO = true
 
 export default function App() {
   if (MANTENIMIENTO) return <Mantenimiento />
