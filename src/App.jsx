@@ -7,8 +7,13 @@ import Programas from './pages/Programas'
 import Savean from './pages/Savean'
 import Contacto from './pages/Contacto'
 import PortalCreditos from './pages/PortalCreditos'
+import Mantenimiento from './pages/Mantenimiento'
+
+const MANTENIMIENTO = true
 
 export default function App() {
+  if (MANTENIMIENTO) return <Mantenimiento />
+
   return (
     <Router>
       <Navbar activeSection={null} />
