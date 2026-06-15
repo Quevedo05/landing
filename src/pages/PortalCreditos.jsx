@@ -12,7 +12,20 @@ const programaMap = {
   'Cosecha y Acarreo 2026': { icon: 'CreditCard', label: 'Agricultura' },
 }
 
+const MANTENIMIENTO = true
+
 export default function PortalCreditos() {
+  if (MANTENIMIENTO) return (
+    <main className="pt-[72px] min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="max-w-lg mx-auto px-4 text-center">
+        <div className="bg-white rounded-2xl shadow-lg p-12">
+          <AlertCircle size={48} className="text-orange-500 mx-auto mb-4" />
+          <h2 className="text-2xl font-bold text-gray-900 mb-3">Portal en mantenimiento</h2>
+          <p className="text-gray-600">Estamos trabajando para mejorar el Portal de Créditos. Volvé a intentarlo en unos momentos.</p>
+        </div>
+      </div>
+    </main>
+  )
   const [formularios, setFormularios] = useState([])
   const [formularioActivo, setFormularioActivo] = useState(null)
   const [cargando, setCargando] = useState(true)
