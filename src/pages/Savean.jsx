@@ -50,8 +50,8 @@ function SaveanLanding({ onClickEmitir }) {
         <span className="inline-block bg-white/20 text-white text-xs font-bold tracking-widest uppercase px-5 py-2 rounded-full mb-8 border border-white/30">
           Programa Provincial
         </span>
-        <h1 className="text-7xl font-extrabold text-white mb-3 tracking-tight">SAVEAN</h1>
-        <p className="text-2xl italic text-white/90 mb-8 font-medium">
+        <h1 className="text-5xl sm:text-7xl font-extrabold text-white mb-3 tracking-tight">SAVEAN</h1>
+        <p className="text-lg sm:text-2xl italic text-white/90 mb-8 font-medium">
           Sanidad Vegetal y Animal de San Juan
         </p>
         <p className="text-white/80 text-base max-w-2xl mx-auto mb-12 leading-relaxed">
@@ -60,7 +60,7 @@ function SaveanLanding({ onClickEmitir }) {
         </p>
         <button
           onClick={onClickEmitir}
-          className="inline-flex items-center gap-3 bg-white text-orange-600 font-bold px-10 py-4 rounded-xl hover:bg-orange-50 transition-colors text-lg shadow-lg"
+          className="inline-flex items-center gap-3 bg-white text-orange-600 font-bold px-6 sm:px-10 py-3 sm:py-4 rounded-xl hover:bg-orange-50 transition-colors text-base sm:text-lg shadow-lg"
         >
           Completar Guía de Origen →
         </button>
@@ -155,7 +155,7 @@ function SaveanLanding({ onClickEmitir }) {
         <p className="text-gray-400 mb-8">Completá el formulario digital y obtené tu código QR al instante.</p>
         <button
           onClick={onClickEmitir}
-          className="inline-flex items-center gap-3 bg-orange-500 text-white font-bold px-10 py-4 rounded-xl hover:bg-orange-600 transition-colors text-base"
+          className="inline-flex items-center gap-3 bg-orange-500 text-white font-bold px-6 sm:px-10 py-3 sm:py-4 rounded-xl hover:bg-orange-600 transition-colors text-base"
         >
           Completar Guía de Origen →
         </button>

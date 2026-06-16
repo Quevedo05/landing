@@ -196,7 +196,7 @@ export default function SaveanForm({ onGuiaCreated }) {
 
       {/* Step 1: Remitente, Destinatario, Contacto */}
       {step === 1 && (
-        <div className="space-y-8 bg-white rounded-2xl p-8">
+        <div className="space-y-8 bg-white rounded-2xl p-4 sm:p-8">
           <div>
             <h3 className="text-xl font-bold text-gray-900 mb-6">Remitente de Mercadería</h3>
             <div className="space-y-4">
@@ -339,7 +339,7 @@ export default function SaveanForm({ onGuiaCreated }) {
 
       {/* Step 2: Mercadería */}
       {step === 2 && (
-        <div className="space-y-6 bg-white rounded-2xl p-8">
+        <div className="space-y-6 bg-white rounded-2xl p-4 sm:p-8">
           <h3 className="text-xl font-bold text-gray-900">Mercadería</h3>
           <div className="space-y-6">
             {formData.mercaderias.map((item) => (
@@ -468,7 +468,7 @@ export default function SaveanForm({ onGuiaCreated }) {
 
       {/* Step 3: Transporte y Pago */}
       {step === 3 && (
-        <div className="space-y-8 bg-white rounded-2xl p-8">
+        <div className="space-y-8 bg-white rounded-2xl p-4 sm:p-8">
           <div>
             <h3 className="text-xl font-bold text-gray-900 mb-6">Transporte</h3>
             <div className="space-y-4">

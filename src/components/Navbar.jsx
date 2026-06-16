@@ -19,7 +19,7 @@ export default function Navbar({ activeSection }) {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between">
         {/* Logo Left */}
         <div className="flex-1 flex items-center">
-          <Link to="/" className="flex items-center flex-shrink-0 -ml-28">
+          <Link to="/" className="flex items-center flex-shrink-0 md:-ml-28">
             <img src="/logo-navbar.png" alt="Agencia Calidad San Juan" className="h-16 w-auto" />
           </Link>
         </div>

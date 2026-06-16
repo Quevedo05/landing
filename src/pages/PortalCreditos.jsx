@@ -100,34 +100,37 @@ export default function PortalCreditos() {
                   key={formulario.id}
                   className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md hover:border-orange-200 transition-all duration-200"
                 >
-                  <div className="flex items-center gap-6 p-6">
-                    {/* Número de índice */}
-                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center">
-                      <span className="text-sm font-bold text-orange-600">{index + 1}</span>
-                    </div>
-
-                    {/* Ícono */}
-                    <div className="flex-shrink-0 w-12 h-12 bg-orange-50 rounded-lg flex items-center justify-center border border-orange-100">
-                      <CreditCard size={22} className="text-orange-600" />
-                    </div>
-
-                    {/* Contenido */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-3 mb-1">
-                        <h3 className="text-base font-bold text-gray-900 truncate">
-                          {formulario.programa}
-                        </h3>
-                        <span className="flex-shrink-0 inline-flex items-center gap-1 bg-green-50 border border-green-200 px-2.5 py-0.5 rounded-full">
-                          <Check size={12} className="text-green-600" />
-                          <span className="text-xs font-semibold text-green-700">Disponible</span>
-                        </span>
+                  <div className="p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
+                    {/* Fila superior: número + ícono + contenido */}
+                    <div className="flex items-center gap-3 sm:gap-6 flex-1 min-w-0">
+                      {/* Número de índice */}
+                      <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-orange-100 flex items-center justify-center">
+                        <span className="text-sm font-bold text-orange-600">{index + 1}</span>
                       </div>
-                      <p className="text-sm text-gray-500 leading-relaxed line-clamp-2">
-                        {formulario.descripcion}
-                      </p>
+
+                      {/* Ícono — se oculta en móvil para ganar espacio */}
+                      <div className="hidden sm:flex flex-shrink-0 w-12 h-12 bg-orange-50 rounded-lg items-center justify-center border border-orange-100">
+                        <CreditCard size={22} className="text-orange-600" />
+                      </div>
+
+                      {/* Contenido */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-wrap items-center gap-2 mb-1">
+                          <h3 className="text-base font-bold text-gray-900">
+                            {formulario.programa}
+                          </h3>
+                          <span className="inline-flex items-center gap-1 bg-green-50 border border-green-200 px-2.5 py-0.5 rounded-full">
+                            <Check size={12} className="text-green-600" />
+                            <span className="text-xs font-semibold text-green-700">Disponible</span>
+                          </span>
+                        </div>
+                        <p className="text-sm text-gray-500 leading-relaxed line-clamp-2">
+                          {formulario.descripcion}
+                        </p>
+                      </div>
                     </div>
 
-                    {/* Botón */}
+                    {/* Botón — ancho completo en móvil, automático en sm+ */}
                     <div className="flex-shrink-0">
                       <button
                         onClick={() =>
@@ -137,9 +140,9 @@ export default function PortalCreditos() {
                             title: formulario.programa,
                           })
                         }
-                        className="inline-flex items-center gap-2 bg-orange-600 text-white px-5 py-2.5
+                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-orange-600 text-white px-5 py-2.5
                                    rounded-lg font-semibold hover:bg-orange-700 active:bg-orange-800
-                                   transition-colors text-sm whitespace-nowrap"
+                                   transition-colors text-sm"
                       >
                         Solicitar <ArrowRight size={15} />
                       </button>

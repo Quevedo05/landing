@@ -4,7 +4,7 @@ export default function SaveanSection() {
   return (
     <section id="savean" className="py-20 bg-primary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-center justify-items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center justify-items-center">
           <div className="text-white">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">

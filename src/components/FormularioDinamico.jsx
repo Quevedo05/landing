@@ -78,8 +78,8 @@ export default function FormularioDinamico({ formularioId, programa, title, onCl
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="sticky top-0 bg-gradient-to-r from-orange-600 to-orange-700 px-6 py-4 flex items-center justify-between">
-          <h3 className="text-xl font-bold text-white">Solicitar {programa}</h3>
+        <div className="sticky top-0 bg-gradient-to-r from-orange-600 to-orange-700 px-4 sm:px-6 py-4 flex items-center justify-between gap-3">
+          <h3 className="text-base sm:text-xl font-bold text-white leading-tight">Solicitar {programa}</h3>
           <button
             onClick={onClose}
             className="text-white hover:bg-white/20 rounded-lg p-1 transition-colors"
@@ -89,7 +89,7 @@ export default function FormularioDinamico({ formularioId, programa, title, onCl
         </div>
 
         {/* Contenido */}
-        <div className="p-8">
+        <div className="p-4 sm:p-8">
           {mensaje && (
             <div className="mb-6 bg-green-50 border-2 border-green-200 rounded-lg p-6 flex gap-4">
               <CheckCircle size={24} className="text-green-600 flex-shrink-0" />
