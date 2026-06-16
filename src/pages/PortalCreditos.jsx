@@ -12,7 +12,7 @@ const programaMap = {
   'Cosecha y Acarreo 2026': { icon: 'CreditCard', label: 'Agricultura' },
 }
 
-const MANTENIMIENTO = true
+const MANTENIMIENTO = false
 
 export default function PortalCreditos() {
   if (MANTENIMIENTO) return (

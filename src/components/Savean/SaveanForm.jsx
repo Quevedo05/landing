@@ -42,6 +42,8 @@ export default function SaveanForm({ onGuiaCreated }) {
 
   const [errors, setErrors] = useState({})
   const [guiaCreated, setGuiaCreated] = useState(null)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState(null)
 
   const handleInputChange = (section, field, value) => {
     setFormData((prev) => ({
@@ -99,23 +101,68 @@ export default function SaveanForm({ onGuiaCreated }) {
     return Object.keys(newErrors).length === 0
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!validateStep(3)) return
 
-    const guiaNumber = `SAVEAN-${new Date().getFullYear()}-${String(Math.floor(Math.random() * 10000)).padStart(5, '0')}`
-    const token = Math.random().toString(36).substring(2, 66)
+    setSubmitting(true)
+    setSubmitError(null)
 
-    const guia = {
-      numero: guiaNumber,
-      token,
-      estado: 'pendiente',
-      fecha_emision: new Date().toISOString(),
-      ...formData,
+    const body = {
+      remitenteNombre: formData.remitente.nombre,
+      remitenteTipo: formData.remitente.tipo,
+      remitenteRenspa: formData.remitente.renspa || undefined,
+      destinatarioNombre: formData.destinatario.nombre,
+      destinoTipo: formData.destinatario.tipoDestino,
+      destinoPais: formData.destinatario.pais || undefined,
+      destinoPuntoSalida: formData.destinatario.puntoSalida || undefined,
+      destinoMercadoInterno: formData.destinatario.mercadoInterno || undefined,
+      destinoProvincia: formData.destinatario.provincia || undefined,
+      emailContacto: formData.contacto.email || undefined,
+      items: formData.mercaderias.map((m) => ({
+        id: String(m.id),
+        especie: m.especie,
+        variedad: m.variedad || undefined,
+        vidDestino: [],
+        tipoEnvase: m.envase || undefined,
+        cantidadKg: (parseFloat(m.kilos) || 0) * (parseInt(m.cantidad) || 0),
+        cantidadBultos: parseInt(m.cantidad) || 0,
+        lugarEmpaque: '',
+      })),
+      transporteConductor: formData.transporte.conductor,
+      transporteEmpresa: formData.transporte.empresa || undefined,
+      transporteCamionPatente: formData.transporte.camionPatente || undefined,
+      transporteAcopladoPatente: formData.transporte.acopladoPatente || undefined,
+      transportePrecintos: formData.transporte.precintos || undefined,
     }
 
-    onGuiaCreated(guia)
-    setGuiaCreated(guia)
-    setStep(4)
+    try {
+      const response = await fetch('https://sistema.agenciacalidadsanjuan.com.ar/api/savean/guias', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => null)
+        throw new Error(errorData?.message || `Error ${response.status}: No se pudo emitir la guía`)
+      }
+
+      const data = await response.json()
+
+      const guia = {
+        ...formData,
+        ...data,
+        fecha_emision: data.fechaEmision,
+      }
+
+      onGuiaCreated(guia)
+      setGuiaCreated(guia)
+      setStep(4)
+    } catch (err) {
+      setSubmitError(err.message || 'Ocurrió un error al emitir la guía. Intentá nuevamente.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   if (guiaCreated) {
@@ -135,13 +182,14 @@ export default function SaveanForm({ onGuiaCreated }) {
       </div>
 
       {/* Error Messages */}
-      {Object.keys(errors).length > 0 && (
+      {(Object.keys(errors).length > 0 || submitError) && (
         <div className="mb-6 bg-red-50 border border-red-200 rounded-lg p-4 flex gap-3">
           <AlertCircle size={20} className="text-red-600 flex-shrink-0" />
           <div className="text-sm text-red-800">
             {Object.values(errors).map((err, i) => (
               <p key={i}>{err}</p>
             ))}
+            {submitError && <p>{submitError}</p>}
           </div>
         </div>
       )}
@@ -547,9 +595,10 @@ export default function SaveanForm({ onGuiaCreated }) {
         ) : (
           <button
             onClick={handleSubmit}
-            className="px-6 py-3 bg-primary text-white rounded-lg font-medium hover:bg-orange-600"
+            disabled={submitting}
+            className="px-6 py-3 bg-primary text-white rounded-lg font-medium hover:bg-orange-600 disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            Emitir Guía
+            {submitting ? 'Emitiendo...' : 'Emitir Guía'}
           </button>
         )}
       </div>

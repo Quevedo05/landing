@@ -60,7 +60,10 @@ export default function SaveanQRPDF({ guia }) {
           Número: <strong>{guia.numero}</strong>
         </p>
         <p className="text-green-700 text-sm">
-          Válida por <strong>20 días</strong> desde su emisión
+          {guia.fechaVencimiento
+            ? <>Vence el <strong>{new Date(guia.fechaVencimiento).toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' })}</strong></>
+            : <>Válida por <strong>20 días</strong> desde su emisión</>
+          }
         </p>
       </div>
 
