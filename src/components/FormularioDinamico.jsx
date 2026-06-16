@@ -1,85 +1,191 @@
 import { useState } from 'react'
-import { AlertCircle, CheckCircle, X } from 'lucide-react'
+import { AlertCircle, CheckCircle, X, Paperclip } from 'lucide-react'
 import { crearTicket } from '../services/tickets.service.js'
 
-export default function FormularioDinamico({ formularioId, programa, title, onClose }) {
-  const [formData, setFormData] = useState({
-    nombreCiudadano: '',
-    emailCiudadano: '',
-    telefonoCiudadano: '',
-    descripcion: '',
-  })
+const inputBase =
+  'w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed transition-colors text-sm'
+
+function CampoInput({ campo, value, onChange, disabled }) {
+  const { id, label, tipo, requerido, placeholder, opciones } = campo
+
+  const handleFile = (e) => {
+    const file = e.target.files?.[0]
+    onChange(id, file ? file.name : '')
+  }
+
+  if (tipo === 'selector') {
+    return (
+      <select
+        value={value || ''}
+        onChange={(e) => onChange(id, e.target.value)}
+        disabled={disabled}
+        className={inputBase}
+      >
+        <option value="">Seleccionar...</option>
+        {(opciones || []).map((op) => (
+          <option key={op} value={op}>{op}</option>
+        ))}
+      </select>
+    )
+  }
+
+  if (tipo === 'textarea') {
+    return (
+      <textarea
+        value={value || ''}
+        onChange={(e) => onChange(id, e.target.value)}
+        disabled={disabled}
+        rows={3}
+        placeholder={placeholder || ''}
+        className={inputBase}
+      />
+    )
+  }
+
+  if (tipo === 'archivo') {
+    return (
+      <div className="flex items-center gap-3">
+        <label className={`
+          flex items-center gap-2 px-4 py-3 border-2 border-dashed border-gray-300
+          rounded-lg cursor-pointer hover:border-orange-400 hover:bg-orange-50
+          transition-colors text-sm text-gray-500 w-full
+          ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
+        `}>
+          <Paperclip size={16} className="text-orange-500 flex-shrink-0" />
+          <span className="truncate">{value || 'Seleccionar archivo...'}</span>
+          <input
+            type="file"
+            className="hidden"
+            disabled={disabled}
+            onChange={handleFile}
+          />
+        </label>
+      </div>
+    )
+  }
+
+  if (tipo === 'fecha') {
+    return (
+      <input
+        type="date"
+        value={value || ''}
+        onChange={(e) => onChange(id, e.target.value)}
+        disabled={disabled}
+        className={inputBase}
+      />
+    )
+  }
+
+  if (tipo === 'numero') {
+    return (
+      <input
+        type="number"
+        value={value || ''}
+        onChange={(e) => onChange(id, e.target.value)}
+        disabled={disabled}
+        placeholder={placeholder || ''}
+        className={inputBase}
+      />
+    )
+  }
+
+  // default: texto
+  return (
+    <input
+      type="text"
+      value={value || ''}
+      onChange={(e) => onChange(id, e.target.value)}
+      disabled={disabled}
+      placeholder={placeholder || ''}
+      className={inputBase}
+    />
+  )
+}
+
+export default function FormularioDinamico({ formularioId, programa, title, campos = [], onClose }) {
+  const [nombreCiudadano, setNombre] = useState('')
+  const [emailCiudadano, setEmail] = useState('')
+  const [telefonoCiudadano, setTelefono] = useState('')
+  const [valoresCampos, setValoresCampos] = useState({})
   const [loading, setLoading] = useState(false)
   const [mensaje, setMensaje] = useState(null)
-  const [error, setError] = useState(null)
+  const [errores, setErrores] = useState({})
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value,
-    }))
+  const camposOrdenados = [...campos].sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0))
+
+  const setCampoValor = (id, valor) => {
+    setValoresCampos((prev) => ({ ...prev, [id]: valor }))
+    setErrores((prev) => { const e = { ...prev }; delete e[id]; return e })
+  }
+
+  const validar = () => {
+    const errs = {}
+    if (!nombreCiudadano.trim()) errs._nombre = 'El nombre es requerido'
+    if (!emailCiudadano.trim()) errs._email = 'El email es requerido'
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailCiudadano)) errs._email = 'Email inválido'
+
+    camposOrdenados.forEach((campo) => {
+      if (campo.requerido && !valoresCampos[campo.id]?.trim?.() && !valoresCampos[campo.id]) {
+        errs[campo.id] = `"${campo.label}" es requerido`
+      }
+    })
+    return errs
+  }
+
+  const construirDescripcion = () => {
+    const lineas = camposOrdenados.map((campo) => {
+      const valor = valoresCampos[campo.id]
+      if (!valor) return null
+      const prefix = campo.tipo === 'archivo' ? '[Adjunto]' : ''
+      return `${campo.label}: ${prefix}${valor}`
+    }).filter(Boolean)
+
+    return lineas.length > 0
+      ? lineas.join('\n')
+      : 'Sin información adicional'
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    const errs = validar()
+    if (Object.keys(errs).length > 0) {
+      setErrores(errs)
+      return
+    }
+
     setLoading(true)
-    setError(null)
-    setMensaje(null)
+    setErrores({})
 
     try {
-      // Validación básica
-      if (!formData.nombreCiudadano.trim()) {
-        throw new Error('El nombre es requerido')
-      }
-      if (!formData.emailCiudadano.trim()) {
-        throw new Error('El email es requerido')
-      }
-
-      // Validar formato de email
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-      if (!emailRegex.test(formData.emailCiudadano)) {
-        throw new Error('Email inválido')
-      }
-
       const resultado = await crearTicket({
         formularioId,
         programa,
-        ciudadanoNombre: formData.nombreCiudadano,
-        ciudadanoEmail: formData.emailCiudadano,
-        ciudadanoTelefono: formData.telefonoCiudadano || null,
-        descripcion: formData.descripcion || 'Sin detalles adicionales',
+        ciudadanoNombre: nombreCiudadano.trim(),
+        ciudadanoEmail: emailCiudadano.trim(),
+        ciudadanoTelefono: telefonoCiudadano.trim() || null,
+        descripcion: construirDescripcion(),
       })
 
       setMensaje({
-        tipo: 'exito',
-        titulo: 'Solicitud enviada exitosamente',
         numero: resultado.numero,
-        detalle: `Su número de seguimiento es: ${resultado.numero}`,
       })
-
-      // Limpiar formulario después de 2 segundos
-      setTimeout(() => {
-        setFormData({
-          nombreCiudadano: '',
-          emailCiudadano: '',
-          telefonoCiudadano: '',
-          descripcion: '',
-        })
-      }, 2000)
     } catch (err) {
-      setError(err.message || 'Error al enviar el formulario')
+      setErrores({ _global: err.message || 'Error al enviar el formulario. Intente nuevamente.' })
     } finally {
       setLoading(false)
     }
   }
 
+  const formularioDeshabilitado = loading || !!mensaje
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="sticky top-0 bg-gradient-to-r from-orange-600 to-orange-700 px-4 sm:px-6 py-4 flex items-center justify-between gap-3">
-          <h3 className="text-base sm:text-xl font-bold text-white leading-tight">Solicitar {programa}</h3>
+        <div className="sticky top-0 bg-gradient-to-r from-orange-600 to-orange-700 px-4 sm:px-6 py-4 flex items-center justify-between gap-3 z-10">
+          <h3 className="text-base sm:text-xl font-bold text-white leading-tight">
+            Solicitar {programa || title}
+          </h3>
           <button
             onClick={onClose}
             className="text-white hover:bg-white/20 rounded-lg p-1 transition-colors"
@@ -90,117 +196,151 @@ export default function FormularioDinamico({ formularioId, programa, title, onCl
 
         {/* Contenido */}
         <div className="p-4 sm:p-8">
+          {/* Éxito */}
           {mensaje && (
             <div className="mb-6 bg-green-50 border-2 border-green-200 rounded-lg p-6 flex gap-4">
-              <CheckCircle size={24} className="text-green-600 flex-shrink-0" />
+              <CheckCircle size={24} className="text-green-600 flex-shrink-0 mt-0.5" />
               <div>
-                <h4 className="font-bold text-green-900 text-lg">{mensaje.titulo}</h4>
+                <h4 className="font-bold text-green-900 text-lg">Solicitud enviada exitosamente</h4>
                 <p className="text-green-700 mt-2">
                   Número de seguimiento:{' '}
                   <span className="font-mono font-bold text-lg text-green-900">{mensaje.numero}</span>
                 </p>
-                <p className="text-green-600 text-sm mt-3">{mensaje.detalle}</p>
-                <p className="text-green-600 text-sm mt-2">
+                <p className="text-green-600 text-sm mt-3">
                   Puede usar este número para consultar el estado de su solicitud en el sistema.
                 </p>
-              </div>
-            </div>
-          )}
-
-          {error && (
-            <div className="mb-6 bg-red-50 border-2 border-red-200 rounded-lg p-6 flex gap-4">
-              <AlertCircle size={24} className="text-red-600 flex-shrink-0" />
-              <div>
-                <h4 className="font-bold text-red-900">Error al enviar</h4>
-                <p className="text-red-700 text-sm mt-1">{error}</p>
-              </div>
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit} className={mensaje ? 'opacity-50 pointer-events-none' : ''}>
-            <div className="space-y-5">
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Nombre Completo *
-                </label>
-                <input
-                  type="text"
-                  name="nombreCiudadano"
-                  value={formData.nombreCiudadano}
-                  onChange={handleChange}
-                  disabled={loading || !!mensaje}
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed transition-colors"
-                  placeholder="Juan Pérez García"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Email *
-                </label>
-                <input
-                  type="email"
-                  name="emailCiudadano"
-                  value={formData.emailCiudadano}
-                  onChange={handleChange}
-                  disabled={loading || !!mensaje}
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed transition-colors"
-                  placeholder="juan@ejemplo.com"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Teléfono
-                </label>
-                <input
-                  type="tel"
-                  name="telefonoCiudadano"
-                  value={formData.telefonoCiudadano}
-                  onChange={handleChange}
-                  disabled={loading || !!mensaje}
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed transition-colors"
-                  placeholder="264 4123456"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Detalles de la Solicitud
-                </label>
-                <textarea
-                  name="descripcion"
-                  value={formData.descripcion}
-                  onChange={handleChange}
-                  disabled={loading || !!mensaje}
-                  rows="5"
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed transition-colors"
-                  placeholder="Cuéntenos sobre su proyecto, empresa o necesidad..."
-                />
-              </div>
-            </div>
-
-            <div className="mt-8 flex gap-3">
-              <button
-                type="submit"
-                disabled={loading || !!mensaje}
-                className="flex-1 bg-orange-600 text-white font-bold py-3 px-6 rounded-lg
-                           hover:bg-orange-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {loading ? 'Enviando solicitud...' : 'Enviar Solicitud'}
-              </button>
-              {mensaje && (
                 <button
-                  type="button"
                   onClick={onClose}
-                  className="px-6 bg-gray-200 text-gray-700 font-semibold py-3 rounded-lg
-                             hover:bg-gray-300 transition-colors"
+                  className="mt-4 px-6 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors text-sm"
                 >
                   Cerrar
                 </button>
-              )}
+              </div>
             </div>
-          </form>
+          )}
+
+          {/* Error global */}
+          {errores._global && (
+            <div className="mb-6 bg-red-50 border-2 border-red-200 rounded-lg p-4 flex gap-3">
+              <AlertCircle size={20} className="text-red-600 flex-shrink-0 mt-0.5" />
+              <p className="text-red-700 text-sm">{errores._global}</p>
+            </div>
+          )}
+
+          {!mensaje && (
+            <form onSubmit={handleSubmit} noValidate>
+              <div className="space-y-5">
+                {/* Campos fijos: identidad del solicitante */}
+                <div className="pb-4 border-b border-gray-200">
+                  <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">
+                    Datos del Solicitante
+                  </p>
+
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+                        Nombre Completo <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={nombreCiudadano}
+                        onChange={(e) => { setNombre(e.target.value); setErrores(p => { const e={...p}; delete e._nombre; return e }) }}
+                        disabled={formularioDeshabilitado}
+                        placeholder="Juan Pérez García"
+                        className={`${inputBase} ${errores._nombre ? 'border-red-400 bg-red-50' : ''}`}
+                      />
+                      {errores._nombre && <p className="text-red-500 text-xs mt-1">{errores._nombre}</p>}
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+                        Email <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="email"
+                        value={emailCiudadano}
+                        onChange={(e) => { setEmail(e.target.value); setErrores(p => { const e={...p}; delete e._email; return e }) }}
+                        disabled={formularioDeshabilitado}
+                        placeholder="juan@ejemplo.com"
+                        className={`${inputBase} ${errores._email ? 'border-red-400 bg-red-50' : ''}`}
+                      />
+                      {errores._email && <p className="text-red-500 text-xs mt-1">{errores._email}</p>}
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+                        Teléfono
+                      </label>
+                      <input
+                        type="tel"
+                        value={telefonoCiudadano}
+                        onChange={(e) => setTelefono(e.target.value)}
+                        disabled={formularioDeshabilitado}
+                        placeholder="264 4123456"
+                        className={inputBase}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Campos dinámicos del programa */}
+                {camposOrdenados.length > 0 && (
+                  <div>
+                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">
+                      Información del Programa
+                    </p>
+                    <div className="space-y-4">
+                      {camposOrdenados.map((campo) => (
+                        <div key={campo.id}>
+                          <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+                            {campo.label}
+                            {campo.requerido && <span className="text-red-500 ml-1">*</span>}
+                          </label>
+                          <CampoInput
+                            campo={campo}
+                            value={valoresCampos[campo.id] ?? ''}
+                            onChange={setCampoValor}
+                            disabled={formularioDeshabilitado}
+                          />
+                          {errores[campo.id] && (
+                            <p className="text-red-500 text-xs mt-1">{errores[campo.id]}</p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Fallback si no hay campos dinámicos */}
+                {camposOrdenados.length === 0 && (
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+                      Detalles de la Solicitud
+                    </label>
+                    <textarea
+                      value={valoresCampos._descripcion || ''}
+                      onChange={(e) => setCampoValor('_descripcion', e.target.value)}
+                      disabled={formularioDeshabilitado}
+                      rows={5}
+                      placeholder="Cuéntenos sobre su proyecto, empresa o necesidad..."
+                      className={inputBase}
+                    />
+                  </div>
+                )}
+              </div>
+
+              <div className="mt-8">
+                <button
+                  type="submit"
+                  disabled={formularioDeshabilitado}
+                  className="w-full bg-orange-600 text-white font-bold py-3 px-6 rounded-lg
+                             hover:bg-orange-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {loading ? 'Enviando solicitud...' : 'Enviar Solicitud'}
+                </button>
+              </div>
+            </form>
+          )}
         </div>
       </div>
     </div>

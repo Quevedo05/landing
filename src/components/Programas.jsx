@@ -8,13 +8,6 @@ import { USE_LOCAL_STORAGE } from '../services/api.js'
 
 const iconMap = { CreditCard, Star, Sun }
 
-// Mapeo entre nombres de programas en landing y formularios del sistema
-const programaMap = {
-  'Programa de Créditos destinado a Bienes Capitales': 'Microcréditos 2024',
-  'Programa Pequeños Emprendedores': 'Programa Aprender, Trabajar y Producir',
-  'Semana del Olivo': 'Cosecha y Acarreo 2026',
-}
-
 export default function Programas({ onProgramaClick }) {
   const [programasActivos, setProgramasActivos] = useState({})
 
@@ -27,7 +20,15 @@ export default function Programas({ onProgramaClick }) {
         if (cancelled) return
         const activos = {}
         formularios.forEach(f => {
-          if (f.activo) activos[f.programa] = { formularioId: f.id, activo: true }
+          if (f.activo) {
+            // Key by nombre (unique) so two BIENES DE CAPITAL don't collide
+            activos[f.nombre] = {
+              formularioId: f.id || f.formularioId,
+              activo: true,
+              campos: f.campos || [],
+              programa: f.programa,
+            }
+          }
         })
         setProgramasActivos(activos)
       } catch {
@@ -55,8 +56,8 @@ export default function Programas({ onProgramaClick }) {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
           {programas.map(({ id, icon, title, description, link }) => {
             const Icon = iconMap[icon] || Star
-            const formularioKey = programaMap[title]
-            const programaData = programasActivos[formularioKey]
+            // Match by card title === formulario nombre
+            const programaData = programasActivos[title]
             const estaActivo = programaData?.activo || false
 
             return (
@@ -88,8 +89,9 @@ export default function Programas({ onProgramaClick }) {
                       if (onProgramaClick) {
                         onProgramaClick({
                           formularioId: programaData.formularioId,
-                          programa: formularioKey,
-                          title: title,
+                          programa: title,
+                          title,
+                          campos: programaData.campos,
                         })
                       }
                     }}

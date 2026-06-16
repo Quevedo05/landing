@@ -21,6 +21,7 @@ export default function Home() {
           formularioId={formularioActivo.formularioId}
           programa={formularioActivo.programa}
           title={formularioActivo.title}
+          campos={formularioActivo.campos || []}
           onClose={() => setFormularioActivo(null)}
         />
       )}

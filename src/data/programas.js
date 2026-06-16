@@ -2,25 +2,25 @@ export const programas = [
   {
     id: 1,
     icon: 'CreditCard',
-    title: 'Programa de Créditos destinado a Bienes Capitales',
+    title: 'Microcréditos Emprendedores',
     description:
-      'Financiamiento para la adquisición de maquinaria, equipos y bienes de capital que mejoren la productividad de PyMEs sanjuaninas.',
+      'Programa de microcréditos para emprendedores y pequeñas empresas. Financiá capital de trabajo o equipamiento para impulsar tu negocio.',
     link: null,
   },
   {
     id: 2,
     icon: 'Star',
-    title: 'Programa Pequeños Emprendedores',
+    title: 'Bienes de Capital - Persona Física',
     description:
-      'Apoyo técnico y financiero para emprendedores en etapa temprana que buscan formalizar y escalar sus proyectos productivos.',
+      'Financiamiento para la adquisición de maquinaria, equipos y bienes de capital que mejoren tu productividad como persona física.',
     link: null,
   },
   {
     id: 3,
     icon: 'Sun',
-    title: 'Semana del Olivo',
+    title: 'Bienes de Capital - Persona Jurídica',
     description:
-      'Evento anual que celebra y promueve la cadena olivícola de San Juan, impulsando la calidad y la identidad regional del sector.',
+      'Financiamiento para empresas (SRL, SA, etc.) que necesiten adquirir bienes de capital para potenciar su actividad productiva.',
     link: null,
   },
 ]

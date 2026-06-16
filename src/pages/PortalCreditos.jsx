@@ -172,6 +172,7 @@ export default function PortalCreditos() {
           formularioId={formularioActivo.formularioId}
           programa={formularioActivo.programa}
           title={formularioActivo.title}
+          campos={formularioActivo.campos || []}
           onClose={() => setFormularioActivo(null)}
         />
       )}
