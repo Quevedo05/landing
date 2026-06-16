@@ -105,7 +105,7 @@ function DescripcionCredito({ programa }) {
   )
 }
 
-const MANTENIMIENTO = false
+const MANTENIMIENTO = true
 
 export default function PortalCreditos() {
   if (MANTENIMIENTO) return (
