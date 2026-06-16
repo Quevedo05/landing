@@ -28,7 +28,7 @@ export default function SaveanQRPDF({ guia }) {
     (s, m) => s + (parseFloat(m.cantidad) || 0) * (parseFloat(m.kilos) || 0),
     0
   )
-  const verificationUrl = `https://savean.agenciacalidadsanjuan.com.ar/verificar/${guia.token}`
+  const verificationUrl = `https://sistema.agenciacalidadsanjuan.com.ar/?verificar=${guia.token}`
 
   const destinoLabel = guia.destinatario.tipoDestino === 'externo' ? 'Externo' : 'Interno'
   const destinoPais =
