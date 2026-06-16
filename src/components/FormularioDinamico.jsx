@@ -7,10 +7,15 @@ const inputBase =
 
 function CampoInput({ campo, value, onChange, disabled }) {
   const { id, label, tipo, requerido, placeholder, opciones } = campo
+  const [fileName, setFileName] = useState('')
 
   const handleFile = (e) => {
     const file = e.target.files?.[0]
-    onChange(id, file ? file.name : '')
+    if (!file) { onChange(id, ''); setFileName(''); return }
+    setFileName(file.name)
+    const reader = new FileReader()
+    reader.onload = (ev) => onChange(id, ev.target.result)
+    reader.readAsDataURL(file)
   }
 
   if (tipo === 'selector') {
@@ -43,6 +48,7 @@ function CampoInput({ campo, value, onChange, disabled }) {
   }
 
   if (tipo === 'archivo') {
+    const displayName = fileName || (value && !value.startsWith('data:') ? value : '') || ''
     return (
       <div className="flex items-center gap-3">
         <label className={`
@@ -50,11 +56,13 @@ function CampoInput({ campo, value, onChange, disabled }) {
           rounded-lg cursor-pointer hover:border-orange-400 hover:bg-orange-50
           transition-colors text-sm text-gray-500 w-full
           ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
+          ${displayName ? 'border-orange-400 bg-orange-50' : ''}
         `}>
           <Paperclip size={16} className="text-orange-500 flex-shrink-0" />
-          <span className="truncate">{value || 'Seleccionar archivo...'}</span>
+          <span className="truncate">{displayName || 'Seleccionar archivo (JPG, PDF, PNG)...'}</span>
           <input
             type="file"
+            accept="image/*,.pdf,.doc,.docx"
             className="hidden"
             disabled={disabled}
             onChange={handleFile}
