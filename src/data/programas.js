@@ -4,23 +4,24 @@ export const programas = [
     icon: 'CreditCard',
     title: 'Microcréditos Emprendedores',
     description:
-      'Programa de microcréditos para emprendedores y pequeñas empresas. Financiá capital de trabajo o equipamiento para impulsar tu negocio.',
+      'Microcréditos para emprendedores en estadío de iniciación, ejecución o crecimiento. Hasta $3.000.000. Tasa 50% BADLAR. Sin gastos de otorgamiento.',
     link: null,
   },
   {
     id: 2,
     icon: 'Star',
-    title: 'Bienes de Capital - Persona Física',
+    title: 'Bienes de Capital',
     description:
-      'Financiamiento para la adquisición de maquinaria, equipos y bienes de capital que mejoren tu productividad como persona física.',
+      'Financiamiento para personas físicas o jurídicas (Microempresas) de San Juan para adquirir bienes de capital. Hasta $10.000.000. Tasa 50% BADLAR.',
     link: null,
+    esBienesCapital: true,
   },
   {
     id: 3,
     icon: 'Sun',
-    title: 'Bienes de Capital - Persona Jurídica',
+    title: 'Potenciar Emprendedores',
     description:
-      'Financiamiento para empresas (SRL, SA, etc.) que necesiten adquirir bienes de capital para potenciar su actividad productiva.',
+      'Línea de crédito para nuevos emprendedores y emprendimientos en ejecución o crecimiento. Hasta $4.000.000. Tasa 40% BADLAR. Primer llamado: cierra el 30/06/2026.',
     link: null,
   },
 ]

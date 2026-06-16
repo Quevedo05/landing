@@ -21,12 +21,13 @@ export default function Programas({ onProgramaClick }) {
         const activos = {}
         formularios.forEach(f => {
           if (f.activo) {
-            // Key by nombre (unique) so two BIENES DE CAPITAL don't collide
             activos[f.nombre] = {
               formularioId: f.id || f.formularioId,
               activo: true,
               campos: f.campos || [],
               programa: f.programa,
+              personasFisicas: f.personasFisicas ?? true,
+              personasJuridicas: f.personasJuridicas ?? false,
             }
           }
         })
@@ -54,15 +55,42 @@ export default function Programas({ onProgramaClick }) {
           centered
         />
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-          {programas.map(({ id, icon, title, description, link }) => {
-            const Icon = iconMap[icon] || Star
-            // Match by card title === formulario nombre
-            const programaData = programasActivos[title]
-            const estaActivo = programaData?.activo || false
+          {programas.map((p) => {
+            const Icon = iconMap[p.icon] || Star
+
+            // Bienes de Capital is shown as a unified card matching both subforms
+            const bienesData = p.esBienesCapital ? {
+              fisica: programasActivos['Bienes de Capital - Persona Física'],
+              juridica: programasActivos['Bienes de Capital - Persona Jurídica'],
+            } : null
+
+            const programaData = p.esBienesCapital ? null : programasActivos[p.title]
+
+            const estaActivo = p.esBienesCapital
+              ? Boolean(bienesData?.fisica?.activo || bienesData?.juridica?.activo)
+              : Boolean(programaData?.activo)
+
+            const handleSolicitar = () => {
+              if (!onProgramaClick) return
+              if (p.esBienesCapital) {
+                onProgramaClick({
+                  esBienesCapital: true,
+                  fisica: bienesData.fisica,
+                  juridica: bienesData.juridica,
+                })
+              } else {
+                onProgramaClick({
+                  formularioId: programaData.formularioId,
+                  programa: programaData.programa,
+                  title: p.title,
+                  campos: programaData.campos,
+                })
+              }
+            }
 
             return (
               <Card
-                key={id}
+                key={p.id}
                 className={`flex flex-col p-8 hover:shadow-lg transition-all ${
                   estaActivo
                     ? 'border-2 border-green-500 shadow-lg'
@@ -80,21 +108,12 @@ export default function Programas({ onProgramaClick }) {
                     </div>
                   )}
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-3">{title}</h3>
-                <p className="text-gray-600 leading-relaxed flex-1">{description}</p>
+                <h3 className="text-lg font-bold text-gray-900 mb-3">{p.title}</h3>
+                <p className="text-gray-600 leading-relaxed flex-1">{p.description}</p>
 
                 {estaActivo && (
                   <button
-                    onClick={() => {
-                      if (onProgramaClick) {
-                        onProgramaClick({
-                          formularioId: programaData.formularioId,
-                          programa: title,
-                          title,
-                          campos: programaData.campos,
-                        })
-                      }
-                    }}
+                    onClick={handleSolicitar}
                     className="mt-6 inline-flex items-center gap-2 bg-orange-600 text-white px-4 py-2
                                rounded-lg font-semibold hover:bg-orange-700 transition-colors text-sm"
                   >
@@ -102,9 +121,9 @@ export default function Programas({ onProgramaClick }) {
                   </button>
                 )}
 
-                {!estaActivo && link && (
+                {!estaActivo && p.link && (
                   <a
-                    href={link}
+                    href={p.link}
                     className="mt-6 inline-flex items-center gap-2 text-orange-600 font-semibold
                                hover:gap-3 transition-all text-sm"
                   >
@@ -112,7 +131,7 @@ export default function Programas({ onProgramaClick }) {
                   </a>
                 )}
 
-                {!estaActivo && !link && (
+                {!estaActivo && !p.link && (
                   <p className="mt-6 text-sm text-gray-500 italic">Próximamente</p>
                 )}
               </Card>
