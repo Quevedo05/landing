@@ -136,8 +136,9 @@ export default function PortalCreditos() {
                         onClick={() =>
                           setFormularioActivo({
                             formularioId: formulario.id,
-                            programa: formulario.programa,
-                            title: formulario.programa,
+                            programa: formulario.nombre,
+                            title: formulario.nombre,
+                            campos: formulario.campos || [],
                           })
                         }
                         className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-orange-600 text-white px-5 py-2.5
