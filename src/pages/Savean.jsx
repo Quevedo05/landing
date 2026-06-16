@@ -81,7 +81,7 @@ function SaveanLanding({ onClickEmitir }) {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {[
           { value: '8', label: 'Puestos de control activos' },
           { value: '24/7', label: 'Fiscalización continua' },
@@ -99,7 +99,7 @@ function SaveanLanding({ onClickEmitir }) {
         <h3 className="text-2xl font-bold text-gray-900 mb-8 border-l-4 border-orange-500 pl-4">
           ¿Cómo funciona?
         </h3>
-        <div className="grid grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {[
             { step: '1', color: '#ea580c', title: 'Completá la guía', desc: 'Ingresá los datos de remitente, destinatario, mercadería y transporte en el formulario digital.' },
             { step: '2', color: '#f97316', title: 'Recibí tu QR', desc: 'Se genera un código QR único y un PDF descargable con toda la información de tu guía.' },
@@ -125,7 +125,7 @@ function SaveanLanding({ onClickEmitir }) {
         <h3 className="text-2xl font-bold text-gray-900 mb-8 border-l-4 border-orange-500 pl-4">
           Puestos de control
         </h3>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {[
             { nombre: 'Barreal', detalle: 'Ruta N°149, Km 111', zona: 'Calingasta' },
             { nombre: 'Encon', detalle: 'Ruta N°20, Km 470', zona: '25 de mayo' },

@@ -44,7 +44,7 @@ export default function Navbar({ activeSection }) {
         <div className="flex-1 flex justify-end items-center gap-2">
           <Link
             to="/portal-creditos"
-            className="btn-primary flex items-center gap-2 text-sm"
+            className="hidden md:inline-flex btn-primary items-center gap-2 text-sm"
           >
             Portal de Créditos
           </Link>
