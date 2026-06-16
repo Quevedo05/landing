@@ -59,12 +59,19 @@ export default function SaveanQRPDF({ guia }) {
         <p className="text-green-800 mb-1">
           Número: <strong>{guia.numero}</strong>
         </p>
-        <p className="text-green-700 text-sm">
+        <p className="text-green-700 text-sm mb-6">
           {guia.fechaVencimiento
             ? <>Vence el <strong>{new Date(guia.fechaVencimiento).toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' })}</strong></>
             : <>Válida por <strong>20 días</strong> desde su emisión</>
           }
         </p>
+
+        {/* QR para presentar en barrera */}
+        <div className="flex flex-col items-center gap-2 bg-white border-2 border-green-300 rounded-xl p-5 max-w-xs mx-auto">
+          <p className="text-xs font-bold text-gray-700 uppercase tracking-widest">QR a presentar en Barrera</p>
+          <QRCodeSVG value={verificationUrl} size={180} level="M" />
+          <p className="text-xs text-gray-400 mt-1">Sacá una captura de pantalla para mostrar al inspector</p>
+        </div>
       </div>
 
       {/* Documento PDF */}
