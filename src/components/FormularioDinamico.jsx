@@ -126,6 +126,13 @@ export default function FormularioDinamico({ formularioId, programa, title, camp
     setErrores((prev) => { const e = { ...prev }; delete e[id]; return e })
   }
 
+  const esCampoVisible = (campo) => {
+    if (!campo.condicion) return true
+    const ctrl = camposOrdenados.find(c => c.campo === campo.condicion.campo)
+    if (!ctrl) return false
+    return campo.condicion.valor.includes(valoresCampos[ctrl.id] ?? '')
+  }
+
   const validar = () => {
     const errs = {}
     if (!nombreCiudadano.trim()) errs._nombre = 'El nombre es requerido'
@@ -133,6 +140,7 @@ export default function FormularioDinamico({ formularioId, programa, title, camp
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailCiudadano)) errs._email = 'Email inválido'
 
     camposOrdenados.forEach((campo) => {
+      if (!esCampoVisible(campo)) return
       if (campo.requerido && !valoresCampos[campo.id]?.trim?.() && !valoresCampos[campo.id]) {
         errs[campo.id] = `"${campo.label}" es requerido`
       }
@@ -141,7 +149,7 @@ export default function FormularioDinamico({ formularioId, programa, title, camp
   }
 
   const construirDescripcion = () => {
-    const lineas = camposOrdenados.map((campo) => {
+    const lineas = camposOrdenados.filter(esCampoVisible).map((campo) => {
       const valor = valoresCampos[campo.id]
       if (!valor) return null
       const prefix = campo.tipo === 'archivo' ? '[Adjunto]' : ''
@@ -298,23 +306,26 @@ export default function FormularioDinamico({ formularioId, programa, title, camp
                       Información del Programa
                     </p>
                     <div className="space-y-4">
-                      {camposOrdenados.map((campo) => (
-                        <div key={campo.id}>
-                          <label className="block text-sm font-semibold text-gray-700 mb-1.5">
-                            {campo.label}
-                            {campo.requerido && <span className="text-red-500 ml-1">*</span>}
-                          </label>
-                          <CampoInput
-                            campo={campo}
-                            value={valoresCampos[campo.id] ?? ''}
-                            onChange={setCampoValor}
-                            disabled={formularioDeshabilitado}
-                          />
-                          {errores[campo.id] && (
-                            <p className="text-red-500 text-xs mt-1">{errores[campo.id]}</p>
-                          )}
-                        </div>
-                      ))}
+                      {camposOrdenados.map((campo) => {
+                        if (!esCampoVisible(campo)) return null
+                        return (
+                          <div key={campo.id}>
+                            <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+                              {campo.label}
+                              {campo.requerido && <span className="text-red-500 ml-1">*</span>}
+                            </label>
+                            <CampoInput
+                              campo={campo}
+                              value={valoresCampos[campo.id] ?? ''}
+                              onChange={setCampoValor}
+                              disabled={formularioDeshabilitado}
+                            />
+                            {errores[campo.id] && (
+                              <p className="text-red-500 text-xs mt-1">{errores[campo.id]}</p>
+                            )}
+                          </div>
+                        )
+                      })}
                     </div>
                   </div>
                 )}
