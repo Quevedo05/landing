@@ -1,87 +1,66 @@
-import SectionHeader from './ui/SectionHeader'
-
 const logros = [
   {
     numero: '+500',
     titulo: 'Empresas Asistidas',
     descripcion:
-      'PyMEs y emprendedores de San Juan que recibieron orientación técnica, financiera y capacitación para fortalecer su competitividad.',
-    color: 'from-orange-400 to-orange-600',
-    // Reemplazar con ruta real cuando estén disponibles las imágenes
+      'PyMEs y emprendedores de San Juan que recibieron orientación técnica, financiera y capacitación.',
     imagen: null,
   },
   {
     numero: '+150',
     titulo: 'Capacitaciones Realizadas',
     descripcion:
-      'Talleres, jornadas y programas de formación organizados para el sector productivo provincial a lo largo del año.',
-    color: 'from-amber-400 to-amber-600',
+      'Talleres, jornadas y programas de formación para el sector productivo provincial.',
     imagen: null,
   },
   {
     numero: '+80',
     titulo: 'Proyectos Financiados',
     descripcion:
-      'Iniciativas de innovación, calidad y desarrollo productivo que recibieron financiamiento para concretar sus objetivos.',
-    color: 'from-red-400 to-orange-500',
+      'Iniciativas de innovación, calidad y desarrollo productivo que recibieron financiamiento.',
     imagen: null,
   },
   {
     numero: '8',
     titulo: 'Puestos de Control SAVEAN',
     descripcion:
-      'Barreras fitozoosanitarias activas que protegen las 24 horas la producción agrícola sanjuanina en puntos estratégicos.',
-    color: 'from-orange-500 to-red-500',
+      'Barreras fitozoosanitarias activas que protegen la producción agrícola sanjuanina.',
     imagen: null,
   },
 ]
 
 export default function LogrosSection() {
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-white border-t border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeader
-          title="Lo que hemos logrado"
-          subtitle="Resultados concretos que demuestran nuestro compromiso con el sector productivo sanjuanino."
-          centered
-        />
+        {/* Encabezado institucional */}
+        <div className="mb-14">
+          <p className="text-xs font-semibold tracking-widest uppercase text-primary mb-2">
+            Gestión y resultados
+          </p>
+          <h2 className="text-3xl font-bold text-gray-900">
+            Indicadores de gestión
+          </h2>
+          <div className="w-12 h-0.5 bg-primary mt-4" />
+        </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
-          {logros.map(({ numero, titulo, descripcion, color, imagen }) => (
-            <div
-              key={titulo}
-              className="group rounded-2xl overflow-hidden border border-gray-200 bg-white
-                         hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-            >
-              {/* Imagen o degradado de color */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-0 divide-y sm:divide-y-0 sm:divide-x divide-gray-200 border border-gray-200 rounded-lg overflow-hidden">
+          {logros.map(({ numero, titulo, descripcion, imagen }) => (
+            <div key={titulo} className="bg-white p-8 flex flex-col gap-4">
               {imagen ? (
-                <img
-                  src={imagen}
-                  alt={titulo}
-                  className="w-full h-44 object-cover"
-                />
+                <img src={imagen} alt={titulo} className="w-full h-36 object-cover rounded" />
               ) : (
-                <div className={`h-44 bg-gradient-to-br ${color} flex flex-col items-center justify-center`}>
-                  <span className="text-5xl font-extrabold text-white drop-shadow">{numero}</span>
-                  {/* Placeholder para cuando se agreguen imágenes reales */}
-                  <span className="text-white/60 text-xs mt-2 font-medium tracking-wider uppercase">
-                    Agregar imagen
-                  </span>
+                <div className="h-36 bg-gray-50 border border-gray-200 rounded flex items-center justify-center">
+                  <span className="text-5xl font-bold text-gray-800">{numero}</span>
                 </div>
               )}
-
-              <div className="p-5">
-                <h3 className="text-base font-bold text-gray-900 mb-2">{titulo}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{descripcion}</p>
+              <div>
+                <p className="text-sm font-semibold text-gray-900 mb-1">{titulo}</p>
+                <p className="text-xs text-gray-500 leading-relaxed">{descripcion}</p>
               </div>
             </div>
           ))}
         </div>
-
-        <p className="text-center text-xs text-gray-400 mt-8">
-          * Para actualizar imágenes o cifras, editar el archivo{' '}
-          <code className="bg-gray-100 px-1 rounded">src/components/LogrosSection.jsx</code>
-        </p>
       </div>
     </section>
   )
