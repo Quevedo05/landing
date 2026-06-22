@@ -222,15 +222,23 @@ export default function FormularioDinamico({ formularioId, programa, title, camp
                   Número de seguimiento:{' '}
                   <span className="font-mono font-bold text-lg text-green-900">{mensaje.numero}</span>
                 </p>
-                <p className="text-green-600 text-sm mt-3">
-                  Puede usar este número para consultar el estado de su solicitud en el sistema.
+                <p className="text-green-600 text-sm mt-2">
+                  Guardá este número para consultar el estado de tu solicitud en cualquier momento.
                 </p>
-                <button
-                  onClick={onClose}
-                  className="mt-4 px-6 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors text-sm"
-                >
-                  Cerrar
-                </button>
+                <div className="mt-4 flex flex-col sm:flex-row gap-2">
+                  <a
+                    href={`/consultar?numero=${mensaje.numero}`}
+                    className="px-5 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors text-sm text-center"
+                  >
+                    Ver estado de mi trámite →
+                  </a>
+                  <button
+                    onClick={onClose}
+                    className="px-5 py-2 border border-green-400 text-green-700 font-semibold rounded-lg hover:bg-green-50 transition-colors text-sm"
+                  >
+                    Cerrar
+                  </button>
+                </div>
               </div>
             </div>
           )}

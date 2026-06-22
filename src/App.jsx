@@ -8,6 +8,7 @@ import Savean from './pages/Savean'
 import Contacto from './pages/Contacto'
 import PortalCreditos from './pages/PortalCreditos'
 import Mantenimiento from './pages/Mantenimiento'
+import ConsultarTramite from './pages/ConsultarTramite'
 
 const MANTENIMIENTO = false
 
@@ -24,6 +25,7 @@ export default function App() {
         <Route path="/savean" element={<Savean />} />
         <Route path="/contacto" element={<Contacto />} />
         <Route path="/portal-creditos" element={<PortalCreditos />} />
+        <Route path="/consultar" element={<ConsultarTramite />} />
       </Routes>
       <Footer />
     </Router>

@@ -24,3 +24,7 @@ export async function crearTicket(datos) {
   }
   return api.post('/tickets/crear-desde-formulario', datos)
 }
+
+export async function consultarTicket(numero) {
+  return api.get(`/tickets/consultar/${numero}`)
+}
