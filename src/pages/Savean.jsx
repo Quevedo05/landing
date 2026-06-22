@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { X } from 'lucide-react'
+import { X, Mail } from 'lucide-react'
 import SaveanForm from '../components/Savean/SaveanForm'
 
 export default function SaveanPage() {
@@ -159,6 +159,102 @@ function SaveanLanding({ onClickEmitir }) {
         >
           Completar Guía de Origen →
         </button>
+      </div>
+
+      {/* Formulario de consultas SAVEAN */}
+      <ConsultaSavean />
+    </div>
+  )
+}
+
+function ConsultaSavean() {
+  const [form, setForm] = useState({ nombre: '', email: '', consulta: '' })
+  const [enviado, setEnviado] = useState(false)
+
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const subject = encodeURIComponent('Consulta SAVEAN desde la web')
+    const body = encodeURIComponent(
+      `Nombre: ${form.nombre}\nEmail: ${form.email}\n\nConsulta:\n${form.consulta}`
+    )
+    window.location.href = `mailto:savean@calidadsj.com.ar?subject=${subject}&body=${body}`
+    setEnviado(true)
+  }
+
+  return (
+    <div className="bg-orange-50 border border-orange-200 rounded-2xl p-8 sm:p-12">
+      <div className="max-w-2xl mx-auto">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="w-10 h-10 bg-orange-500 rounded-xl flex items-center justify-center flex-shrink-0">
+            <Mail size={20} className="text-white" />
+          </div>
+          <h3 className="text-2xl font-bold text-gray-900">¿Tenés una consulta sobre SAVEAN?</h3>
+        </div>
+        <p className="text-gray-600 mb-8 ml-13">
+          Completá el formulario y te respondemos a la brevedad.
+        </p>
+
+        {enviado ? (
+          <div className="text-center py-8">
+            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span className="text-2xl">✓</span>
+            </div>
+            <p className="text-gray-700 font-semibold">¡Consulta enviada!</p>
+            <p className="text-gray-500 text-sm mt-1">Revisá tu cliente de correo para completar el envío.</p>
+            <button
+              onClick={() => { setEnviado(false); setForm({ nombre: '', email: '', consulta: '' }) }}
+              className="mt-4 text-orange-600 text-sm hover:underline"
+            >
+              Enviar otra consulta
+            </button>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Nombre *</label>
+                <input
+                  type="text" name="nombre" required value={form.nombre}
+                  onChange={handleChange}
+                  className="w-full border border-gray-300 rounded-lg px-4 py-2.5
+                             focus:ring-2 focus:ring-orange-300 focus:border-orange-500 outline-none bg-white"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+                <input
+                  type="email" name="email" required value={form.email}
+                  onChange={handleChange}
+                  className="w-full border border-gray-300 rounded-lg px-4 py-2.5
+                             focus:ring-2 focus:ring-orange-300 focus:border-orange-500 outline-none bg-white"
+                />
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Tu consulta *</label>
+              <textarea
+                name="consulta" required rows={4} value={form.consulta}
+                onChange={handleChange}
+                placeholder="Escribí tu consulta sobre SAVEAN..."
+                className="w-full border border-gray-300 rounded-lg px-4 py-2.5
+                           focus:ring-2 focus:ring-orange-300 focus:border-orange-500 outline-none resize-none bg-white"
+              />
+            </div>
+            <div className="flex items-center gap-4">
+              <button
+                type="submit"
+                className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white
+                           font-semibold px-8 py-3 rounded-xl transition-colors"
+              >
+                <Mail size={18} />
+                Enviar consulta
+              </button>
+              <p className="text-xs text-gray-400">Se abrirá tu cliente de correo para enviar.</p>
+            </div>
+          </form>
+        )}
       </div>
     </div>
   )

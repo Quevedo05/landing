@@ -17,9 +17,9 @@ export default function QuienesSomos() {
               San Juan.
             </p>
             <p className="text-gray-600 leading-relaxed">
-              Dependemos del Ministerio de Producción, Trabajo e Innovación del
-              Gobierno de la Provincia de San Juan, trabajando en conjunto con
-              los actores públicos y privados del ecosistema productivo regional.
+              Dependemos del Gobierno de la Provincia de San Juan, trabajando
+              en conjunto con los actores públicos y privados del ecosistema
+              productivo regional.
             </p>
           </div>
 

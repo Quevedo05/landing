@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import WhatsAppButton from './components/WhatsAppButton'
 import Home from './pages/Home'
 import Nosotros from './pages/Nosotros'
 import Programas from './pages/Programas'
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="/consultar" element={<ConsultarTramite />} />
       </Routes>
       <Footer />
+      <WhatsAppButton />
     </Router>
   )
 }

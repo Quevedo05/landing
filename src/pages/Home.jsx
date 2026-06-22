@@ -3,6 +3,10 @@ import Hero from '../components/Hero'
 import QuienesSomos from '../components/QuienesSomos'
 import MisionVisionValores from '../components/MisionVisionValores'
 import Programas from '../components/Programas'
+import LogrosSection from '../components/LogrosSection'
+import CalendarioEventos from '../components/CalendarioEventos'
+import CamarasSocias from '../components/CamarasSocias'
+import RelevamientoEmprende from '../components/RelevamientoEmprende'
 import FormularioDinamico from '../components/FormularioDinamico'
 import SelectorTipoPersona from '../components/SelectorTipoPersona'
 
@@ -34,6 +38,18 @@ export default function Home() {
       <QuienesSomos />
       <MisionVisionValores />
       <Programas onProgramaClick={handleProgramaClick} />
+
+      {/* Logros y cosas hechas */}
+      <LogrosSection />
+
+      {/* Relevamiento Emprendedor */}
+      <RelevamientoEmprende />
+
+      {/* Calendario de eventos */}
+      <CalendarioEventos />
+
+      {/* Carta de presentación - Cámaras Socias */}
+      <CamarasSocias />
 
       {/* Selector persona física/jurídica para Bienes de Capital */}
       {selectorBienes && (
