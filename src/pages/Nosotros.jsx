@@ -81,10 +81,6 @@ function CodigoEtica() {
               Descargar PDF
             </a>
 
-            <p className="text-xs text-gray-400 mt-4">
-              Colocar el archivo en{' '}
-              <code className="bg-gray-200 px-1 rounded">public/documentos/codigo-etica.pdf</code>
-            </p>
           </div>
         </div>
       </div>
@@ -119,10 +115,6 @@ function PoliticaCalidad() {
               Descargar PDF
             </a>
 
-            <p className="text-xs text-gray-400 mt-4">
-              Colocar el archivo en{' '}
-              <code className="bg-gray-200 px-1 rounded">public/documentos/politica-calidad.pdf</code>
-            </p>
           </div>
 
           {/* Encabezado e ícono */}
