@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
+import { Link } from 'react-router-dom'
 import SectionHeader from '../components/ui/SectionHeader'
 import FormularioDinamico from '../components/FormularioDinamico'
 import SelectorTipoPersona from '../components/SelectorTipoPersona'
@@ -215,6 +216,15 @@ export default function PortalCreditos() {
           subtitle="Solicita financiamiento para tu negocio o proyecto productivo."
           centered
         />
+
+        <div className="flex justify-center mt-4">
+          <Link
+            to="/consultar"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-[#FF9500] hover:text-orange-600 transition-colors"
+          >
+            ¿Ya tenés un trámite iniciado? Consultá el estado →
+          </Link>
+        </div>
 
         {cargando ? (
           <div className="mt-12 bg-white rounded-2xl shadow-lg p-8 sm:p-12 text-center">
