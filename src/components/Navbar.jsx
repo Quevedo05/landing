@@ -43,6 +43,12 @@ export default function Navbar({ activeSection }) {
         {/* CTA Button Right */}
         <div className="flex-1 flex justify-end items-center gap-2">
           <Link
+            to="/consultar"
+            className="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-[#FF9500] border border-[#FF9500] rounded-lg px-4 py-2 hover:bg-orange-50 transition-colors"
+          >
+            Consultar trámite
+          </Link>
+          <Link
             to="/portal-creditos"
             className="hidden md:inline-flex btn-primary items-center gap-2 text-sm"
           >
@@ -73,6 +79,13 @@ export default function Navbar({ activeSection }) {
               {label}
             </Link>
           ))}
+          <Link
+            to="/consultar"
+            onClick={() => setMenuOpen(false)}
+            className="block text-center mt-2 font-semibold text-[#FF9500] border border-[#FF9500] rounded-lg px-4 py-2 hover:bg-orange-50 transition-colors"
+          >
+            Consultar trámite
+          </Link>
           <Link
             to="/portal-creditos"
             onClick={() => setMenuOpen(false)}
