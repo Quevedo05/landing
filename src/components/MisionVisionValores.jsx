@@ -1,22 +1,20 @@
-import { Target, Eye, Shield } from 'lucide-react'
-import Card from './ui/Card'
 import SectionHeader from './ui/SectionHeader'
 
 const items = [
   {
-    icon: Target,
     title: 'Misión',
     text: 'Gestionar, orientar y contribuir con las PyMEs y emprendedores de la provincia, fomentando su desarrollo sustentable y competitividad.',
+    image: '/acsjmision.jpg',
   },
   {
-    icon: Eye,
     title: 'Visión',
     text: 'Ser una de las agencias guía del sector productivo, fomentando el crecimiento, la calidad y la sustentabilidad de las empresas sanjuaninas.',
+    image: '/acsjvision.jpg',
   },
   {
-    icon: Shield,
     title: 'Valores',
     text: 'Integridad · Eficiencia · Excelencia · Transparencia · Confianza',
+    image: '/acsjvalores.jpg',
   },
 ]
 
@@ -29,15 +27,25 @@ export default function MisionVisionValores() {
           centered
         />
         <div className="grid sm:grid-cols-3 gap-8 mt-12">
-          {items.map(({ icon: Icon, title, text }) => (
-            <Card key={title} className="text-center p-8">
-              <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center
-                              justify-center mx-auto mb-6">
-                <Icon size={28} className="text-primary" />
+          {items.map(({ title, text, image }) => (
+            <div
+              key={title}
+              className="relative rounded-2xl overflow-hidden shadow-lg min-h-[320px] flex flex-col justify-end"
+            >
+              {/* Imagen de fondo */}
+              <img
+                src={image}
+                alt={title}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              {/* Overlay oscuro degradado */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
+              {/* Contenido */}
+              <div className="relative z-10 p-8 text-white">
+                <h3 className="text-2xl font-bold mb-3 drop-shadow">{title}</h3>
+                <p className="text-white/90 leading-relaxed text-sm drop-shadow">{text}</p>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">{title}</h3>
-              <p className="text-gray-600 leading-relaxed">{text}</p>
-            </Card>
+            </div>
           ))}
         </div>
       </div>

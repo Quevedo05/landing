@@ -28,7 +28,7 @@ export default function QuienesSomos() {
             <img
               src="/acsj1.jpg"
               alt="Agencia Calidad San Juan"
-              className="w-full h-auto rounded-2xl object-cover shadow-md"
+              className="w-4/5 h-auto rounded-2xl object-cover shadow-md"
             />
           </div>
         </div>
