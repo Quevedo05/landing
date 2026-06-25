@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { X, Mail } from 'lucide-react'
+import { X, Mail, FileText, Shield, MapPin } from 'lucide-react'
 import SaveanForm from '../components/Savean/SaveanForm'
 
 export default function SaveanPage() {
@@ -78,6 +78,170 @@ function SaveanLanding({ onClickEmitir }) {
           prevenir el ingreso y dispersión de plagas como la <em>Lobesia Botrana</em> (Polilla de la Vid)
           y <em>Ceratitis Capitata</em> (Mosca de los Frutos).
         </p>
+      </div>
+
+      {/* Servicios */}
+      <div>
+        <h3 className="text-2xl font-bold text-gray-900 mb-2 border-l-4 border-orange-500 pl-4">
+          Nuestros Servicios
+        </h3>
+        <p className="text-gray-500 text-sm mb-6 pl-5">
+          SAVEAN ofrece dos servicios principales para el registro y control del tránsito de productos.
+        </p>
+
+        <div className="space-y-6">
+
+          {/* Guía de Origen */}
+          <div className="border border-gray-200 rounded-xl bg-white overflow-hidden">
+            <div className="bg-orange-50 border-b border-orange-100 px-6 py-4 flex items-center gap-3">
+              <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                <FileText size={20} className="text-white" />
+              </div>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-widest text-orange-600 mb-0.5">Servicio 01</p>
+                <h4 className="text-lg font-bold text-gray-900">Guía de Origen</h4>
+              </div>
+            </div>
+            <div className="px-6 py-6 space-y-4">
+              <p className="text-gray-600 leading-relaxed text-sm">
+                La <strong>Guía de Origen</strong> es una declaración jurada mediante la cual se registra la salida de productos
+                de origen vegetal desde la provincia de San Juan hacia otros destinos del país. En ella se consignan datos
+                relacionados con el producto transportado, su procedencia y la cantidad de kilogramos que se trasladan.
+              </p>
+              <p className="text-gray-600 leading-relaxed text-sm">
+                Su finalidad es principalmente <strong>estadística e informativa</strong>, ya que permite al Estado provincial
+                contar con información confiable sobre los volúmenes y tipos de productos que egresan de la provincia.
+                Estos datos constituyen una herramienta fundamental para la planificación y el diseño de políticas públicas
+                vinculadas al sector agropecuario y agroindustrial.
+              </p>
+              <p className="text-gray-600 leading-relaxed text-sm">
+                A partir de la información recopilada, el Gobierno puede analizar tendencias productivas y comerciales,
+                evaluar la evolución de las distintas cadenas productivas y generar herramientas de apoyo al sector,
+                como programas de financiamiento, asistencia técnica, promoción comercial o políticas de desarrollo productivo.
+              </p>
+              <div className="bg-orange-50 border border-orange-200 rounded-lg px-5 py-4">
+                <p className="text-sm text-orange-800 leading-relaxed">
+                  <strong>Importante:</strong> La Guía de Origen no tiene carácter tributario ni fiscal. No se encuentra
+                  vinculada a organismos de recaudación ni implica el pago de aranceles o tasas, siendo un trámite
+                  completamente gratuito. Su objetivo es exclusivamente brindar información para una mejor planificación
+                  estratégica basada en datos reales de la producción provincial.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* SVIS */}
+          <div className="border border-gray-200 rounded-xl bg-white overflow-hidden">
+            <div className="bg-orange-50 border-b border-orange-100 px-6 py-4 flex items-center gap-3">
+              <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Shield size={20} className="text-white" />
+              </div>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-widest text-orange-600 mb-0.5">Servicio 02</p>
+                <h4 className="text-lg font-bold text-gray-900">Servicio de Inspección Veterinaria (SVIS)</h4>
+              </div>
+            </div>
+            <div className="px-6 py-6 space-y-4">
+              <p className="text-gray-600 leading-relaxed text-sm">
+                El <strong>Servicio Veterinario de Inspección Sanitaria</strong> actúa como autoridad de aplicación en
+                sanidad animal, alimentos y fiscalización, aplicando normativas nacionales como la Ley Federal de Carnes.
+              </p>
+              <p className="text-gray-600 leading-relaxed text-sm">
+                Todo producto y subproducto de origen animal y sus derivados debe ingresar al territorio de la provincia
+                con una serie de documentación que avale su origen, con las características de la especie, temperatura
+                y acondicionamiento.
+              </p>
+              <div>
+                <p className="text-sm font-semibold text-gray-900 mb-3">Habilitaciones y control de:</p>
+                <ul className="space-y-2">
+                  {[
+                    'Plantas de Faenas (Mataderos)',
+                    'Cámaras frigoríficas',
+                    'Fábricas de productos y subproductos de origen animal dentro de la provincia',
+                    'Movilidades térmicas para el transporte de los productos y subproductos',
+                    'Trozaderos, despostaderos, graserías, triperías, etc.',
+                    'Depósitos de huevos',
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-2.5 text-sm text-gray-600">
+                      <span className="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0 mt-1.5" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Punto de Control */}
+              <div className="mt-4 bg-gray-800 rounded-xl overflow-hidden">
+                <div className="px-6 py-4 border-b border-white/10 flex items-center gap-3">
+                  <div className="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <MapPin size={16} className="text-white" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-widest text-orange-400">Punto de Control</p>
+                    <p className="text-white font-semibold text-sm">Calle 11 y Punta del Monte — Rawson</p>
+                  </div>
+                </div>
+                <div className="px-6 py-5 space-y-4">
+                  <p className="text-gray-300 leading-relaxed text-sm">
+                    El Punto de Control de carnes de la Provincia de San Juan pertenece al{' '}
+                    <span className="text-white font-medium">
+                      «Sistema Integrado para el control y fiscalización de la introducción de productos y subproductos
+                      derivados de origen animal»
+                    </span>
+                    . En esta oficina, con equipamiento para controles exhaustivos, se fiscaliza la calidad e inocuidad
+                    agroalimentaria con el objetivo de co-garantizar la salud de los consumidores.
+                  </p>
+                  <p className="text-gray-300 leading-relaxed text-sm">
+                    Se controla la cantidad y calidad de las carnes y sus derivados contemplados por la{' '}
+                    <span className="text-orange-400 font-medium">Ley Federal de Carnes N° 22.375</span> y{' '}
+                    <span className="text-orange-400 font-medium">Ley Provincial N° 256-J</span>, cuya competencia
+                    recae en el SVIS de la Dirección de Sanidad Vegetal Animal y Alimentos (DSVAyA). El sistema
+                    contempla software y conectividad para registrar el ingreso de camiones en los límites de la
+                    provincia: Encón, San Carlos, Bermejo y Vallecito.
+                  </p>
+
+                  <div className="grid sm:grid-cols-2 gap-4 pt-2">
+                    <div>
+                      <p className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-2">Productos controlados</p>
+                      <ul className="space-y-1.5">
+                        {[
+                          'Carnes refrigeradas al gancho (bovinos, porcinos, ovinos, caprinos, aves, conejo, nutria, caza mayor y menor) en cortes refrigerados o congelados',
+                          'Tripas, mondongos y menudencias',
+                          'Productos avícolas: carne y huevos',
+                          'Productos de la pesca: pescados, crustáceos, moluscos, batracios, reptiles y mamíferos de especies comestibles',
+                        ].map((item) => (
+                          <li key={item} className="flex items-start gap-2 text-xs text-gray-400 leading-relaxed">
+                            <span className="w-1 h-1 rounded-full bg-orange-500 flex-shrink-0 mt-1.5" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-2">Subproductos de origen animal</p>
+                      <ul className="space-y-1.5">
+                        {[
+                          'Salazones: bondiola, jamón cocido/crudo, panceta, patitas y lomos de cerdo salados, etc.',
+                          'Embutidos frescos: chorizo fresco, longaniza parrillera, salchicha fresca, etc.',
+                          'Embutidos secos: chorizo a la española, longaniza, salame, salamines, etc.',
+                          'Embutidos cocidos: morcilla, mortadela, salchicha tipo Frankfurt o Viena, salchichón, etc.',
+                          'Chacinados no embutidos: arrollado criollo, lechón arrollado, matambre, queso de cerdo, hamburguesa, milanesa, etc.',
+                          'Harina de carne, grasa, sebo, sangre, cuero, cerda, pluma, etc.',
+                        ].map((item) => (
+                          <li key={item} className="flex items-start gap-2 text-xs text-gray-400 leading-relaxed">
+                            <span className="w-1 h-1 rounded-full bg-orange-500 flex-shrink-0 mt-1.5" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
 
       {/* Stats */}
