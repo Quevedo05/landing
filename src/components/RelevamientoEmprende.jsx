@@ -47,43 +47,13 @@ export default function RelevamientoEmprende() {
             </a>
           </div>
 
-          {/* Columna derecha — tarjeta informativa */}
-          <div className="bg-gray-900 rounded-lg p-8 text-white">
-            <p className="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-5">
-              ¿Por qué registrarse?
-            </p>
-            <div className="space-y-5 divide-y divide-gray-700">
-              {[
-                {
-                  titulo: 'Visibilidad institucional',
-                  texto:
-                    'Tu proyecto queda registrado en la base oficial del Estado provincial, con acceso a programas de apoyo.',
-                },
-                {
-                  titulo: 'Diseño de políticas públicas',
-                  texto:
-                    'Los datos relevados permiten al Estado identificar necesidades reales del sector y mejorar la asistencia.',
-                },
-                {
-                  titulo: 'Articulación con la Agencia',
-                  texto:
-                    'La Agencia de Calidad San Juan utiliza el relevamiento para conectar emprendedores con sus programas.',
-                },
-              ].map(({ titulo, texto }) => (
-                <div key={titulo} className="pt-5 first:pt-0">
-                  <p className="text-sm font-semibold text-white mb-1">{titulo}</p>
-                  <p className="text-sm text-gray-400 leading-relaxed">{texto}</p>
-                </div>
-              ))}
-            </div>
-            <div className="border-t border-gray-700 mt-6 pt-5 flex items-center gap-3">
-              <img
-                src="/logo-navbar.png"
-                alt="Agencia Calidad San Juan"
-                className="h-7 w-auto brightness-0 invert opacity-60"
-              />
-              <span className="text-gray-500 text-xs">Iniciativa provincial · San Juan Gobierno</span>
-            </div>
+          {/* Columna derecha — imagen San Juan Emprende */}
+          <div className="flex items-center justify-center">
+            <img
+              src="/sjemprende.jpg"
+              alt="San Juan Emprende"
+              className="w-full max-w-md h-auto rounded-2xl object-cover shadow-xl"
+            />
           </div>
 
         </div>
