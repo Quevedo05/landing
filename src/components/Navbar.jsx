@@ -8,17 +8,17 @@ export default function Navbar({ activeSection }) {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10)
+    const onScroll = () => setScrolled(window.scrollY > 60)
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500
         ${scrolled
           ? 'bg-white/98 backdrop-blur-md shadow-md'
-          : 'bg-white/90 backdrop-blur-sm'
+          : 'bg-transparent'
         }`}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between">
@@ -26,7 +26,11 @@ export default function Navbar({ activeSection }) {
         {/* Logo */}
         <div className="flex-1 flex items-center">
           <Link to="/" className="flex items-center flex-shrink-0 md:-ml-28">
-            <img src="/logo-navbar.png" alt="Agencia Calidad San Juan" className="h-16 w-auto" />
+            <img
+              src="/logo-navbar.png"
+              alt="Agencia Calidad San Juan"
+              className={`h-16 w-auto transition-all duration-500 ${!scrolled ? 'brightness-0 invert' : ''}`}
+            />
           </Link>
         </div>
 
@@ -37,9 +41,13 @@ export default function Navbar({ activeSection }) {
               <li key={href}>
                 <Link
                   to={href}
-                  className="relative text-sm font-medium text-gray-600 hover:text-primary transition-colors duration-200
-                             after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-0 after:bg-primary
-                             after:transition-all after:duration-300 hover:after:w-full"
+                  className={`relative text-sm font-medium transition-colors duration-300
+                    after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-0
+                    after:transition-all after:duration-300 hover:after:w-full
+                    ${scrolled
+                      ? 'text-gray-600 hover:text-primary after:bg-primary'
+                      : 'text-white/90 hover:text-white after:bg-white'
+                    }`}
                 >
                   {label}
                 </Link>
@@ -52,12 +60,16 @@ export default function Navbar({ activeSection }) {
         <div className="flex-1 flex justify-end items-center gap-2">
           <Link
             to="/portal-creditos"
-            className="hidden md:inline-flex btn-primary items-center gap-2 text-sm"
+            className={`hidden md:inline-flex items-center gap-2 text-sm font-semibold px-6 py-3 rounded-lg transition-all duration-300
+              ${scrolled
+                ? 'bg-primary text-white hover:bg-orange-600 shadow-sm'
+                : 'bg-white/20 text-white border border-white/40 hover:bg-white/30 backdrop-blur-sm'
+              }`}
           >
             Portal de Créditos
           </Link>
           <button
-            className="md:hidden p-2 text-gray-600 hover:text-primary transition-colors"
+            className={`md:hidden p-2 transition-colors ${scrolled ? 'text-gray-600 hover:text-primary' : 'text-white hover:text-white/70'}`}
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Abrir menú"
           >
