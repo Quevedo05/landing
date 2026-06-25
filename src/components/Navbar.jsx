@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { navLinks } from '../data/navLinks'
 
 export default function Navbar({ activeSection }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const { pathname } = useLocation()
+  const esHome = pathname === '/'
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60)
@@ -13,10 +15,12 @@ export default function Navbar({ activeSection }) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  const transparente = esHome && !scrolled
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500
-        ${scrolled ? 'bg-white/98 backdrop-blur-md shadow-md' : 'bg-transparent'}`}
+        ${transparente ? 'bg-transparent' : 'bg-white/98 backdrop-blur-md shadow-md'}`}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between">
 
@@ -41,7 +45,7 @@ export default function Navbar({ activeSection }) {
                   className={`relative text-sm font-semibold transition-colors duration-300
                     after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-0
                     after:transition-all after:duration-300 hover:after:w-full
-                    ${scrolled
+                    ${!transparente
                       ? 'text-gray-700 hover:text-primary after:bg-primary'
                       : 'text-gray-900 hover:text-primary after:bg-primary [text-shadow:0_1px_3px_rgba(255,255,255,0.8)]'
                     }`}
@@ -58,7 +62,7 @@ export default function Navbar({ activeSection }) {
           <Link
             to="/portal-creditos"
             className={`hidden md:inline-flex items-center gap-2 text-sm font-semibold px-6 py-3 rounded-lg transition-all duration-300
-              ${scrolled
+              ${!transparente
                 ? 'bg-primary text-white hover:bg-orange-600 shadow-sm'
                 : 'bg-white/70 text-gray-900 border border-gray-300 hover:bg-white backdrop-blur-sm shadow-sm'
               }`}
@@ -66,7 +70,7 @@ export default function Navbar({ activeSection }) {
             Portal de Créditos
           </Link>
           <button
-            className={`md:hidden p-2 transition-colors ${scrolled ? 'text-gray-600 hover:text-primary' : 'text-gray-900'}`}
+            className={`md:hidden p-2 transition-colors ${!transparente ? 'text-gray-600 hover:text-primary' : 'text-gray-900'}`}
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Abrir menú"
           >
