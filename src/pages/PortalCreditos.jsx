@@ -1,9 +1,8 @@
 import { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import SectionHeader from '../components/ui/SectionHeader'
 import FormularioDinamico from '../components/FormularioDinamico'
 import SelectorTipoPersona from '../components/SelectorTipoPersona'
-import { CreditCard, ArrowRight, Check, AlertCircle, ChevronDown, ChevronUp } from 'lucide-react'
+import { ArrowRight, Check, AlertCircle, ChevronDown, ChevronUp } from 'lucide-react'
 import { getFormulariosActivos } from '../services/formularios.service.js'
 import { USE_LOCAL_STORAGE } from '../services/api.js'
 
@@ -79,22 +78,22 @@ const CONDICIONES = {
   ],
 }
 
-// ─── Componente de descripción detallada ─────────────────────────────────────
+// ─── Descripción detallada ────────────────────────────────────────────────────
 function DescripcionCredito({ programa }) {
   const secciones = CONDICIONES[programa]
   if (!secciones) return null
 
   return (
-    <div className="mt-4 pt-4 border-t border-gray-100 space-y-3">
+    <div className="mt-5 pt-5 border-t border-gray-100 space-y-4">
       {secciones.map((sec, i) => (
         <div key={i}>
-          <p className="text-xs font-bold text-orange-700 uppercase tracking-wide mb-1">{sec.titulo}</p>
-          {sec.texto && <p className="text-sm text-gray-600">{sec.texto}</p>}
+          <p className="text-xs font-bold text-primary uppercase tracking-widest mb-1.5">{sec.titulo}</p>
+          {sec.texto && <p className="text-sm text-gray-600 leading-relaxed">{sec.texto}</p>}
           {sec.lista && (
-            <ul className="space-y-1 mt-1">
+            <ul className="space-y-1.5 mt-1">
               {sec.lista.map((item, j) => (
-                <li key={j} className="flex gap-2 text-sm text-gray-600">
-                  <span className="text-orange-400 flex-shrink-0 mt-0.5">•</span>
+                <li key={j} className="flex gap-2.5 text-sm text-gray-600">
+                  <span className="w-1 h-1 rounded-full bg-primary flex-shrink-0 mt-2" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -150,7 +149,6 @@ export default function PortalCreditos() {
     return () => { cancelled = true }
   }, [])
 
-  // Agrupar los dos formularios de Bienes de Capital en una sola tarjeta
   const formulariosAgrupados = useMemo(() => {
     const grupos = {}
     formularios.forEach(f => {
@@ -164,7 +162,6 @@ export default function PortalCreditos() {
       if (forms.length === 1) {
         result.push({ ...forms[0], agrupado: false })
       } else {
-        // Múltiples variantes del mismo programa: mostrar como una sola tarjeta
         const fisica = forms.find(f => f.personasFisicas && !f.personasJuridicas)
         const juridica = forms.find(f => f.personasJuridicas && !f.personasFisicas)
         result.push({
@@ -209,113 +206,113 @@ export default function PortalCreditos() {
   }
 
   return (
-    <main className="pt-[72px] min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <SectionHeader
-          title="Portal de Créditos"
-          subtitle="Solicita financiamiento para tu negocio o proyecto productivo."
-          centered
-        />
+    <main className="min-h-screen bg-gray-50">
 
-        <div className="flex justify-center mt-4">
-          <Link
-            to="/consultar"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-[#FF9500] hover:text-orange-600 transition-colors"
-          >
-            ¿Ya tenés un trámite iniciado? Consultá el estado →
-          </Link>
+      {/* Header oscuro */}
+      <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 pt-[72px]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <p className="text-xs font-semibold tracking-widest uppercase text-orange-400 mb-3">
+            Financiamiento Productivo · Agencia Calidad San Juan
+          </p>
+          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4 leading-tight">
+            Portal de Créditos
+          </h1>
+          <p className="text-gray-300 text-lg max-w-2xl leading-relaxed">
+            Accedé a las líneas de financiamiento disponibles para tu negocio o proyecto productivo.
+          </p>
+          <div className="mt-6">
+            <Link
+              to="/consultar"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-orange-400 hover:text-orange-300 transition-colors"
+            >
+              ¿Ya tenés un trámite iniciado? Consultá el estado
+              <ArrowRight size={14} />
+            </Link>
+          </div>
         </div>
+      </div>
+
+      {/* Contenido */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 
         {cargando ? (
-          <div className="mt-12 bg-white rounded-2xl shadow-lg p-8 sm:p-12 text-center">
-            <div className="animate-pulse space-y-4">
-              <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto"></div>
-              <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto"></div>
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-12 text-center">
+            <div className="animate-pulse space-y-4 max-w-sm mx-auto">
+              <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto" />
+              <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto" />
             </div>
           </div>
         ) : formulariosAgrupados.length === 0 ? (
-          <div className="mt-12 bg-white rounded-2xl shadow-lg p-12">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <AlertCircle size={24} className="text-orange-600" />
-              <h3 className="text-xl font-bold text-gray-900">No hay créditos disponibles</h3>
-            </div>
-            <p className="text-gray-600 text-center">
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-12 text-center">
+            <AlertCircle size={32} className="text-orange-500 mx-auto mb-4" />
+            <h3 className="text-xl font-bold text-gray-900 mb-2">No hay créditos disponibles</h3>
+            <p className="text-gray-500">
               Por el momento no hay programas de crédito activos. Te notificaremos cuando haya nuevas oportunidades.
             </p>
           </div>
         ) : (
           <>
-            {/* Resumen */}
-            <div className="mt-8 bg-white rounded-lg shadow p-6 mb-12">
-              <h3 className="text-lg font-bold text-gray-900 mb-2">
-                ✅ {formulariosAgrupados.length} {formulariosAgrupados.length === 1 ? 'crédito disponible' : 'créditos disponibles'}
-              </h3>
-              <p className="text-gray-600">
-                Seleccioná el programa que se adapte a tus necesidades y completá el formulario.
+            {/* Indicador disponibles */}
+            <div className="flex items-center gap-3 mb-10">
+              <span className="inline-flex items-center gap-2 bg-green-50 border border-green-200 px-3 py-1.5 rounded-full">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                <span className="text-sm font-semibold text-green-700">
+                  {formulariosAgrupados.length} {formulariosAgrupados.length === 1 ? 'línea disponible' : 'líneas disponibles'}
+                </span>
+              </span>
+              <p className="text-gray-400 text-sm hidden sm:block">
+                Seleccioná el programa que se adapte a tus necesidades.
               </p>
             </div>
 
             {/* Lista de créditos */}
-            <div className="mt-8 space-y-4">
+            <div className="space-y-5">
               {formulariosAgrupados.map((formulario, index) => (
                 <div
                   key={formulario.id}
-                  className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md hover:border-orange-200 transition-all duration-200"
+                  className="bg-white rounded-xl border border-gray-200 border-l-4 border-l-primary shadow-sm hover:shadow-md transition-all duration-300"
                 >
-                  <div className="p-4 sm:p-6">
-                    {/* Fila superior */}
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
-                      <div className="flex items-center gap-3 sm:gap-6 flex-1 min-w-0">
-                        {/* Número */}
-                        <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-orange-100 flex items-center justify-center">
-                          <span className="text-sm font-bold text-orange-600">{index + 1}</span>
-                        </div>
+                  <div className="p-6 sm:p-8">
+                    <div className="flex flex-col sm:flex-row sm:items-start gap-6">
 
-                        {/* Ícono */}
-                        <div className="hidden sm:flex flex-shrink-0 w-12 h-12 bg-orange-50 rounded-lg items-center justify-center border border-orange-100">
-                          <CreditCard size={22} className="text-orange-600" />
-                        </div>
-
-                        {/* Contenido */}
-                        <div className="flex-1 min-w-0">
-                          <div className="flex flex-wrap items-center gap-2 mb-1">
-                            <h3 className="text-base font-bold text-gray-900">
-                              {formulario.nombre}
-                            </h3>
-                            <span className="inline-flex items-center gap-1 bg-green-50 border border-green-200 px-2.5 py-0.5 rounded-full">
-                              <Check size={12} className="text-green-600" />
-                              <span className="text-xs font-semibold text-green-700">Disponible</span>
+                      {/* Contenido */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-wrap items-center gap-2 mb-2">
+                          <span className="text-xs font-semibold tracking-widest uppercase text-gray-400">
+                            Programa {String(index + 1).padStart(2, '0')}
+                          </span>
+                          <span className="inline-flex items-center gap-1.5 bg-green-50 border border-green-200 px-2.5 py-0.5 rounded-full">
+                            <Check size={11} className="text-green-600" />
+                            <span className="text-xs font-semibold text-green-700">Disponible</span>
+                          </span>
+                          {formulario.agrupado && (
+                            <span className="text-xs text-gray-500 border border-gray-200 px-2.5 py-0.5 rounded-full">
+                              Persona Física / Jurídica
                             </span>
-                            {formulario.agrupado && (
-                              <span className="inline-flex items-center gap-1 bg-blue-50 border border-blue-200 px-2.5 py-0.5 rounded-full">
-                                <span className="text-xs font-semibold text-blue-700">Persona Física / Jurídica</span>
-                              </span>
-                            )}
-                          </div>
-                          <p className="text-sm text-gray-500 leading-relaxed">
-                            {formulario.descripcion}
-                          </p>
+                          )}
                         </div>
+                        <h3 className="text-xl font-bold text-gray-900 mb-2">{formulario.nombre}</h3>
+                        <p className="text-sm text-gray-500 leading-relaxed">{formulario.descripcion}</p>
                       </div>
 
-                      {/* Botón solicitar */}
+                      {/* Botón */}
                       <div className="flex-shrink-0">
                         <button
                           onClick={() => handleSolicitar(formulario)}
-                          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-orange-600 text-white px-5 py-2.5
-                                     rounded-lg font-semibold hover:bg-orange-700 active:bg-orange-800
-                                     transition-colors text-sm"
+                          className="w-full sm:w-auto inline-flex items-center justify-center gap-2
+                                     bg-gray-900 hover:bg-gray-700 text-white
+                                     px-6 py-3 rounded-lg font-semibold transition-colors text-sm"
                         >
                           Solicitar <ArrowRight size={15} />
                         </button>
                       </div>
                     </div>
 
-                    {/* Toggle ver condiciones */}
-                    <div className="mt-4">
+                    {/* Toggle condiciones */}
+                    <div className="mt-5 pt-4 border-t border-gray-100">
                       <button
                         onClick={() => toggleDesc(formulario.programa)}
-                        className="inline-flex items-center gap-1.5 text-sm text-orange-600 hover:text-orange-800 font-medium transition-colors"
+                        className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 font-medium transition-colors"
                       >
                         {descExpandida[formulario.programa] ? (
                           <>Ocultar condiciones <ChevronUp size={15} /></>
@@ -323,7 +320,6 @@ export default function PortalCreditos() {
                           <>Ver condiciones del crédito <ChevronDown size={15} /></>
                         )}
                       </button>
-
                       {descExpandida[formulario.programa] && (
                         <DescripcionCredito programa={formulario.programa} />
                       )}
@@ -333,21 +329,30 @@ export default function PortalCreditos() {
               ))}
             </div>
 
-            {/* Información adicional */}
-            <div className="mt-16 bg-blue-50 border border-blue-200 rounded-lg p-8">
-              <h4 className="font-bold text-blue-900 mb-3">💡 ¿Cómo funciona?</h4>
-              <ul className="space-y-2 text-blue-800">
-                <li>✓ Completá tu solicitud en línea</li>
-                <li>✓ Recibirás un número de seguimiento inmediatamente</li>
-                <li>✓ Nuestro equipo revisará tu solicitud</li>
-                <li>✓ Te contactaremos con el resultado</li>
-              </ul>
+            {/* Cómo funciona */}
+            <div className="mt-16 bg-gray-900 rounded-2xl p-8 sm:p-10">
+              <p className="text-xs font-semibold tracking-widest uppercase text-orange-400 mb-2">Proceso</p>
+              <h4 className="text-xl font-bold text-white mb-8">¿Cómo funciona?</h4>
+              <div className="grid sm:grid-cols-2 gap-6">
+                {[
+                  'Completá tu solicitud en línea',
+                  'Recibirás un número de seguimiento inmediatamente',
+                  'Nuestro equipo revisará tu solicitud',
+                  'Te contactaremos con el resultado',
+                ].map((paso, i) => (
+                  <div key={i} className="flex items-start gap-4">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold">
+                      {i + 1}
+                    </span>
+                    <p className="text-gray-300 text-sm leading-relaxed pt-1">{paso}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </>
         )}
       </div>
 
-      {/* Selector persona física/jurídica para Bienes de Capital */}
       {selectorBienes && (
         <SelectorTipoPersona
           fisica={selectorBienes.fisica}
@@ -357,7 +362,6 @@ export default function PortalCreditos() {
         />
       )}
 
-      {/* Formulario dinámico modal */}
       {formularioActivo && (
         <FormularioDinamico
           formularioId={formularioActivo.formularioId}
