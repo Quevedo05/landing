@@ -1,101 +1,44 @@
 import SectionHeader from './ui/SectionHeader'
+import { useInView } from '../hooks/useInView'
 
-/**
- * Para agregar cámaras, añadir objetos a este arreglo:
- * {
- *   nombre: 'Nombre de la Cámara',
- *   logo: '/logos/nombre-camara.png',   (colocar el logo en /public/logos/)
- *   descripcion: 'Breve descripción',    (opcional)
- *   web: 'https://...',                  (opcional)
- * }
- */
 const camaras = [
-  // Cámaras socias — agregar logos cuando estén disponibles
-  { nombre: 'Cámara 1', logo: null, descripcion: 'Próximamente' },
-  { nombre: 'Cámara 2', logo: null, descripcion: 'Próximamente' },
-  { nombre: 'Cámara 3', logo: null, descripcion: 'Próximamente' },
-  { nombre: 'Cámara 4', logo: null, descripcion: 'Próximamente' },
+  { nombre: 'Cámara de Comercio de San Juan', logo: '/logos/camara-comercio.png' },
+  { nombre: 'Unión Industrial de San Juan', logo: '/logos/uisj.png' },
+  { nombre: 'CASETIC', logo: '/logos/casetic.png' },
+  { nombre: 'FESJ', logo: '/logos/fesj.png' },
+  { nombre: 'CASEMI', logo: '/logos/casemi.png' },
 ]
 
-function LogoPlaceholder({ nombre }) {
-  const iniciales = nombre
-    .split(' ')
-    .filter((w) => w.length > 2)
-    .slice(0, 2)
-    .map((w) => w[0].toUpperCase())
-    .join('')
-
-  return (
-    <div className="w-full h-28 bg-gray-100 rounded-xl flex items-center justify-center border-2 border-dashed border-gray-300">
-      <span className="text-3xl font-extrabold text-gray-300">{iniciales || '?'}</span>
-    </div>
-  )
-}
-
 export default function CamarasSocias() {
+  const ref = useInView()
+
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-white border-t border-gray-100" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeader
-          title="Nuestras Cámaras Socias"
-          subtitle="La Agencia Calidad San Juan trabaja junto a las principales cámaras del sector productivo provincial."
-          centered
-        />
+        <div className="reveal">
+          <SectionHeader
+            title="Nuestras Cámaras Socias"
+            subtitle="La Agencia Calidad San Juan trabaja junto a las principales cámaras del sector productivo provincial."
+            centered
+          />
+        </div>
 
-        {/* Carta de presentación */}
-        <div className="mt-12 bg-white rounded-2xl border border-gray-200 p-8 sm:p-12 mb-12 shadow-sm">
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 bg-orange-50 text-orange-700 text-sm font-semibold
-                            px-4 py-2 rounded-full border border-orange-200 mb-6">
-              Alianzas Estratégicas
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 mt-12">
+          {camaras.map(({ nombre, logo }, i) => (
+            <div
+              key={nombre}
+              className={`bg-white rounded-2xl border border-gray-200 p-6 flex flex-col items-center justify-center gap-3
+                          hover:shadow-md hover:-translate-y-1 transition-all duration-300 reveal delay-${i + 1}`}
+            >
+              <img
+                src={logo}
+                alt={nombre}
+                className="h-16 w-full object-contain grayscale hover:grayscale-0 transition-all duration-300"
+              />
+              <p className="text-xs font-medium text-gray-500 text-center leading-snug">{nombre}</p>
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
-              Unidos por el desarrollo productivo sanjuanino
-            </h3>
-            <p className="text-gray-600 leading-relaxed mb-4">
-              La Agencia de Calidad San Juan articula su trabajo con las cámaras y asociaciones
-              empresariales de la provincia, generando sinergias que potencian el impacto de nuestros
-              programas y benefician al conjunto del sector productivo local.
-            </p>
-            <p className="text-gray-600 leading-relaxed">
-              Juntos diseñamos estrategias, compartimos información y ejecutamos acciones concretas
-              para mejorar la competitividad, la calidad y la sustentabilidad de las empresas
-              sanjuaninas en el mercado regional, nacional e internacional.
-            </p>
-          </div>
+          ))}
         </div>
-
-        {/* Grid de logos */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-          {camaras.map(({ nombre, logo, web }) => {
-            const contenido = (
-              <div
-                className="bg-white rounded-2xl border border-gray-200 p-6 flex flex-col items-center
-                           gap-3 hover:shadow-md transition-shadow duration-200 group"
-              >
-                {logo ? (
-                  <img
-                    src={logo}
-                    alt={nombre}
-                    className="h-20 w-full object-contain grayscale group-hover:grayscale-0 transition-all"
-                  />
-                ) : (
-                  <LogoPlaceholder nombre={nombre} />
-                )}
-                <p className="text-sm font-semibold text-gray-700 text-center">{nombre}</p>
-              </div>
-            )
-
-            return web ? (
-              <a key={nombre} href={web} target="_blank" rel="noopener noreferrer">
-                {contenido}
-              </a>
-            ) : (
-              <div key={nombre}>{contenido}</div>
-            )
-          })}
-        </div>
-
       </div>
     </section>
   )

@@ -56,7 +56,7 @@ export default function RelevamientoEmprende() {
               className="absolute inset-0 w-full h-full object-cover"
             />
             {/* Overlay oscuro para legibilidad */}
-            <div className="absolute inset-0 bg-black/65" />
+            <div className="absolute inset-0 bg-black/80" />
 
             {/* Contenido */}
             <div className="relative z-10 p-8">
