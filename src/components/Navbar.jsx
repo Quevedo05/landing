@@ -22,7 +22,7 @@ export default function Navbar({ activeSection }) {
 
         {/* Logo */}
         <div className="flex-1 flex items-center">
-          <Link to="/" className="flex items-center flex-shrink-0 md:-ml-28">
+          <Link to="/" className="flex items-center flex-shrink-0 md:-ml-40">
             <img
               src="/logo-navbar-new.png"
               alt="Agencia Calidad San Juan"
@@ -38,12 +38,12 @@ export default function Navbar({ activeSection }) {
               <li key={href}>
                 <Link
                   to={href}
-                  className={`relative text-sm font-medium transition-colors duration-300
+                  className={`relative text-sm font-semibold transition-colors duration-300
                     after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-0
                     after:transition-all after:duration-300 hover:after:w-full
                     ${scrolled
-                      ? 'text-gray-600 hover:text-primary after:bg-primary'
-                      : 'text-white/90 hover:text-white after:bg-white drop-shadow'
+                      ? 'text-gray-700 hover:text-primary after:bg-primary'
+                      : 'text-gray-900 hover:text-primary after:bg-primary [text-shadow:0_1px_3px_rgba(255,255,255,0.8)]'
                     }`}
                 >
                   {label}
@@ -60,13 +60,13 @@ export default function Navbar({ activeSection }) {
             className={`hidden md:inline-flex items-center gap-2 text-sm font-semibold px-6 py-3 rounded-lg transition-all duration-300
               ${scrolled
                 ? 'bg-primary text-white hover:bg-orange-600 shadow-sm'
-                : 'bg-white/20 text-white border border-white/50 hover:bg-white/30 backdrop-blur-sm drop-shadow'
+                : 'bg-white/70 text-gray-900 border border-gray-300 hover:bg-white backdrop-blur-sm shadow-sm'
               }`}
           >
             Portal de Créditos
           </Link>
           <button
-            className={`md:hidden p-2 transition-colors ${scrolled ? 'text-gray-600 hover:text-primary' : 'text-white'}`}
+            className={`md:hidden p-2 transition-colors ${scrolled ? 'text-gray-600 hover:text-primary' : 'text-gray-900'}`}
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Abrir menú"
           >
