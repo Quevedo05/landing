@@ -20,10 +20,9 @@ export default function Navbar({ activeSection }) {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500
-        bg-white/95 backdrop-blur-md shadow-sm
         ${transparente
-          ? 'md:bg-transparent md:backdrop-blur-none md:shadow-none'
-          : 'md:bg-white/98 md:backdrop-blur-md md:shadow-md'
+          ? 'bg-white shadow-sm md:bg-transparent md:shadow-none md:backdrop-blur-none'
+          : 'bg-white/98 backdrop-blur-md shadow-md'
         }`}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between">
@@ -34,7 +33,7 @@ export default function Navbar({ activeSection }) {
             <img
               src="/logo-navbar-new.png"
               alt="Agencia Calidad San Juan"
-              className="h-16 w-auto"
+              className="h-10 w-auto max-w-[220px] object-contain object-left sm:h-12 md:h-16 md:max-w-none"
             />
           </Link>
         </div>
