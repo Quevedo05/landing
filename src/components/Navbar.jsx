@@ -20,7 +20,11 @@ export default function Navbar({ activeSection }) {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500
-        ${transparente ? 'bg-transparent' : 'bg-white/98 backdrop-blur-md shadow-md'}`}
+        bg-white/95 backdrop-blur-md shadow-sm
+        ${transparente
+          ? 'md:bg-transparent md:backdrop-blur-none md:shadow-none'
+          : 'md:bg-white/98 md:backdrop-blur-md md:shadow-md'
+        }`}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between">
 
@@ -47,7 +51,7 @@ export default function Navbar({ activeSection }) {
                     after:transition-all after:duration-300 hover:after:w-full
                     ${!transparente
                       ? 'text-gray-700 hover:text-primary after:bg-primary'
-                      : 'text-gray-900 hover:text-primary after:bg-primary [text-shadow:0_1px_3px_rgba(255,255,255,0.8)]'
+                      : 'text-white hover:text-orange-300 after:bg-white'
                     }`}
                 >
                   {label}
@@ -64,13 +68,13 @@ export default function Navbar({ activeSection }) {
             className={`hidden md:inline-flex items-center gap-2 text-sm font-semibold px-6 py-3 rounded-lg transition-all duration-300
               ${!transparente
                 ? 'bg-primary text-white hover:bg-orange-600 shadow-sm'
-                : 'bg-white/70 text-gray-900 border border-gray-300 hover:bg-white backdrop-blur-sm shadow-sm'
+                : 'bg-white text-primary border border-white hover:bg-orange-50 shadow-sm'
               }`}
           >
             Portal de Créditos
           </Link>
           <button
-            className={`md:hidden p-2 transition-colors ${!transparente ? 'text-gray-600 hover:text-primary' : 'text-gray-900'}`}
+            className="md:hidden p-2 text-gray-700 hover:text-primary transition-colors"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Abrir menú"
           >
