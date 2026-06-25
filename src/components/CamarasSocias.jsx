@@ -96,11 +96,6 @@ export default function CamarasSocias() {
           })}
         </div>
 
-        <p className="text-center text-xs text-gray-400 mt-8">
-          Para actualizar los logos y nombres, editar{' '}
-          <code className="bg-gray-100 px-1 rounded">src/components/CamarasSocias.jsx</code> y
-          colocar los logos en <code className="bg-gray-100 px-1 rounded">public/logos/</code>
-        </p>
       </div>
     </section>
   )
