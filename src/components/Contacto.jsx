@@ -80,13 +80,23 @@ export default function Contacto() {
 
           {/* Contact Info */}
           <div className="space-y-8">
-            <div className="flex gap-4">
-              <div className="w-12 h-12 bg-orange-100 rounded-xl flex-shrink-0 flex items-center justify-center">
-                <MapPin size={20} className="text-primary" />
+            {/* Oficina card */}
+            <div className="flex items-center gap-6">
+              <div className="relative flex-shrink-0">
+                <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-[#1a3a6b] shadow-md">
+                  <img src="/oficina.jpeg" alt="Oficina Agencia Calidad San Juan"
+                    className="w-full h-full object-cover" />
+                </div>
+                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-[#1a3a6b] text-white text-[9px] font-bold px-2 py-0.5 rounded whitespace-nowrap uppercase tracking-wide">
+                  San Juan
+                </div>
               </div>
               <div>
-                <p className="font-semibold text-gray-900">Dirección</p>
-                <p className="text-gray-600">{contactInfo.address}</p>
+                <p className="font-bold text-[#1a3a6b] text-base mb-2">Oficina Agencia Calidad San Juan</p>
+                <div className="flex items-start gap-2 text-gray-600 text-sm">
+                  <MapPin size={16} className="text-primary mt-0.5 flex-shrink-0" />
+                  <span>{contactInfo.address}</span>
+                </div>
               </div>
             </div>
             <div className="flex gap-4">
@@ -123,9 +133,18 @@ export default function Contacto() {
               </div>
             </div>
 
-            {/* Map placeholder */}
-            <div className="rounded-xl overflow-hidden border border-gray-200 h-48 bg-gray-100 flex items-center justify-center">
-              <p className="text-sm text-gray-400">Mapa (embeber Google Maps iframe aquí)</p>
+            {/* Google Maps embed */}
+            <div className="rounded-xl overflow-hidden border border-gray-200 h-48">
+              <iframe
+                title="Ubicación Agencia Calidad San Juan"
+                src="https://maps.google.com/maps?q=25+de+Mayo+Esq+517+San+Juan+Argentina&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
           </div>
         </div>
