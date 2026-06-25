@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import FormularioDinamico from '../components/FormularioDinamico'
 import SelectorTipoPersona from '../components/SelectorTipoPersona'
-import { ArrowRight, Check, AlertCircle, ChevronDown, ChevronUp } from 'lucide-react'
+import { ArrowRight, AlertCircle, ChevronDown, ChevronUp } from 'lucide-react'
 import { getFormulariosActivos } from '../services/formularios.service.js'
 import { USE_LOCAL_STORAGE } from '../services/api.js'
 
@@ -252,18 +252,10 @@ export default function PortalCreditos() {
           </div>
         ) : (
           <>
-            {/* Indicador disponibles */}
-            <div className="flex items-center gap-3 mb-10">
-              <span className="inline-flex items-center gap-2 bg-green-50 border border-green-200 px-3 py-1.5 rounded-full">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
-                <span className="text-sm font-semibold text-green-700">
-                  {formulariosAgrupados.length} {formulariosAgrupados.length === 1 ? 'línea disponible' : 'líneas disponibles'}
-                </span>
-              </span>
-              <p className="text-gray-400 text-sm hidden sm:block">
-                Seleccioná el programa que se adapte a tus necesidades.
-              </p>
-            </div>
+            {/* Intro */}
+            <p className="text-gray-500 text-sm mb-10">
+              Seleccioná el programa que se adapte a tus necesidades.
+            </p>
 
             {/* Lista de créditos */}
             <div className="space-y-5">
@@ -280,10 +272,6 @@ export default function PortalCreditos() {
                         <div className="flex flex-wrap items-center gap-2 mb-2">
                           <span className="text-xs font-semibold tracking-widest uppercase text-gray-400">
                             Programa {String(index + 1).padStart(2, '0')}
-                          </span>
-                          <span className="inline-flex items-center gap-1.5 bg-green-50 border border-green-200 px-2.5 py-0.5 rounded-full">
-                            <Check size={11} className="text-green-600" />
-                            <span className="text-xs font-semibold text-green-700">Disponible</span>
                           </span>
                           {formulario.agrupado && (
                             <span className="text-xs text-gray-500 border border-gray-200 px-2.5 py-0.5 rounded-full">
