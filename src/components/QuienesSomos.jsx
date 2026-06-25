@@ -1,12 +1,16 @@
+import { useInView } from '../hooks/useInView'
 import SectionHeader from './ui/SectionHeader'
 
 export default function QuienesSomos() {
+  const ref = useInView()
+
   return (
-    <section id="nosotros" className="py-20 bg-white">
+    <section id="nosotros" className="py-20 bg-white" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Text column */}
-          <div>
+
+          {/* Texto */}
+          <div className="reveal-left">
             <SectionHeader
               title="¿Quiénes Somos?"
               subtitle="La Agencia de Calidad San Juan es el organismo provincial que articula políticas de apoyo al sector productivo local."
@@ -23,14 +27,16 @@ export default function QuienesSomos() {
             </p>
           </div>
 
-          {/* Visual accent column */}
-          <div className="flex justify-center">
+          {/* Imagen */}
+          <div className="flex justify-center reveal-right">
             <img
               src="/acsj1.jpg"
               alt="Agencia Calidad San Juan"
-              className="w-4/5 h-auto rounded-2xl object-cover shadow-md"
+              className="w-4/5 h-auto rounded-2xl object-cover shadow-xl
+                         hover:shadow-2xl hover:scale-[1.02] transition-all duration-500"
             />
           </div>
+
         </div>
       </div>
     </section>

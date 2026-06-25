@@ -4,11 +4,11 @@ import { contactInfo } from '../data/contacto'
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-400">
+    <footer className="bg-gray-900 text-gray-400 border-t-4 border-primary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
 
-          {/* Brand column */}
+          {/* Brand */}
           <div className="lg:col-span-2">
             <div className="text-2xl font-bold text-white mb-4">
               <span className="text-primary">Agencia</span> Calidad San Juan
@@ -18,39 +18,55 @@ export default function Footer() {
               técnica y financieramente con las PyMEs y emprendedores de San Juan.
             </p>
             <div className="flex gap-4 mt-6">
-              <a href={contactInfo.facebook} target="_blank" rel="noopener noreferrer"
+              <a
+                href={contactInfo.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center
-                           hover:bg-primary transition-colors text-white font-bold text-xs">
+                           hover:bg-primary hover:scale-110 transition-all duration-200 text-white font-bold text-xs"
+              >
                 f
               </a>
-              <a href={contactInfo.instagram} target="_blank" rel="noopener noreferrer"
+              <a
+                href={contactInfo.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center
-                           hover:bg-primary transition-colors text-white font-bold text-xs">
+                           hover:bg-primary hover:scale-110 transition-all duration-200 text-white font-bold text-xs"
+              >
                 ig
               </a>
             </div>
           </div>
 
-          {/* Navigation column */}
+          {/* Navegación */}
           <div>
             <h4 className="text-white font-semibold mb-4">Navegación</h4>
             <ul className="space-y-2 text-sm">
               {navLinks.map(({ label, href }) => (
                 <li key={href}>
-                  <Link to={href} className="hover:text-primary transition-colors">{label}</Link>
+                  <Link
+                    to={href}
+                    className="hover:text-primary transition-colors duration-200 hover:pl-1 transition-all"
+                  >
+                    {label}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact column */}
+          {/* Contacto */}
           <div>
             <h4 className="text-white font-semibold mb-4">Contacto</h4>
             <ul className="space-y-2 text-sm">
               <li>{contactInfo.address}</li>
               {contactInfo.phones.map((p) => <li key={p}>{p}</li>)}
               <li>
-                <a href={`mailto:${contactInfo.email}`} className="hover:text-primary transition-colors">
+                <a
+                  href={`mailto:${contactInfo.email}`}
+                  className="hover:text-primary transition-colors duration-200"
+                >
                   {contactInfo.email}
                 </a>
               </li>
