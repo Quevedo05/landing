@@ -6,7 +6,6 @@ import Programas from '../components/Programas'
 import LogrosSection from '../components/LogrosSection'
 import CalendarioEventos from '../components/CalendarioEventos'
 import RelevamientoEmprende from '../components/RelevamientoEmprende'
-import CamarasSocias from '../components/CamarasSocias'
 import FormularioDinamico from '../components/FormularioDinamico'
 import SelectorTipoPersona from '../components/SelectorTipoPersona'
 
@@ -47,8 +46,8 @@ export default function Home() {
       {/* Calendario de eventos */}
       <CalendarioEventos />
 
-      {/* Cámaras Socias */}
-      <CamarasSocias />
+      {/* Cámaras Socias — oculto hasta tener los logos disponibles */}
+      {/* <CamarasSocias /> */}
 
       {/* Selector persona física/jurídica para Bienes de Capital */}
       {selectorBienes && (
