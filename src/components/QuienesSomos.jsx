@@ -26,9 +26,9 @@ export default function QuienesSomos() {
           {/* Visual accent column */}
           <div className="flex justify-center">
             <img
-              src="/unnamed.jpg"
+              src="/acsj1.jpg"
               alt="Agencia Calidad San Juan"
-              className="w-64 h-64 rounded-full object-cover flex-shrink-0"
+              className="w-full h-auto rounded-2xl object-cover shadow-md"
             />
           </div>
         </div>
