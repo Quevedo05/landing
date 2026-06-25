@@ -36,7 +36,6 @@ export default function Home() {
       <Hero />
       <QuienesSomos />
       <MisionVisionValores />
-      <Programas onProgramaClick={handleProgramaClick} />
 
       {/* Logros y cosas hechas */}
       <LogrosSection />
