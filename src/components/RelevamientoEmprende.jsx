@@ -47,42 +47,51 @@ export default function RelevamientoEmprende() {
             </a>
           </div>
 
-          {/* Columna derecha — tarjeta informativa */}
-          <div className="bg-gray-900 rounded-lg p-8 text-white">
-            <p className="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-5">
-              ¿Por qué registrarse?
-            </p>
-            <div className="space-y-5 divide-y divide-gray-700">
-              {[
-                {
-                  titulo: 'Visibilidad institucional',
-                  texto:
-                    'Tu proyecto queda registrado en la base oficial del Estado provincial, con acceso a programas de apoyo.',
-                },
-                {
-                  titulo: 'Diseño de políticas públicas',
-                  texto:
-                    'Los datos relevados permiten al Estado identificar necesidades reales del sector y mejorar la asistencia.',
-                },
-                {
-                  titulo: 'Articulación con la Agencia',
-                  texto:
-                    'La Agencia de Calidad San Juan utiliza el relevamiento para conectar emprendedores con sus programas.',
-                },
-              ].map(({ titulo, texto }) => (
-                <div key={titulo} className="pt-5 first:pt-0">
-                  <p className="text-sm font-semibold text-white mb-1">{titulo}</p>
-                  <p className="text-sm text-gray-400 leading-relaxed">{texto}</p>
-                </div>
-              ))}
-            </div>
-            <div className="border-t border-gray-700 mt-6 pt-5 flex items-center gap-3">
-              <img
-                src="/logo-navbar.png"
-                alt="Agencia Calidad San Juan"
-                className="h-7 w-auto brightness-0 invert opacity-60"
-              />
-              <span className="text-gray-500 text-xs">Iniciativa provincial · San Juan Gobierno</span>
+          {/* Columna derecha — tarjeta con imagen de fondo */}
+          <div className="relative rounded-2xl overflow-hidden shadow-xl">
+            {/* Imagen de fondo */}
+            <img
+              src="/sjemprende.jpg"
+              alt="San Juan Emprende"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            {/* Overlay oscuro para legibilidad */}
+            <div className="absolute inset-0 bg-black/65" />
+
+            {/* Contenido */}
+            <div className="relative z-10 p-8">
+              <p className="text-xs font-semibold tracking-widest uppercase text-orange-400 mb-5">
+                ¿Por qué registrarse?
+              </p>
+              <div className="space-y-5 divide-y divide-white/20">
+                {[
+                  {
+                    titulo: 'Visibilidad institucional',
+                    texto: 'Tu proyecto queda registrado en la base oficial del Estado provincial, con acceso a programas de apoyo.',
+                  },
+                  {
+                    titulo: 'Diseño de políticas públicas',
+                    texto: 'Los datos relevados permiten al Estado identificar necesidades reales del sector y mejorar la asistencia.',
+                  },
+                  {
+                    titulo: 'Articulación con la Agencia',
+                    texto: 'La Agencia de Calidad San Juan utiliza el relevamiento para conectar emprendedores con sus programas.',
+                  },
+                ].map(({ titulo, texto }) => (
+                  <div key={titulo} className="pt-5 first:pt-0">
+                    <p className="text-sm font-semibold text-white mb-1">{titulo}</p>
+                    <p className="text-sm text-white/75 leading-relaxed">{texto}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="border-t border-white/20 mt-6 pt-5 flex items-center gap-3">
+                <img
+                  src="/logo-navbar.png"
+                  alt="Agencia Calidad San Juan"
+                  className="h-7 w-auto brightness-0 invert opacity-80"
+                />
+                <span className="text-white/60 text-xs">Iniciativa provincial · San Juan Gobierno</span>
+              </div>
             </div>
           </div>
 
