@@ -43,6 +43,19 @@ section[id] {
   to   { transform: scaleX(1); }
 }
 
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.marquee-track:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
 /* ── Scroll-reveal ──────────────────────────── */
 .reveal {
   opacity: 0;

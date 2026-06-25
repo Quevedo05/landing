@@ -13,6 +13,19 @@ const camaras = [
   { nombre: 'CAPMIN', logo: '/logos/capmin.png' },
 ]
 
+function LogoCard({ nombre, logo, oscuro }) {
+  return (
+    <div className={`flex-shrink-0 w-40 mx-4 rounded-2xl border border-gray-200 p-5
+                     flex flex-col items-center justify-center gap-3
+                     ${oscuro ? 'bg-gray-800' : 'bg-white'}`}>
+      <img src={logo} alt={nombre} className="h-14 w-full object-contain" />
+      <p className={`text-xs font-medium text-center leading-snug ${oscuro ? 'text-gray-300' : 'text-gray-500'}`}>
+        {nombre}
+      </p>
+    </div>
+  )
+}
+
 export default function CamarasSocias() {
   const ref = useInView()
 
@@ -26,24 +39,14 @@ export default function CamarasSocias() {
             centered
           />
         </div>
+      </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 mt-12">
-          {camaras.map(({ nombre, logo, oscuro }, i) => (
-            <div
-              key={nombre}
-              className={`rounded-2xl border border-gray-200 p-6 flex flex-col items-center justify-center gap-3
-                          hover:shadow-md hover:-translate-y-1 transition-all duration-300 reveal delay-${i + 1}
-                          ${oscuro ? 'bg-gray-800' : 'bg-white'}`}
-            >
-              <img
-                src={logo}
-                alt={nombre}
-                className="h-16 w-full object-contain transition-all duration-300"
-              />
-              <p className={`text-xs font-medium text-center leading-snug ${oscuro ? 'text-gray-300' : 'text-gray-500'}`}>
-                {nombre}
-              </p>
-            </div>
+      {/* Banner infinito — ancho completo para que el scroll no muestre bordes */}
+      <div className="mt-12 overflow-hidden marquee-track">
+        <div className="flex animate-marquee">
+          {/* Lista duplicada para el loop continuo */}
+          {[...camaras, ...camaras].map(({ nombre, logo, oscuro }, i) => (
+            <LogoCard key={i} nombre={nombre} logo={logo} oscuro={oscuro} />
           ))}
         </div>
       </div>
