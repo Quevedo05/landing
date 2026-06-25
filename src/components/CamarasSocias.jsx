@@ -6,6 +6,11 @@ const camaras = [
   { nombre: 'CASETIC', logo: '/logos/casetic.png', oscuro: true },
   { nombre: 'FESJ', logo: '/logos/fesj.png' },
   { nombre: 'CASEMI', logo: '/logos/casemi.png', oscuro: true },
+  { nombre: 'Cámara Vitivinícola de San Juan', logo: '/logos/camara-vitivinicola.jpeg' },
+  { nombre: 'Cámara Minera de San Juan', logo: '/logos/camara-minera.jpeg' },
+  { nombre: 'Cámara Olivícola', logo: '/logos/logo-camara-olivicola.png' },
+  { nombre: 'Cámara de Transporte', logo: '/logos/logoTranspCh.png' },
+  { nombre: 'CAPMIN', logo: '/logos/capmin.png' },
 ]
 
 export default function CamarasSocias() {
@@ -22,7 +27,7 @@ export default function CamarasSocias() {
           />
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-12">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 mt-12">
           {camaras.map(({ nombre, logo, oscuro }, i) => (
             <div
               key={nombre}
