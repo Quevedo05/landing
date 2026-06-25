@@ -2,11 +2,10 @@ import SectionHeader from './ui/SectionHeader'
 import { useInView } from '../hooks/useInView'
 
 const camaras = [
-  { nombre: 'Cámara de Comercio de San Juan', logo: '/logos/camara-comercio.png' },
   { nombre: 'Unión Industrial de San Juan', logo: '/logos/uisj.png' },
-  { nombre: 'CASETIC', logo: '/logos/casetic.png' },
+  { nombre: 'CASETIC', logo: '/logos/casetic.png', oscuro: true },
   { nombre: 'FESJ', logo: '/logos/fesj.png' },
-  { nombre: 'CASEMI', logo: '/logos/casemi.png' },
+  { nombre: 'CASEMI', logo: '/logos/casemi.png', oscuro: true },
 ]
 
 export default function CamarasSocias() {
@@ -23,19 +22,22 @@ export default function CamarasSocias() {
           />
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 mt-12">
-          {camaras.map(({ nombre, logo }, i) => (
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-12">
+          {camaras.map(({ nombre, logo, oscuro }, i) => (
             <div
               key={nombre}
-              className={`bg-white rounded-2xl border border-gray-200 p-6 flex flex-col items-center justify-center gap-3
-                          hover:shadow-md hover:-translate-y-1 transition-all duration-300 reveal delay-${i + 1}`}
+              className={`rounded-2xl border border-gray-200 p-6 flex flex-col items-center justify-center gap-3
+                          hover:shadow-md hover:-translate-y-1 transition-all duration-300 reveal delay-${i + 1}
+                          ${oscuro ? 'bg-gray-800' : 'bg-white'}`}
             >
               <img
                 src={logo}
                 alt={nombre}
-                className="h-16 w-full object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                className="h-16 w-full object-contain transition-all duration-300"
               />
-              <p className="text-xs font-medium text-gray-500 text-center leading-snug">{nombre}</p>
+              <p className={`text-xs font-medium text-center leading-snug ${oscuro ? 'text-gray-300' : 'text-gray-500'}`}>
+                {nombre}
+              </p>
             </div>
           ))}
         </div>
