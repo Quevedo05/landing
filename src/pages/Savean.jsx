@@ -244,73 +244,74 @@ function SaveanLanding({ onClickEmitir }) {
         </div>
       </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {[
-          { value: '8', label: 'Puestos de control activos' },
-          { value: '24/7', label: 'Fiscalización continua' },
-          { value: '20 días', label: 'Validez de cada guía' },
-        ].map(({ value, label }) => (
-          <div key={label} className="bg-orange-50 border-l-4 border-orange-500 p-6 rounded-r-xl">
-            <p className="text-3xl font-extrabold text-orange-600 mb-1">{value}</p>
-            <p className="text-gray-600 text-sm">{label}</p>
+      {/* Stats + ¿Cómo funciona? + Puestos de control — bloque unificado */}
+      <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+
+        {/* Stats */}
+        <div className="grid grid-cols-3 divide-x divide-gray-100 border-b border-gray-100">
+          {[
+            { value: '8', label: 'Puestos de control activos' },
+            { value: '24/7', label: 'Fiscalización continua' },
+            { value: '20 días', label: 'Validez de cada guía' },
+          ].map(({ value, label }) => (
+            <div key={label} className="px-6 py-7 text-center">
+              <p className="text-3xl font-extrabold text-orange-500 mb-1">{value}</p>
+              <p className="text-gray-500 text-xs">{label}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* ¿Cómo funciona? */}
+        <div className="px-6 sm:px-8 py-8 border-b border-gray-100">
+          <p className="text-xs font-bold uppercase tracking-widest text-orange-500 mb-1">Proceso</p>
+          <h3 className="text-xl font-bold text-gray-900 mb-6">¿Cómo funciona?</h3>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { step: '1', color: '#ea580c', title: 'Completá la guía', desc: 'Ingresá los datos de remitente, destinatario, mercadería y transporte en el formulario digital.' },
+              { step: '2', color: '#f97316', title: 'Recibí tu QR', desc: 'Se genera un código QR único y un PDF descargable con toda la información de tu guía.' },
+              { step: '3', color: '#eab308', title: 'Presentá en barrera', desc: 'Al llegar al puesto de control, mostrá el QR al inspector para la verificación rápida.' },
+              { step: '✓', color: '#16a34a', title: 'Guía verificada', desc: 'El inspector registra la verificación y tu mercadería queda habilitada para circular.' },
+            ].map(({ step, color, title, desc }) => (
+              <div key={title} className="bg-gray-50 rounded-xl p-5 text-center">
+                <div
+                  className="w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-base mx-auto mb-3"
+                  style={{ backgroundColor: color }}
+                >
+                  {step}
+                </div>
+                <p className="font-semibold text-gray-900 text-sm mb-1.5">{title}</p>
+                <p className="text-gray-500 text-xs leading-relaxed">{desc}</p>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-
-      {/* ¿Cómo funciona? */}
-      <div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-8 border-l-4 border-orange-500 pl-4">
-          ¿Cómo funciona?
-        </h3>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {[
-            { step: '1', color: '#ea580c', title: 'Completá la guía', desc: 'Ingresá los datos de remitente, destinatario, mercadería y transporte en el formulario digital.' },
-            { step: '2', color: '#f97316', title: 'Recibí tu QR', desc: 'Se genera un código QR único y un PDF descargable con toda la información de tu guía.' },
-            { step: '3', color: '#eab308', title: 'Presentá en barrera', desc: 'Al llegar al puesto de control, mostrá el QR al inspector para la verificación rápida.' },
-            { step: '✓', color: '#16a34a', title: 'Guía verificada', desc: 'El inspector registra la verificación y tu mercadería queda habilitada para circular.' },
-          ].map(({ step, color, title, desc }) => (
-            <div key={title} className="border border-gray-200 rounded-xl p-6 text-center bg-white">
-              <div
-                className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg mx-auto mb-4"
-                style={{ backgroundColor: color }}
-              >
-                {step}
-              </div>
-              <p className="font-bold text-gray-900 mb-2">{title}</p>
-              <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
-            </div>
-          ))}
         </div>
-      </div>
 
-      {/* Puestos de control */}
-      <div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-8 border-l-4 border-orange-500 pl-4">
-          Puestos de control
-        </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {[
-            { nombre: 'Barreal', detalle: 'Ruta N°149, Km 111', zona: 'Calingasta' },
-            { nombre: 'Encon', detalle: 'Ruta N°20, Km 470', zona: '25 de mayo' },
-            { nombre: 'Encon Sur', detalle: 'Ruta N°142, Km 112', zona: '25 de mayo' },
-            { nombre: 'Huaco', detalle: 'Ruta N°40', zona: 'Jachal' },
-            { nombre: 'Los Baldecitos', detalle: 'Ruta N°150', zona: 'Valle fértil' },
-            { nombre: 'San Carlos', detalle: 'Ruta N°40, Km 3379', zona: 'Sarmiento' },
-            { nombre: 'Vallecito', detalle: 'Ruta N°141, Km 180', zona: 'Caucete' },
-            { nombre: 'Villa Calingasta', detalle: 'Ruta N°12, Km 151', zona: 'Calingasta' },
-          ].map(({ nombre, detalle, zona }) => (
-            <div key={nombre} className="border border-gray-200 rounded-xl p-4 flex items-center gap-4 bg-white">
-              <div className="w-10 h-10 bg-orange-50 rounded-lg flex items-center justify-center flex-shrink-0">
-                <span className="w-2.5 h-2.5 rounded-full bg-orange-500 block" />
+        {/* Puestos de control */}
+        <div className="px-6 sm:px-8 py-8">
+          <p className="text-xs font-bold uppercase tracking-widest text-orange-500 mb-1">Red provincial</p>
+          <h3 className="text-xl font-bold text-gray-900 mb-6">Puestos de control</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {[
+              { nombre: 'Barreal', detalle: 'Ruta N°149, Km 111', zona: 'Calingasta' },
+              { nombre: 'Encon', detalle: 'Ruta N°20, Km 470', zona: '25 de mayo' },
+              { nombre: 'Encon Sur', detalle: 'Ruta N°142, Km 112', zona: '25 de mayo' },
+              { nombre: 'Huaco', detalle: 'Ruta N°40', zona: 'Jachal' },
+              { nombre: 'Los Baldecitos', detalle: 'Ruta N°150', zona: 'Valle fértil' },
+              { nombre: 'San Carlos', detalle: 'Ruta N°40, Km 3379', zona: 'Sarmiento' },
+              { nombre: 'Vallecito', detalle: 'Ruta N°141, Km 180', zona: 'Caucete' },
+              { nombre: 'Villa Calingasta', detalle: 'Ruta N°12, Km 151', zona: 'Calingasta' },
+            ].map(({ nombre, detalle, zona }) => (
+              <div key={nombre} className="flex items-center gap-3 bg-gray-50 rounded-lg px-4 py-3">
+                <span className="w-2 h-2 rounded-full bg-orange-500 flex-shrink-0" />
+                <div>
+                  <p className="font-semibold text-gray-900 text-sm">{nombre}</p>
+                  <p className="text-xs text-gray-500">{detalle} — {zona}</p>
+                </div>
               </div>
-              <div>
-                <p className="font-semibold text-gray-900">{nombre}</p>
-                <p className="text-sm text-gray-500">{detalle} — {zona}</p>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
+
       </div>
 
       {/* CTA final */}
