@@ -2,6 +2,16 @@ import { useState } from 'react'
 import { AlertCircle, CheckCircle, X, Paperclip } from 'lucide-react'
 import { crearTicket } from '../services/tickets.service.js'
 
+const EXPLICACION_CHEQUE = `Documentación a adjuntar para la evaluación crediticia del garante:
+
+• En caso de presentar cheque de pago diferido físico, deberá adjuntarse una fotografía clara del cheque en blanco, donde se visualicen correctamente sus datos identificatorios.
+
+• En caso de presentar cheque electrónico (Echeq), deberá adjuntarse una captura de pantalla de la simulación del cheque, en la que consten de manera visible la razón social o nombre y apellido del librador y su CUIT.
+
+La documentación requerida será utilizada exclusivamente para verificar la situación crediticia de la persona física o jurídica que postula como garante del crédito.
+
+En caso de aprobarse el crédito, el cheque de pago diferido presentado como garantía deberá ser completado y entregado en la Agencia Calidad San Juan al momento de la firma del convenio correspondiente.`
+
 const inputBase =
   'w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed transition-colors text-sm'
 
@@ -118,6 +128,7 @@ export default function FormularioDinamico({ formularioId, programa, title, camp
   const [loading, setLoading] = useState(false)
   const [mensaje, setMensaje] = useState(null)
   const [errores, setErrores] = useState({})
+  const [tooltipCheque, setTooltipCheque] = useState(false)
 
   const camposOrdenados = [...campos].sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0))
 
@@ -196,6 +207,31 @@ export default function FormularioDinamico({ formularioId, programa, title, camp
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+      {tooltipCheque && (
+        <div
+          className="fixed inset-0 bg-black/60 z-[60] flex items-center justify-center p-4"
+          onClick={() => setTooltipCheque(false)}
+        >
+          <div
+            className="bg-white rounded-xl shadow-xl max-w-lg w-full p-6"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 className="font-bold text-gray-900 text-base mb-3">
+              Garantía — Copia del Cheque
+            </h3>
+            <p className="text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">
+              {EXPLICACION_CHEQUE}
+            </p>
+            <button
+              type="button"
+              onClick={() => setTooltipCheque(false)}
+              className="mt-5 px-5 py-2 bg-orange-600 hover:bg-orange-700 text-white text-sm font-semibold rounded-lg transition-colors"
+            >
+              Entendido
+            </button>
+          </div>
+        </div>
+      )}
       <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="sticky top-0 bg-gradient-to-r from-orange-600 to-orange-700 px-4 sm:px-6 py-4 flex items-center justify-between gap-3 z-10">
@@ -321,6 +357,15 @@ export default function FormularioDinamico({ formularioId, programa, title, camp
                             <label className="block text-sm font-semibold text-gray-700 mb-1.5">
                               {campo.label}
                               {campo.requerido && <span className="text-red-500 ml-1">*</span>}
+                              {campo.campo === 'cf_garantia_cheque' && (
+                                <button
+                                  type="button"
+                                  onClick={() => setTooltipCheque(true)}
+                                  className="ml-2 inline-flex items-center gap-1 text-xs font-normal text-orange-600 hover:text-orange-800 transition-colors"
+                                >
+                                  ❔ ¿Por qué pedimos esto?
+                                </button>
+                              )}
                             </label>
                             <CampoInput
                               campo={campo}
