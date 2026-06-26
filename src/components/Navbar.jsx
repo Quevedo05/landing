@@ -33,14 +33,14 @@ export default function Navbar({ activeSection }) {
             <img
               src="/logo-navbar-new.png"
               alt="Agencia Calidad San Juan"
-              className="h-10 w-auto max-w-[220px] object-contain object-left sm:h-12 md:h-16 md:max-w-none"
+              className="h-10 w-auto max-w-[200px] object-contain object-left sm:h-12 md:h-14 md:max-w-[240px] lg:h-16 lg:max-w-[300px]"
             />
           </Link>
         </div>
 
         {/* Nav links */}
         <div className="flex-1 flex justify-center">
-          <ul className="hidden md:flex items-center gap-8">
+          <ul className="hidden md:flex items-center gap-5 lg:gap-8">
             {navLinks.map(({ label, href }) => (
               <li key={href}>
                 <Link
