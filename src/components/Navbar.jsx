@@ -50,7 +50,7 @@ export default function Navbar({ activeSection }) {
                     after:transition-all after:duration-300 hover:after:w-full
                     ${!transparente
                       ? 'text-gray-700 hover:text-primary after:bg-primary'
-                      : 'text-white hover:text-orange-300 after:bg-white'
+                      : 'text-gray-800 hover:text-primary after:bg-primary'
                     }`}
                 >
                   {label}
