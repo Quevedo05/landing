@@ -29,7 +29,7 @@ export default function Navbar({ activeSection }) {
 
         {/* Logo */}
         <div className="flex-1 flex items-center">
-          <Link to="/" className="flex items-center flex-shrink-0 md:-ml-40">
+          <Link to="/" className="flex items-center flex-shrink-0">
             <img
               src="/logo-navbar-new.png"
               alt="Agencia Calidad San Juan"
