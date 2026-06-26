@@ -1,5 +1,5 @@
 export default function WhatsAppButton() {
-  const phone = '542644274191'
+  const phone = '542644601222'
   const message = encodeURIComponent('Hola, me comunico desde el sitio web de la Agencia Calidad San Juan.')
 
   return (
