@@ -44,9 +44,15 @@ function SaveanLanding({ onClickEmitir }) {
     <div className="space-y-12">
       {/* Hero */}
       <div
-        className="rounded-2xl overflow-hidden text-center py-20 px-8"
-        style={{ background: 'linear-gradient(135deg, #ea580c 0%, #f97316 50%, #fbbf24 100%)' }}
+        className="rounded-2xl overflow-hidden text-center py-20 px-8 relative"
+        style={{
+          backgroundImage: 'url(/control-fitosanitario.jpeg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
       >
+        <div className="absolute inset-0 rounded-2xl" style={{ background: 'linear-gradient(135deg, rgba(234,88,12,0.88) 0%, rgba(249,115,22,0.82) 50%, rgba(251,191,36,0.80) 100%)' }} />
+        <div className="relative z-10">
         <span className="inline-block bg-white/20 text-white text-xs font-bold tracking-widest uppercase px-5 py-2 rounded-full mb-8 border border-white/30">
           Programa Provincial
         </span>
@@ -64,6 +70,7 @@ function SaveanLanding({ onClickEmitir }) {
         >
           Completar Guía de Origen →
         </button>
+        </div>
       </div>
 
       {/* ¿Qué es SAVEAN? */}
