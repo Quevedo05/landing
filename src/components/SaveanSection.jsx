@@ -2,7 +2,7 @@ import { Leaf, ArrowRight } from 'lucide-react'
 
 export default function SaveanSection() {
   return (
-    <section id="savean" className="py-20 bg-primary">
+    <section id="savean" className="py-20 bg-gradient-to-br from-orange-500 via-orange-700 to-orange-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center justify-items-center">
           <div className="text-white">
