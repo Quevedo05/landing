@@ -11,27 +11,61 @@ const CONDICIONES = {
   'MICROCRÉDITOS EMPRENDEDORES': [
     {
       titulo: 'BENEFICIARIOS ELEGIBLES',
+      texto: 'Se encuentren en alguno de los siguientes estadíos:',
       lista: [
-        'Estadío de iniciación-ejecución: emprendimientos registrados o no ante ARCA que puedan demostrar la existencia del mismo o presenten un proyecto con factibilidad económica.',
-        'Estadío de crecimiento: emprendimientos registrados ante ARCA en la actividad relacionada con el proyecto que postula.',
+        'Estadío de iniciación-ejecución: Aquellos emprendimientos que se encuentren o no registrados ante ARCA, puedan demostrar la existencia del mismo o presenten un proyecto con factibilidad económica.',
+        'Estadío de Crecimiento: Aquellos emprendimientos que se encuentren registrados ante ARCA, en la actividad relacionada con el proyecto que postula.',
       ],
     },
     {
       titulo: 'MONTO A FINANCIAR',
-      texto: 'Hasta $3.000.000,00 (si el beneficiario está registrado ante ARCA; caso contrario, hasta $1.500.000). Crédito depositado a la cuenta de los proveedores que el beneficiario presente (hasta 4).',
+      texto: 'Hasta $3.000.000,00 (si el beneficiario se encuentra registrado ante ARCA, caso contrario podrá acceder hasta $1.500.000) por beneficiario. Crédito depositado a la cuenta de los proveedores que el beneficiario presente (hasta 4).',
     },
     {
       titulo: 'COMPONENTES FINANCIABLES',
       lista: [
         'Adquisición de activos fijos, maquinarias y/o partes de maquinarias y equipamientos.',
         'Adquisición de insumos, equipamiento, dispositivos tecnológicos, materias primas destinados al proyecto.',
-        'Contratación de servicios específicos (NO servicios operativos).',
+        'Contratación de servicios específicos, NO servicios operativos.',
       ],
     },
     { titulo: 'TASA DE INTERÉS APLICABLE', texto: '50% de la tasa BADLAR.' },
     { titulo: 'GARANTÍA', texto: 'Cheque de pago diferido propio o de terceros.' },
     { titulo: 'PLAZO DE DEVOLUCIÓN', texto: '3 meses de gracia + 15 meses de devolución (18 meses en total).' },
-    { titulo: 'GASTOS DE OTORGAMIENTO 2,2%', texto: 'NO se le cobra a los beneficiarios.' },
+    {
+      titulo: 'INFORMACIÓN DEL CHEQUE',
+      texto: 'Una vez aprobado el crédito, se comunicará al beneficiario, quien deberá entregar en guarda a la Agencia el cheque de pago diferido (presentado en la solicitud), por un monto equivalente al cincuenta por ciento (50%) del monto aprobado, más los intereses correspondientes, calculados a una tasa equivalente al cincuenta por ciento (50%) de la Tasa BADLAR.',
+    },
+    {
+      titulo: 'TRANSFERENCIA DEL MONTO APROBADO',
+      texto: 'Los montos correspondientes a los créditos aprobados serán transferidos a la/s cuenta/s de los proveedores seleccionados por el beneficiario, de conformidad con los presupuestos presentados y aprobados en el marco del crédito otorgado.',
+    },
+    {
+      titulo: 'PLAZO PARA PRESENTAR VERIFICABLES',
+      texto: 'El beneficiario tendrá un plazo máximo de DOS (2) meses, contados a partir del desembolso del crédito, para presentar la documentación que permita acreditar la correcta aplicación de los fondos conforme al destino aprobado, bajo apercibimiento de exigirse el reembolso de los fondos otorgados. A tal efecto, deberá presentar los siguientes verificables:',
+      lista: [
+        'Nota de presentación de verificables, firmada por el emprendedor, conforme al modelo establecido por el programa.',
+        'Facturas por la compra de los bienes y/o contratación de los servicios, emitidas por los respectivos proveedores, de conformidad con los presupuestos aprobados.',
+        'Registro fotográfico de los bienes adquiridos, que permita acreditar su efectiva incorporación al emprendimiento, cuando corresponda.',
+        'Informe firmado por el profesional interviniente, en caso de corresponder, que detalle el servicio llevado a cabo, el impacto que dicho servicio genera en el emprendimiento y el plazo de ejecución, el cual no podrá exceder los DOS (2) meses previstos para el período de ejecución.',
+        'Cualquier otro verificable que permita acreditar la ejecución de las actividades aprobadas y la correcta aplicación de los fondos.',
+      ],
+    },
+    {
+      titulo: 'DOCUMENTACIÓN NECESARIA A PRESENTAR',
+      lista: [
+        'Completar la solicitud on line.',
+        'Copia del DNI frente y dorso; si es persona física; Persona jurídica: contrato o estatuto social, poder de representación del representante legal y copia del D.N.I del representante.',
+        'Inscripción en ARCA - con actividad acorde al proyecto que postula (en caso de corresponder).',
+        'Garantía: Cheque de pago diferido.',
+        'Fotos: mínimo tres (3) fotografías que permitan identificar y conocer el emprendimiento, acreditando su existencia y/o viabilidad.',
+        'Proveedor: Presupuesto + Constancia de ARCA (con actividades acorde al bien/servicio que presupuesta) + Constancia de CBU.',
+        'La Agencia realizará la consulta del informe VERAZ del solicitante y del garante, quienes deberán encontrarse en Situación 1 para acceder al financiamiento.',
+        'No tener créditos vigentes en ACSJ.',
+        'Si el beneficiario no se encuentra inscripto en ARCA, deberá presentar una Declaración Jurada comprometiéndose a realizar la inscripción dentro del plazo de tres (3) meses de aprobada la solicitud del crédito.',
+      ],
+    },
+    { nota: 'Sólo podrá presentarse UN (1) único proyecto por solicitante.' },
   ],
   'BIENES DE CAPITAL': [
     {
@@ -54,7 +88,7 @@ const CONDICIONES = {
   'POTENCIAR EMPRENDEDORES': [
     {
       titulo: 'BENEFICIARIOS ELEGIBLES',
-      texto: 'Nuevos emprendedores y aquellos emprendimientos en ejecución o etapa de crecimiento, inscriptos en ARCA en una actividad vinculada al proyecto presentado. Se priorizarán aquellos emprendimientos que generen triple impacto (económico, social y ambiental).',
+      texto: 'Nuevos emprendedores y aquellos emprendimientos que ya se encuentren en ejecución o en etapa de crecimiento, debiendo encontrarse inscriptos en ARCA en una actividad vinculada al proyecto presentado, independientemente de su antigüedad. Se priorizarán aquellos emprendimientos que generen un triple impacto, promoviendo valor económico, social y ambiental.',
     },
     {
       titulo: 'MONTO A FINANCIAR',
@@ -70,11 +104,44 @@ const CONDICIONES = {
     { titulo: 'TASA DE INTERÉS APLICABLE', texto: '40% de la tasa BADLAR.' },
     { titulo: 'GARANTÍA', texto: 'Cheque de pago diferido propio o de terceros.' },
     { titulo: 'PLAZO DE DEVOLUCIÓN', texto: '2 meses de gracia + 10 meses de devolución (12 meses en total).' },
-    { titulo: 'GASTOS DE OTORGAMIENTO 2,2%', texto: 'NO se le cobra a los beneficiarios.' },
     {
       titulo: 'MODALIDAD',
-      texto: 'Se efectuarán convocatorias para la presentación de solicitudes. Fecha de cierre del primer llamado: 30 de junio de 2026.',
+      texto: 'Se efectuarán convocatorias para la presentación de solicitudes de la línea "Potenciar Emprendedores".',
     },
+    {
+      titulo: 'INFORMACIÓN DEL CHEQUE',
+      texto: 'Una vez aprobado el crédito, se comunicará al beneficiario, quien deberá entregar en guarda a la Agencia el cheque de pago diferido (presentado en la solicitud), por un monto equivalente al cincuenta por ciento (50%) del monto aprobado, más los intereses correspondientes, calculados a una tasa equivalente al cuarenta por ciento (40%) de la Tasa BADLAR.',
+    },
+    {
+      titulo: 'TRANSFERENCIA DEL MONTO APROBADO',
+      texto: 'Los montos correspondientes a los créditos aprobados serán transferidos a la cuenta del beneficiario, de conformidad con los presupuestos presentados y aprobados en el marco del crédito otorgado.',
+    },
+    {
+      titulo: 'PLAZO PARA PRESENTAR VERIFICABLES',
+      texto: 'El beneficiario tendrá un plazo máximo de DOS (2) meses, contados a partir del desembolso del crédito, para presentar la documentación que permita acreditar la correcta aplicación de los fondos conforme al destino aprobado, bajo apercibimiento de exigirse el reembolso de los fondos otorgados. A tal efecto, deberá presentar los siguientes verificables:',
+      lista: [
+        'Nota de presentación de verificables, firmada por el emprendedor, conforme al modelo establecido por el programa.',
+        'Factura de los bienes adquiridos, correspondiente al destino aprobado del crédito.',
+        'Registro fotográfico de los bienes adquiridos, que permita acreditar su incorporación al proyecto y su correspondencia con los componentes financiables.',
+        'Cualquier otro verificable que permita acreditar la ejecución de las actividades aprobadas y la correcta aplicación de los fondos.',
+      ],
+    },
+    {
+      titulo: 'DOCUMENTACIÓN NECESARIA A PRESENTAR',
+      lista: [
+        'Completar la solicitud on line.',
+        'Copia del D.N.I. frente y dorso si es persona física; Persona jurídica: contrato o estatuto social, poder de representación del representante legal y copia del D.N.I del representante.',
+        'Inscripción en ARCA (con actividad acorde al proyecto que postula).',
+        'Certificado Mi PYME vigente, categoría permitida micro empresas.',
+        'Garantía: Cheque de pago diferido.',
+        'Fotos: mínimo tres (3) fotografías que permitan identificar y conocer el emprendimiento, acreditando su existencia.',
+        'Constancia de CBU beneficiario.',
+        'Proveedor: Presupuesto + Constancia de ARCA (con actividades acorde al bien/servicio que presupuesta).',
+        'La Agencia realizará la consulta del informe VERAZ del solicitante y del garante, quienes deberán encontrarse en Situación 1 para acceder al financiamiento.',
+        'No tener créditos vigentes en ACSJ.',
+      ],
+    },
+    { nota: 'Sólo podrá presentarse UN (1) único proyecto por solicitante.' },
   ],
 }
 
@@ -85,22 +152,31 @@ function DescripcionCredito({ programa }) {
 
   return (
     <div className="mt-5 pt-5 border-t border-gray-100 space-y-4">
-      {secciones.map((sec, i) => (
-        <div key={i}>
-          <p className="text-xs font-bold text-primary uppercase tracking-widest mb-1.5">{sec.titulo}</p>
-          {sec.texto && <p className="text-sm text-gray-600 leading-relaxed">{sec.texto}</p>}
-          {sec.lista && (
-            <ul className="space-y-1.5 mt-1">
-              {sec.lista.map((item, j) => (
-                <li key={j} className="flex gap-2.5 text-sm text-gray-600">
-                  <span className="w-1 h-1 rounded-full bg-primary flex-shrink-0 mt-2" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      ))}
+      {secciones.map((sec, i) => {
+        if (sec.nota) {
+          return (
+            <p key={i} className="text-sm font-semibold text-orange-700 border-t border-orange-100 pt-4">
+              {sec.nota}
+            </p>
+          )
+        }
+        return (
+          <div key={i}>
+            <p className="text-xs font-bold text-primary uppercase tracking-widest mb-1.5">{sec.titulo}</p>
+            {sec.texto && <p className="text-sm text-gray-600 leading-relaxed">{sec.texto}</p>}
+            {sec.lista && (
+              <ul className="space-y-1.5 mt-1">
+                {sec.lista.map((item, j) => (
+                  <li key={j} className="flex gap-2.5 text-sm text-gray-600">
+                    <span className="w-1 h-1 rounded-full bg-primary flex-shrink-0 mt-2" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )
+      })}
     </div>
   )
 }
