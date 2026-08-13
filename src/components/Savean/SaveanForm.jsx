@@ -4,8 +4,8 @@ import SaveanQRPDF from './SaveanQRPDF'
 
 const ESPECIES = ['Vid', 'Tomate', 'Pimiento', 'Olivo', 'Pistacho', 'Ajo', 'Cebolla', 'Otro']
 const VARIEDADES_VID = ['Cabernet Sauvignon', 'Malbec', 'Syrah', 'Chardonnay', 'Torrontés', 'Otra']
-const GRADOS_SELECCION = ['Extra', 'Primera', 'Segunda']
-const TIPOS_ENVASE = ['Caja', 'Bolsa', 'Balde', 'Contenedor', 'Otro']
+const VID_DESTINOS = ['Vino', 'Mosto', 'Pasa', 'Fresco', 'Mesa']
+const TIPOS_ENVASE = ['Caja', 'Bolsa', 'Balde', 'Contenedor', 'Granel', 'Otro']
 const TIPOS_TRANSPORTE = ['Camión', 'Furgoneta', 'Tractor', 'Otro']
 
 const STEPS = [
@@ -100,7 +100,7 @@ export default function SaveanForm({ onGuiaCreated }) {
     remitente: { nombre: '', renspa: '', tipo: 'Productor' },
     destinatario: { nombre: '', tipoDestino: 'interno', pais: 'Argentina', provincia: '', puntoSalida: '', mercadoInterno: '' },
     contacto: { email: '' },
-    mercaderias: [{ id: 1, especie: 'Vid', variedad: '', grado: '', tamaño: '', envase: '', cantidad: '', kilos: '' }],
+    mercaderias: [{ id: 1, especie: 'Vid', variedad: '', vidDestino: '', tamaño: '', envase: '', cantidad: '', kilos: '' }],
     transporte: { empresa: '', conductor: '', tipo: 'Camión', camionMarca: '', camionPatente: '', acopladoMarca: '', acopladoPatente: '', precintos: '' },
   })
 
@@ -124,7 +124,7 @@ export default function SaveanForm({ onGuiaCreated }) {
     const newId = Math.max(...formData.mercaderias.map((m) => m.id), 0) + 1
     setFormData((prev) => ({
       ...prev,
-      mercaderias: [...prev.mercaderias, { id: newId, especie: 'Vid', variedad: '', grado: '', tamaño: '', envase: '', cantidad: '', kilos: '' }],
+      mercaderias: [...prev.mercaderias, { id: newId, especie: 'Vid', variedad: '', vidDestino: '', tamaño: '', envase: '', cantidad: '', kilos: '' }],
     }))
   }
 
@@ -175,7 +175,7 @@ export default function SaveanForm({ onGuiaCreated }) {
         id: String(m.id),
         especie: m.especie,
         variedad: m.variedad || undefined,
-        vidDestino: [],
+        vidDestino: m.vidDestino ? [m.vidDestino] : [],
         tipoEnvase: m.envase || undefined,
         cantidadKg: (parseFloat(m.kilos) || 0) * (parseInt(m.cantidad) || 0),
         cantidadBultos: parseInt(m.cantidad) || 0,
@@ -416,27 +416,28 @@ export default function SaveanForm({ onGuiaCreated }) {
                     </FieldGroup>
                   </div>
 
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <FieldGroup label="Grado de Selección">
+                  {item.especie === 'Vid' && (
+                    <FieldGroup label="Destino de la Vid" required>
                       <select
-                        value={item.grado}
-                        onChange={(e) => handleMercaderiaChange(item.id, 'grado', e.target.value)}
+                        value={item.vidDestino}
+                        onChange={(e) => handleMercaderiaChange(item.id, 'vidDestino', e.target.value)}
                         className={fieldCls}
                       >
                         <option value="">Seleccionar...</option>
-                        {GRADOS_SELECCION.map((g) => <option key={g}>{g}</option>)}
+                        {VID_DESTINOS.map((d) => <option key={d}>{d}</option>)}
                       </select>
                     </FieldGroup>
-                    <FieldGroup label="Tamaño">
-                      <input
-                        type="text"
-                        value={item.tamaño}
-                        onChange={(e) => handleMercaderiaChange(item.id, 'tamaño', e.target.value)}
-                        className={fieldCls}
-                        placeholder="Grande, Mediano..."
-                      />
-                    </FieldGroup>
-                  </div>
+                  )}
+
+                  <FieldGroup label="Tamaño">
+                    <input
+                      type="text"
+                      value={item.tamaño}
+                      onChange={(e) => handleMercaderiaChange(item.id, 'tamaño', e.target.value)}
+                      className={fieldCls}
+                      placeholder="Grande, Mediano..."
+                    />
+                  </FieldGroup>
 
                   <div className="grid sm:grid-cols-3 gap-4">
                     <FieldGroup label="Tipo Envase" required>
