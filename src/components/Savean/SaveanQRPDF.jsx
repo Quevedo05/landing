@@ -163,7 +163,7 @@ export default function SaveanQRPDF({ guia }) {
                     'Lugar Empaque',
                     'Especie',
                     'Variedad',
-                    'Grado',
+                    'Destino',
                     'Tamaño',
                     'Tipo Envase',
                     'Bultos',
@@ -183,7 +183,7 @@ export default function SaveanQRPDF({ guia }) {
                     <td style={td}></td>
                     <td style={td}>{m.especie}</td>
                     <td style={td}>{m.variedad}</td>
-                    <td style={td}>{m.grado}</td>
+                    <td style={td}>{m.vidDestino || ''}</td>
                     <td style={td}>{m.tamaño}</td>
                     <td style={td}>{m.envase}</td>
                     <td style={{ ...td, textAlign: 'center' }}>{m.cantidad}</td>
