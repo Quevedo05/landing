@@ -1,10 +1,14 @@
+import { useState } from 'react'
 import { programas } from '../data/programas'
-import { CreditCard, Star, Sun, DollarSign, Percent, AlertCircle } from 'lucide-react'
+import { CreditCard, Star, Sun, DollarSign, Percent, AlertCircle, FileText } from 'lucide-react'
 import SectionHeader from './ui/SectionHeader'
+import ProgramaDetalleModal from './ProgramaDetalleModal'
 
 const iconMap = { CreditCard, Star, Sun }
 
 export default function Programas() {
+  const [modalPrograma, setModalPrograma] = useState(null)
+
   return (
     <section id="programas" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -58,6 +62,16 @@ export default function Programas() {
                         <span className="text-xs text-orange-700 font-medium">{p.extra}</span>
                       </div>
                     )}
+
+                    {p.detalles && (
+                      <button
+                        onClick={() => setModalPrograma(p)}
+                        className="w-full flex items-center justify-center gap-2 mt-1 border border-orange-200 hover:border-orange-400 hover:bg-orange-50 text-orange-700 font-medium text-sm rounded-lg px-4 py-2.5 transition-colors"
+                      >
+                        <FileText size={14} />
+                        Ver requisitos completos
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -65,6 +79,13 @@ export default function Programas() {
           })}
         </div>
       </div>
+
+      {modalPrograma && (
+        <ProgramaDetalleModal
+          programa={modalPrograma}
+          onClose={() => setModalPrograma(null)}
+        />
+      )}
     </section>
   )
 }
