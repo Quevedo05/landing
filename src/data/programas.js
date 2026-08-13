@@ -97,7 +97,7 @@ export const programas = [
     description: 'Para nuevos emprendedores y emprendimientos en ejecución o crecimiento.',
     monto: '$4.000.000',
     tasa: '40% BADLAR',
-    extra: 'Primer llamado: cierra el 30/06/2026',
+    extra: null,
     link: null,
     detalles: [
       {
