@@ -3,8 +3,8 @@ import { AlertCircle, Plus, Trash2, Check, ChevronRight, ChevronLeft } from 'luc
 import SaveanQRPDF from './SaveanQRPDF'
 
 const ESPECIES = ['Vid', 'Tomate', 'Pimiento', 'Olivo', 'Pistacho', 'Ajo', 'Cebolla', 'Otro']
-const VARIEDADES_VID = ['Cabernet Sauvignon', 'Malbec', 'Syrah', 'Chardonnay', 'Torrontés', 'Otra']
-const VID_DESTINOS = ['Vino', 'Mosto', 'Pasa', 'Fresco', 'Mesa']
+const VARIEDADES_VID = ['Cereza', 'Flame Seedless', 'Cabernet Sauvignon', 'Malbec', 'Syrah', 'Chardonnay', 'Torrontés', 'Otra']
+const VID_DESTINOS = ['Vino', 'Mosto', 'Pasa', 'Mesa']
 const TIPOS_ENVASE = ['Caja', 'Bolsa', 'Balde', 'Contenedor', 'Granel', 'Otro']
 const TIPOS_TRANSPORTE = ['Camión', 'Furgoneta', 'Tractor', 'Otro']
 
@@ -460,7 +460,7 @@ export default function SaveanForm({ onGuiaCreated }) {
                         min="0"
                       />
                     </FieldGroup>
-                    <FieldGroup label="Kilos / Bulto" required>
+                    <FieldGroup label="Kg / Lt / Bulto" required>
                       <input
                         type="number"
                         value={item.kilos}
