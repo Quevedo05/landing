@@ -102,31 +102,65 @@ export const programas = [
     proximamente: true,
     tieneVariantesFisicaJuridica: true,
     camposPreviewFisica: [
-      { label: 'Apellido y Nombre', tipo: 'texto', placeholder: 'Ej: García, Juan Carlos', requerido: true },
-      { label: 'DNI', tipo: 'texto', placeholder: 'Ej: 28.456.789', requerido: true },
-      { label: 'CUIT / CUIL', tipo: 'texto', placeholder: 'Ej: 20-28456789-3', requerido: true },
-      { label: 'Teléfono / WhatsApp', tipo: 'texto', placeholder: 'Ej: 264 4123456', requerido: true },
-      { label: 'Correo electrónico', tipo: 'texto', placeholder: 'Ej: juan@ejemplo.com', requerido: true },
-      { label: 'Domicilio real', tipo: 'texto', placeholder: 'Calle, número, localidad', requerido: true },
-      { label: 'N° de Registro Minero', tipo: 'texto', placeholder: 'Número de registro vigente (Ministerio de Minería)', requerido: true },
-      { label: 'Departamento donde desarrolla la actividad', tipo: 'selector', opciones: ['Iglesia', 'Calingasta', 'Valle Fértil', 'Jáchal', 'Sarmiento', 'Angaco'], requerido: true },
-      { label: 'Descripción del proyecto', tipo: 'textarea', placeholder: 'Describa detalladamente el proyecto y el uso previsto del financiamiento...', requerido: true },
-      { label: 'Monto solicitado ($)', tipo: 'numero', placeholder: 'Ej: 5.000.000', requerido: true },
-      { label: 'Foto del cheque de garantía', tipo: 'archivo', placeholder: 'JPG, PNG o PDF — máx. 10 MB', requerido: true },
+      // Datos de contacto y ubicación
+      { label: 'Teléfono Móvil', tipo: 'texto', placeholder: 'Ej: 2645000000', requerido: true, seccion: 'Datos de contacto y ubicación' },
+      { label: 'Domicilio Real', tipo: 'texto', placeholder: 'Calle, número, barrio', requerido: true, seccion: 'Datos de contacto y ubicación' },
+      { label: 'Departamento donde desarrolla la actividad minera', tipo: 'selector', opciones: ['IGLESIA', 'CALINGASTA', 'VALLE FÉRTIL', 'JÁCHAL', 'SARMIENTO', 'ANGACO'], requerido: true, seccion: 'Datos de contacto y ubicación' },
+      { label: 'Tipo de actividad minera', tipo: 'selector', opciones: ['Productor Minero', 'Comerciante Minero', 'Industrial Minero'], requerido: true, seccion: 'Datos de contacto y ubicación' },
+      // Descripción del proyecto
+      { label: 'Descripción del proyecto minero', tipo: 'textarea', placeholder: 'Describa la actividad minera, los minerales a extraer o comercializar, y el destino de los fondos solicitados', requerido: true, seccion: 'Descripción del proyecto' },
+      { label: 'Destino de fondos', tipo: 'texto', placeholder: 'Ej: Compra de maquinaria de extracción, capital de trabajo para insumos', requerido: true, seccion: 'Descripción del proyecto' },
+      // Documentación del solicitante
+      { label: 'Foto Frente DNI', tipo: 'archivo', requerido: true, seccion: 'Documentación del solicitante' },
+      { label: 'Foto Dorso DNI', tipo: 'archivo', requerido: true, seccion: 'Documentación del solicitante' },
+      { label: 'Acreditación de domicilio real (factura de servicios, contrato de alquiler, comodato, etc.)', tipo: 'archivo', requerido: true, seccion: 'Documentación del solicitante' },
+      { label: 'Constancia de inscripción en ARCA', tipo: 'archivo', requerido: true, seccion: 'Documentación del solicitante' },
+      { label: 'Constancia Dirección General de Rentas San Juan (si corresponde)', tipo: 'archivo', requerido: false, seccion: 'Documentación del solicitante' },
+      { label: 'Certificado vigente de inscripción en el Registro de Productores, Comerciantes e Industriales Mineros (Ministerio de Minería de San Juan)', tipo: 'archivo', requerido: true, seccion: 'Documentación del solicitante' },
+      // Proveedores — Tramo 70%
+      { label: 'Presupuesto Formal Proveedor 1 (Tramo 70%)', tipo: 'archivo', requerido: true, seccion: 'Documentación de proveedores — Tramo 70%' },
+      { label: 'Presupuesto Formal Proveedor 2 (Tramo 70%)', tipo: 'archivo', requerido: false, seccion: 'Documentación de proveedores — Tramo 70%' },
+      { label: 'Presupuesto Formal Proveedor 3 (Tramo 70%)', tipo: 'archivo', requerido: false, seccion: 'Documentación de proveedores — Tramo 70%' },
+      { label: 'Presupuesto Formal Proveedor 4 (Tramo 70%)', tipo: 'archivo', requerido: false, seccion: 'Documentación de proveedores — Tramo 70%' },
+      { label: 'Constancia de inscripción en ARCA del proveedor (Tramo 70%)', tipo: 'archivo', requerido: true, seccion: 'Documentación de proveedores — Tramo 70%' },
+      { label: 'Constancia de CBU del proveedor (Tramo 70%)', tipo: 'archivo', requerido: true, seccion: 'Documentación de proveedores — Tramo 70%' },
+      // Tramo 30%
+      { label: 'Presupuesto para Tramo 30% (capital de trabajo / gastos directos)', tipo: 'archivo', requerido: false, seccion: 'Tramo 30% — Desembolso al beneficiario' },
+      { label: 'Constancia CBU de la cuenta bancaria del beneficiario (Tramo 30%)', tipo: 'archivo', requerido: true, seccion: 'Tramo 30% — Desembolso al beneficiario' },
+      // Garantía
+      { label: 'Garantía — Copia del Cheque de Pago Diferido', tipo: 'archivo', requerido: true, seccion: 'Garantía' },
     ],
     camposPreviewJuridica: [
-      { label: 'Razón Social', tipo: 'texto', placeholder: 'Ej: Minera San Juan S.R.L.', requerido: true },
-      { label: 'CUIT', tipo: 'texto', placeholder: 'Ej: 30-71234567-8', requerido: true },
-      { label: 'Teléfono / WhatsApp', tipo: 'texto', placeholder: 'Ej: 264 4123456', requerido: true },
-      { label: 'Correo electrónico', tipo: 'texto', placeholder: 'Ej: contacto@empresa.com.ar', requerido: true },
-      { label: 'Domicilio legal', tipo: 'texto', placeholder: 'Calle, número, localidad', requerido: true },
-      { label: 'N° de Registro Minero', tipo: 'texto', placeholder: 'Número de registro vigente (Ministerio de Minería)', requerido: true },
-      { label: 'Departamento donde desarrolla la actividad', tipo: 'selector', opciones: ['Iglesia', 'Calingasta', 'Valle Fértil', 'Jáchal', 'Sarmiento', 'Angaco'], requerido: true },
-      { label: 'Nombre del Representante Legal', tipo: 'texto', placeholder: 'Apellido y Nombre completo', requerido: true },
-      { label: 'DNI del Representante Legal', tipo: 'texto', placeholder: 'Ej: 28.456.789', requerido: true },
-      { label: 'Descripción del proyecto', tipo: 'textarea', placeholder: 'Describa detalladamente el proyecto y el uso previsto del financiamiento...', requerido: true },
-      { label: 'Monto solicitado ($)', tipo: 'numero', placeholder: 'Ej: 5.000.000', requerido: true },
-      { label: 'Foto del cheque de garantía', tipo: 'archivo', placeholder: 'JPG, PNG o PDF — máx. 10 MB', requerido: true },
+      // Datos de contacto y ubicación
+      { label: 'Teléfono Móvil', tipo: 'texto', placeholder: 'Ej: 2645000000', requerido: true, seccion: 'Datos de contacto y ubicación' },
+      { label: 'Domicilio Real', tipo: 'texto', placeholder: 'Calle, número, barrio', requerido: true, seccion: 'Datos de contacto y ubicación' },
+      { label: 'Departamento donde desarrolla la actividad minera', tipo: 'selector', opciones: ['IGLESIA', 'CALINGASTA', 'VALLE FÉRTIL', 'JÁCHAL', 'SARMIENTO', 'ANGACO'], requerido: true, seccion: 'Datos de contacto y ubicación' },
+      { label: 'Tipo de actividad minera', tipo: 'selector', opciones: ['Productor Minero', 'Comerciante Minero', 'Industrial Minero'], requerido: true, seccion: 'Datos de contacto y ubicación' },
+      // Descripción del proyecto
+      { label: 'Descripción del proyecto minero', tipo: 'textarea', placeholder: 'Describa la actividad minera, los minerales a extraer o comercializar, y el destino de los fondos solicitados', requerido: true, seccion: 'Descripción del proyecto' },
+      { label: 'Destino de fondos', tipo: 'texto', placeholder: 'Ej: Adquisición de maquinaria de extracción, capital de trabajo para insumos', requerido: true, seccion: 'Descripción del proyecto' },
+      // Documentación del solicitante (Persona Jurídica)
+      { label: 'Foto Frente DNI del representante legal', tipo: 'archivo', requerido: true, seccion: 'Documentación del solicitante' },
+      { label: 'Foto Dorso DNI del representante legal', tipo: 'archivo', requerido: true, seccion: 'Documentación del solicitante' },
+      { label: 'Acreditación de domicilio real (factura de servicios, contrato de alquiler, comodato, etc.)', tipo: 'archivo', requerido: true, seccion: 'Documentación del solicitante' },
+      { label: 'Constancia de inscripción en ARCA', tipo: 'archivo', requerido: true, seccion: 'Documentación del solicitante' },
+      { label: 'Constancia Dirección General de Rentas San Juan (si corresponde)', tipo: 'archivo', requerido: false, seccion: 'Documentación del solicitante' },
+      { label: 'Certificado vigente de inscripción en el Registro de Productores, Comerciantes e Industriales Mineros (Ministerio de Minería de San Juan)', tipo: 'archivo', requerido: true, seccion: 'Documentación del solicitante' },
+      { label: 'Estatuto Social o Contrato Constitutivo con sus modificaciones', tipo: 'archivo', requerido: true, seccion: 'Documentación del solicitante' },
+      { label: 'Acta de designación de autoridades vigente (con objeto acorde a la actividad minera)', tipo: 'archivo', requerido: true, seccion: 'Documentación del solicitante' },
+      { label: 'Constancia de inscripción en el Registro Público de Comercio', tipo: 'archivo', requerido: true, seccion: 'Documentación del solicitante' },
+      // Proveedores — Tramo 70%
+      { label: 'Presupuesto Formal Proveedor 1 (Tramo 70%)', tipo: 'archivo', requerido: true, seccion: 'Documentación de proveedores — Tramo 70%' },
+      { label: 'Presupuesto Formal Proveedor 2 (Tramo 70%)', tipo: 'archivo', requerido: false, seccion: 'Documentación de proveedores — Tramo 70%' },
+      { label: 'Presupuesto Formal Proveedor 3 (Tramo 70%)', tipo: 'archivo', requerido: false, seccion: 'Documentación de proveedores — Tramo 70%' },
+      { label: 'Presupuesto Formal Proveedor 4 (Tramo 70%)', tipo: 'archivo', requerido: false, seccion: 'Documentación de proveedores — Tramo 70%' },
+      { label: 'Constancia de inscripción en ARCA del proveedor (Tramo 70%)', tipo: 'archivo', requerido: true, seccion: 'Documentación de proveedores — Tramo 70%' },
+      { label: 'Constancia de CBU del proveedor (Tramo 70%)', tipo: 'archivo', requerido: true, seccion: 'Documentación de proveedores — Tramo 70%' },
+      // Tramo 30%
+      { label: 'Presupuesto para Tramo 30% (capital de trabajo / gastos directos)', tipo: 'archivo', requerido: false, seccion: 'Tramo 30% — Desembolso al beneficiario' },
+      { label: 'Constancia CBU de la cuenta bancaria del beneficiario (Tramo 30%)', tipo: 'archivo', requerido: true, seccion: 'Tramo 30% — Desembolso al beneficiario' },
+      // Garantía
+      { label: 'Garantía — Copia del Cheque de Pago Diferido', tipo: 'archivo', requerido: true, seccion: 'Garantía' },
     ],
     detalles: [
       {
