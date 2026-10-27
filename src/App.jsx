@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import WhatsAppButton from './components/WhatsAppButton'
@@ -10,6 +10,7 @@ import Contacto from './pages/Contacto'
 import PortalCreditos from './pages/PortalCreditos'
 import Mantenimiento from './pages/Mantenimiento'
 import ConsultarTramite from './pages/ConsultarTramite'
+import { PORTAL_CREDITOS_ACTIVO } from './config'
 
 const MANTENIMIENTO = false
 
@@ -25,7 +26,7 @@ export default function App() {
         <Route path="/programas" element={<Programas />} />
         <Route path="/savean" element={<Savean />} />
         <Route path="/contacto" element={<Contacto />} />
-        <Route path="/portal-creditos" element={<PortalCreditos />} />
+        <Route path="/portal-creditos" element={PORTAL_CREDITOS_ACTIVO ? <PortalCreditos /> : <Navigate to="/" replace />} />
         <Route path="/consultar" element={<ConsultarTramite />} />
       </Routes>
       <Footer />

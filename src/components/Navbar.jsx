@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { navLinks } from '../data/navLinks'
+import { PORTAL_CREDITOS_ACTIVO } from '../config'
 
 export default function Navbar({ activeSection }) {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -62,16 +63,18 @@ export default function Navbar({ activeSection }) {
 
         {/* CTA + hamburguesa */}
         <div className="flex-1 flex justify-end items-center gap-2">
-          <Link
-            to="/portal-creditos"
-            className={`hidden md:inline-flex items-center gap-2 text-sm font-semibold px-6 py-3 rounded-lg transition-all duration-300
-              ${!transparente
-                ? 'bg-primary text-white hover:bg-orange-600 shadow-sm'
-                : 'bg-white text-primary border border-white hover:bg-orange-50 shadow-sm'
-              }`}
-          >
-            Portal de Créditos
-          </Link>
+          {PORTAL_CREDITOS_ACTIVO && (
+            <Link
+              to="/portal-creditos"
+              className={`hidden md:inline-flex items-center gap-2 text-sm font-semibold px-6 py-3 rounded-lg transition-all duration-300
+                ${!transparente
+                  ? 'bg-primary text-white hover:bg-orange-600 shadow-sm'
+                  : 'bg-white text-primary border border-white hover:bg-orange-50 shadow-sm'
+                }`}
+            >
+              Portal de Créditos
+            </Link>
+          )}
           <button
             className="md:hidden p-2 text-gray-700 hover:text-primary transition-colors"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -98,13 +101,15 @@ export default function Navbar({ activeSection }) {
               {label}
             </Link>
           ))}
-          <Link
-            to="/portal-creditos"
-            onClick={() => setMenuOpen(false)}
-            className="btn-primary block text-center mt-2"
-          >
-            Portal de Créditos
-          </Link>
+          {PORTAL_CREDITOS_ACTIVO && (
+            <Link
+              to="/portal-creditos"
+              onClick={() => setMenuOpen(false)}
+              className="btn-primary block text-center mt-2"
+            >
+              Portal de Créditos
+            </Link>
+          )}
         </div>
       </div>
     </header>
