@@ -3,11 +3,13 @@ import { programas } from '../data/programas'
 import { CreditCard, Star, Sun, Mountain, DollarSign, Percent, AlertCircle, FileText, Clock, User, Building2 } from 'lucide-react'
 import SectionHeader from './ui/SectionHeader'
 import ProgramaDetalleModal from './ProgramaDetalleModal'
+import FormularioPreviewModal from './FormularioPreviewModal'
 
 const iconMap = { CreditCard, Star, Sun, Mountain }
 
 export default function Programas() {
   const [modalPrograma, setModalPrograma] = useState(null)
+  const [previewPrograma, setPreviewPrograma] = useState(null)
 
   return (
     <section id="programas" className="py-20 bg-white">
@@ -92,6 +94,15 @@ export default function Programas() {
                         Ver requisitos completos
                       </button>
                     )}
+                    {p.camposPreviewFisica && (
+                      <button
+                        onClick={() => setPreviewPrograma(p)}
+                        className="w-full flex items-center justify-center gap-2 mt-1 border border-amber-200 hover:border-amber-400 hover:bg-amber-50 text-amber-700 font-medium text-sm rounded-lg px-4 py-2.5 transition-colors"
+                      >
+                        <FileText size={14} />
+                        Ver formulario (vista previa)
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -104,6 +115,12 @@ export default function Programas() {
         <ProgramaDetalleModal
           programa={modalPrograma}
           onClose={() => setModalPrograma(null)}
+        />
+      )}
+      {previewPrograma && (
+        <FormularioPreviewModal
+          programa={previewPrograma}
+          onClose={() => setPreviewPrograma(null)}
         />
       )}
     </section>
