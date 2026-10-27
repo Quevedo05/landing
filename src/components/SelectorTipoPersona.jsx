@@ -1,13 +1,13 @@
 import { X, User, Building2 } from 'lucide-react'
 
-export default function SelectorTipoPersona({ fisica, juridica, onSelect, onClose }) {
+export default function SelectorTipoPersona({ fisica, juridica, onSelect, onClose, titulo }) {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8">
         {/* Header */}
         <div className="flex items-start justify-between mb-6">
           <div>
-            <h3 className="text-xl font-bold text-gray-900">Bienes de Capital</h3>
+            <h3 className="text-xl font-bold text-gray-900">{titulo || 'Seleccionar programa'}</h3>
             <p className="text-sm text-gray-500 mt-1">Seleccioná el tipo de solicitante para continuar</p>
           </div>
           <button

@@ -91,6 +91,110 @@ export const programas = [
     esBienesCapital: true,
   },
   {
+    id: 4,
+    icon: 'Mountain',
+    title: 'Desarrollo Minero',
+    description: 'Para pequeños productores, comerciantes e industriales mineros con registro vigente, destinado a adquisición de bienes de capital y capital de trabajo.',
+    monto: '$30.000.000',
+    tasa: '50% BADLAR',
+    extra: 'Registro Minero Vigente requerido',
+    link: null,
+    proximamente: true,
+    tieneVariantesFisicaJuridica: true,
+    detalles: [
+      {
+        titulo: 'BENEFICIARIOS ELEGIBLES',
+        subitems: [
+          'Personas humanas o personas jurídicas consideradas pequeños productores, comerciantes e industriales mineros.',
+          'Deben contar con Inscripción y Registro Minero Vigente en el Registro de Productores, Comerciantes e Industriales Mineros del Ministerio de Minería de San Juan.',
+          'Desarrollar su actividad minera o poseer proyectos en los departamentos de Iglesia, Calingasta, Valle Fértil, Jáchal, Sarmiento y Angaco.',
+          'En el caso de Personas Jurídicas: el objeto social debe ajustarse a la actividad minera del proyecto e ingresar inscripto en el Registro Público de Comercio.',
+        ],
+      },
+      {
+        titulo: 'MONTO A FINANCIAR',
+        texto: 'Hasta $30.000.000,00 por beneficiario.',
+      },
+      {
+        titulo: 'COMPONENTES FINANCIABLES',
+        subitems: [
+          'Adquisición de maquinaria, herramientas y equipos directamente relacionados con la ejecución del proyecto.',
+          'Adquisición de insumos necesarios para la producción y ejecución del proyecto minero.',
+          'Capital de trabajo aplicable directamente a gastos vinculados al proyecto minero aprobado.',
+        ],
+      },
+      {
+        titulo: 'TASA DE INTERÉS APLICABLE',
+        texto: '50% de la Tasa BADLAR.',
+      },
+      {
+        titulo: 'GARANTÍA',
+        subitems: [
+          'Cheque de pago diferido propio o de terceros.',
+          'Cheque físico: fotografía clara del cheque en blanco con sus datos identificatorios.',
+          'Echeq: captura de pantalla de la simulación con razón social o nombre/apellido del librador y CUIT.',
+          'Requisitos del Librador/Garante: deben figurar en "Situación Normal" (Categoría 1) en la Central de Deudores del BCRA y en el registro de cheques rechazados.',
+          'Una vez aprobado el crédito, el cheque deberá entregarse en guarda a la Agencia por el 50% del monto aprobado más intereses (50% Tasa BADLAR).',
+        ],
+      },
+      {
+        titulo: 'PLAZO DE DEVOLUCIÓN',
+        texto: '3 meses de gracia + 33 meses de devolución (36 meses en total).',
+      },
+      {
+        titulo: 'DESEMBOLSO / TRANSFERENCIA DEL MONTO APROBADO',
+        subitems: [
+          'Hasta el 70% del crédito: Transferencia directa a la/s cuenta/s bancaria/s del/los proveedor/es designados (hasta 4 proveedores).',
+          'Hasta el 30% restante: Transferencia a la cuenta bancaria del beneficiario para atender gastos directos vinculados al proyecto.',
+        ],
+      },
+      {
+        titulo: 'PLAZO DE EJECUCIÓN',
+        texto: '60 días corridos desde la fecha de efectivización de la transferencia para realizar las inversiones previstas.',
+      },
+      {
+        titulo: 'PLAZO PARA PRESENTAR VERIFICABLES',
+        texto: 'Máximo 60 días corridos desde la recepción de la transferencia. Documentación a presentar:',
+        subitems: [
+          'Factura de venta comercial emitida en debida forma por los proveedores.',
+          'Informe detallado del servicio prestado en caso de prestaciones técnicas, consultorías o asistencias profesionales.',
+          'El incumplimiento en el plazo o destino de los fondos habilita el reintegro inmediato del total adelantado y la ejecución de garantías.',
+        ],
+      },
+      {
+        titulo: 'DOCUMENTACIÓN DEL SOLICITANTE',
+        subitems: [
+          'Copia de DNI (frente y dorso), teléfono y correo electrónico.',
+          'Acreditación de domicilio real (factura de servicios, contrato de alquiler, comodato, etc.).',
+          'Constancia de Inscripción en ARCA y Dirección General de Rentas de San Juan (en caso de corresponder).',
+          'Certificado vigente de inscripción en el Registro de Productores, Comerciantes e Industriales Mineros del Ministerio de Minería de San Juan.',
+          'Personas Jurídicas: Contrato constitutivo / Estatuto social con modificaciones, acta de designación de autoridades vigente con objeto acorde a la actividad minera, e inscripción en el Registro Público de Comercio.',
+        ],
+      },
+      {
+        titulo: 'DOCUMENTACIÓN DE LOS PROVEEDORES (hasta 4)',
+        subitems: [
+          'Presupuesto formal emitido a nombre del beneficiario con detalle de bienes y/o servicios a adquirir.',
+          'Constancia de inscripción en ARCA del proveedor con actividad acorde a los bienes/servicios presupuestados.',
+          'Constancia de CBU de la cuenta bancaria del proveedor (para el tramo del 70%).',
+          'Para el tramo del 30% al beneficiario: presupuesto formal + constancia ARCA del proveedor + CBU del beneficiario.',
+        ],
+      },
+      {
+        titulo: 'OTRAS CONDICIONES',
+        subitems: [
+          'Todos los gastos de sellados, certificaciones, informes, tasaciones, tasas o impuestos quedan a exclusivo cargo del solicitante.',
+          'No podrán acceder personas condenadas por delitos dolosos, inhabilitadas, inhibidas, concursadas o fallidas.',
+          'No podrán acceder quienes registren incumplimientos vigentes en créditos anteriores con la Agencia Calidad San Juan.',
+          'No podrán acceder personas que no se encuentren en "Situación Normal" (Categoría 1) en la Central de Deudores del BCRA.',
+        ],
+      },
+      {
+        nota: 'Sólo podrá presentarse UN (1) único proyecto por solicitante.',
+      },
+    ],
+  },
+  {
     id: 3,
     icon: 'Sun',
     title: 'Potenciar Emprendedores',

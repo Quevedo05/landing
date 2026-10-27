@@ -424,6 +424,7 @@ export default function PortalCreditos() {
           juridica={selectorBienes.juridica}
           onSelect={handleTipoSeleccionado}
           onClose={() => setSelectorBienes(null)}
+          titulo={selectorBienes.nombre}
         />
       )}
 
