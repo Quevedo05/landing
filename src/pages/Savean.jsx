@@ -73,6 +73,22 @@ function SaveanLanding({ onClickEmitir }) {
         </div>
       </div>
 
+      {/* Video institucional */}
+      <div>
+        <h3 className="text-2xl font-bold text-gray-900 mb-5 border-l-4 border-orange-500 pl-4">
+          Conocé SAVEAN
+        </h3>
+        <div className="rounded-2xl overflow-hidden bg-black shadow-xl aspect-video">
+          <iframe
+            className="w-full h-full"
+            src="https://www.youtube.com/embed/OL2PCOQw_dk"
+            title="Conocé SAVEAN"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        </div>
+      </div>
+
       {/* ¿Qué es SAVEAN? */}
       <div>
         <h3 className="text-2xl font-bold text-gray-900 mb-5 border-l-4 border-orange-500 pl-4">
