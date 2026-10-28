@@ -103,7 +103,11 @@ export const programas = [
     tieneVariantesFisicaJuridica: true,
     camposPreviewFisica: [
       // Datos de contacto y ubicación
+      { label: 'Nombre y Apellido', tipo: 'texto', placeholder: 'Ej: Juan García', requerido: true, seccion: 'Datos de contacto y ubicación' },
+      { label: 'Fecha de Nacimiento', tipo: 'fecha', requerido: true, seccion: 'Datos de contacto y ubicación' },
       { label: 'Teléfono Móvil', tipo: 'texto', placeholder: 'Ej: 2645000000', requerido: true, seccion: 'Datos de contacto y ubicación' },
+      { label: 'CUIT', tipo: 'texto', placeholder: 'Ej: 20-12345678-9', requerido: true, seccion: 'Datos de contacto y ubicación' },
+      { label: 'Mail', tipo: 'texto', placeholder: 'Ej: ejemplo@correo.com', requerido: true, seccion: 'Datos de contacto y ubicación' },
       { label: 'Domicilio Real', tipo: 'texto', placeholder: 'Calle, número, barrio', requerido: true, seccion: 'Datos de contacto y ubicación' },
       { label: 'Departamento donde desarrolla la actividad minera', tipo: 'selector', opciones: ['IGLESIA', 'CALINGASTA', 'VALLE FÉRTIL', 'JÁCHAL', 'SARMIENTO', 'ANGACO'], requerido: true, seccion: 'Datos de contacto y ubicación' },
       { label: 'Tipo de actividad minera', tipo: 'selector', opciones: ['Productor Minero', 'Comerciante Minero', 'Industrial Minero'], requerido: true, seccion: 'Datos de contacto y ubicación' },
@@ -132,6 +136,9 @@ export const programas = [
     ],
     camposPreviewJuridica: [
       // Datos de contacto y ubicación
+      { label: 'Razón Social', tipo: 'texto', requerido: true, seccion: 'Datos de contacto y ubicación' },
+      { label: 'CUIT', tipo: 'texto', placeholder: 'Ej: 30-12345678-9', requerido: true, seccion: 'Datos de contacto y ubicación' },
+      { label: 'Nombre y Apellido (Representante legal)', tipo: 'texto', requerido: true, seccion: 'Datos de contacto y ubicación' },
       { label: 'Teléfono Móvil', tipo: 'texto', placeholder: 'Ej: 2645000000', requerido: true, seccion: 'Datos de contacto y ubicación' },
       { label: 'Domicilio Real', tipo: 'texto', placeholder: 'Calle, número, barrio', requerido: true, seccion: 'Datos de contacto y ubicación' },
       { label: 'Departamento donde desarrolla la actividad minera', tipo: 'selector', opciones: ['IGLESIA', 'CALINGASTA', 'VALLE FÉRTIL', 'JÁCHAL', 'SARMIENTO', 'ANGACO'], requerido: true, seccion: 'Datos de contacto y ubicación' },
@@ -160,7 +167,9 @@ export const programas = [
       { label: 'Presupuesto para Tramo 30% (capital de trabajo / gastos directos)', tipo: 'archivo', requerido: false, seccion: 'Tramo 30% — Desembolso al beneficiario' },
       { label: 'Constancia CBU de la cuenta bancaria del beneficiario (Tramo 30%)', tipo: 'archivo', requerido: true, seccion: 'Tramo 30% — Desembolso al beneficiario' },
       // Garantía
-      { label: 'Garantía — Copia del Cheque de Pago Diferido', tipo: 'archivo', requerido: true, seccion: 'Garantía' },
+      { label: 'Garantía - Copia del Cheque de Pago Diferido', tipo: 'archivo', requerido: true, seccion: 'Garantía' },
+      // Contacto
+      { label: 'Mail', tipo: 'texto', placeholder: 'Ej: ejemplo@correo.com', requerido: true, seccion: 'Datos de contacto y ubicación' },
     ],
     detalles: [
       {
