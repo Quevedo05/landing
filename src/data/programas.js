@@ -91,6 +91,121 @@ export const programas = [
     esBienesCapital: true,
   },
   {
+    id: 5,
+    icon: 'Gem',
+    title: 'Formalización Minera',
+    description: 'Para pequeños productores, comerciantes e industriales mineros que buscan formalizarse mediante el acceso a un Aporte No Reembolsable para su incorporación al Registro Minero.',
+    monto: '$8.000.000',
+    tasa: 'ANR',
+    extra: 'Aporte No Reembolsable — sin devolución',
+    link: null,
+    proximamente: true,
+    tieneVariantesFisicaJuridica: true,
+    camposPreviewFisica: [
+      // Datos de contacto y ubicación
+      { label: 'Nombre y Apellido', tipo: 'texto', placeholder: 'Ej: Juan García', requerido: true, seccion: 'Datos de contacto y ubicación' },
+      { label: 'Fecha de Nacimiento', tipo: 'fecha', requerido: true, seccion: 'Datos de contacto y ubicación' },
+      { label: 'Teléfono Móvil', tipo: 'texto', placeholder: 'Ej: 2645000000', requerido: true, seccion: 'Datos de contacto y ubicación' },
+      { label: 'CUIT', tipo: 'texto', placeholder: 'Ej: 20-12345678-9', requerido: true, seccion: 'Datos de contacto y ubicación' },
+      { label: 'Mail', tipo: 'texto', placeholder: 'Ej: ejemplo@correo.com', requerido: true, seccion: 'Datos de contacto y ubicación' },
+      { label: 'Domicilio Real', tipo: 'texto', placeholder: 'Calle, número, barrio', requerido: true, seccion: 'Datos de contacto y ubicación' },
+      { label: 'Departamento donde desarrolla la actividad minera', tipo: 'selector', opciones: ['IGLESIA', 'CALINGASTA', 'VALLE FÉRTIL', 'JÁCHAL', 'SARMIENTO', 'ANGACO'], requerido: true, seccion: 'Datos de contacto y ubicación' },
+      { label: 'Tipo de actividad minera', tipo: 'selector', opciones: ['Productor Minero', 'Comerciante Minero', 'Industrial Minero'], requerido: true, seccion: 'Datos de contacto y ubicación' },
+      // Descripción del proyecto
+      { label: 'Descripción general de la actividad a desarrollar', tipo: 'textarea', placeholder: 'Describa la actividad, los minerales a extraer o comercializar, y las acciones previstas para su formalización', requerido: true, seccion: 'Descripción del proyecto' },
+      { label: 'Servicios a contratar para la formalización', tipo: 'texto', placeholder: 'Ej: Servicios profesionales, análisis de muestras, certificaciones', requerido: true, seccion: 'Descripción del proyecto' },
+      // Documentación del solicitante
+      { label: 'Foto Frente DNI', tipo: 'archivo', requerido: true, seccion: 'Documentación del solicitante' },
+      { label: 'Foto Dorso DNI', tipo: 'archivo', requerido: true, seccion: 'Documentación del solicitante' },
+      { label: 'Acreditación de domicilio real (factura de servicios, contrato de alquiler, comodato, etc.)', tipo: 'archivo', requerido: true, seccion: 'Documentación del solicitante' },
+      { label: 'Constancia de inscripción en ARCA (si corresponde)', tipo: 'archivo', requerido: false, seccion: 'Documentación del solicitante' },
+      { label: 'Constancia Dirección General de Rentas San Juan (si corresponde)', tipo: 'archivo', requerido: false, seccion: 'Documentación del solicitante' },
+      { label: 'Proyecto con descripción general de la actividad, minerales a extraer y servicios a requerir', tipo: 'archivo', requerido: true, seccion: 'Documentación del solicitante' },
+      // Documentación de proveedores
+      { label: 'Presupuesto Formal Proveedor 1', tipo: 'archivo', requerido: true, seccion: 'Documentación de proveedores (hasta 4)' },
+      { label: 'Presupuesto Formal Proveedor 2', tipo: 'archivo', requerido: false, seccion: 'Documentación de proveedores (hasta 4)' },
+      { label: 'Presupuesto Formal Proveedor 3', tipo: 'archivo', requerido: false, seccion: 'Documentación de proveedores (hasta 4)' },
+      { label: 'Presupuesto Formal Proveedor 4', tipo: 'archivo', requerido: false, seccion: 'Documentación de proveedores (hasta 4)' },
+      { label: 'Constancia de inscripción en ARCA del proveedor', tipo: 'archivo', requerido: true, seccion: 'Documentación de proveedores (hasta 4)' },
+      { label: 'Constancia de CBU del proveedor', tipo: 'archivo', requerido: true, seccion: 'Documentación de proveedores (hasta 4)' },
+    ],
+    camposPreviewJuridica: [
+      // Datos de contacto y ubicación
+      { label: 'Razón Social', tipo: 'texto', requerido: true, seccion: 'Datos de contacto y ubicación' },
+      { label: 'CUIT', tipo: 'texto', placeholder: 'Ej: 30-12345678-9', requerido: true, seccion: 'Datos de contacto y ubicación' },
+      { label: 'Nombre y Apellido (Representante legal)', tipo: 'texto', requerido: true, seccion: 'Datos de contacto y ubicación' },
+      { label: 'Teléfono Móvil', tipo: 'texto', placeholder: 'Ej: 2645000000', requerido: true, seccion: 'Datos de contacto y ubicación' },
+      { label: 'Mail', tipo: 'texto', placeholder: 'Ej: ejemplo@correo.com', requerido: true, seccion: 'Datos de contacto y ubicación' },
+      { label: 'Domicilio Real', tipo: 'texto', placeholder: 'Calle, número, barrio', requerido: true, seccion: 'Datos de contacto y ubicación' },
+      { label: 'Departamento donde desarrolla la actividad minera', tipo: 'selector', opciones: ['IGLESIA', 'CALINGASTA', 'VALLE FÉRTIL', 'JÁCHAL', 'SARMIENTO', 'ANGACO'], requerido: true, seccion: 'Datos de contacto y ubicación' },
+      { label: 'Tipo de actividad minera', tipo: 'selector', opciones: ['Productor Minero', 'Comerciante Minero', 'Industrial Minero'], requerido: true, seccion: 'Datos de contacto y ubicación' },
+      // Descripción del proyecto
+      { label: 'Descripción general de la actividad a desarrollar', tipo: 'textarea', placeholder: 'Describa la actividad, los minerales a extraer o comercializar, y las acciones previstas para su formalización', requerido: true, seccion: 'Descripción del proyecto' },
+      { label: 'Servicios a contratar para la formalización', tipo: 'texto', placeholder: 'Ej: Servicios profesionales, análisis de muestras, certificaciones', requerido: true, seccion: 'Descripción del proyecto' },
+      // Documentación del solicitante (Persona Jurídica)
+      { label: 'Foto Frente DNI del representante legal', tipo: 'archivo', requerido: true, seccion: 'Documentación del solicitante' },
+      { label: 'Foto Dorso DNI del representante legal', tipo: 'archivo', requerido: true, seccion: 'Documentación del solicitante' },
+      { label: 'Acreditación de domicilio real (factura de servicios, contrato de alquiler, comodato, etc.)', tipo: 'archivo', requerido: true, seccion: 'Documentación del solicitante' },
+      { label: 'Constancia de inscripción en ARCA (si corresponde)', tipo: 'archivo', requerido: false, seccion: 'Documentación del solicitante' },
+      { label: 'Constancia Dirección General de Rentas San Juan (si corresponde)', tipo: 'archivo', requerido: false, seccion: 'Documentación del solicitante' },
+      { label: 'Proyecto con descripción general de la actividad, minerales a extraer y servicios a requerir', tipo: 'archivo', requerido: true, seccion: 'Documentación del solicitante' },
+      { label: 'Contrato constitutivo / Estatuto social con sus modificaciones', tipo: 'archivo', requerido: true, seccion: 'Documentación del solicitante' },
+      { label: 'Acta de designación de autoridades vigente (con objeto acorde a la actividad minera)', tipo: 'archivo', requerido: true, seccion: 'Documentación del solicitante' },
+      { label: 'Constancia de inscripción en el Registro Público de Comercio', tipo: 'archivo', requerido: true, seccion: 'Documentación del solicitante' },
+      // Documentación de proveedores
+      { label: 'Presupuesto Formal Proveedor 1', tipo: 'archivo', requerido: true, seccion: 'Documentación de proveedores (hasta 4)' },
+      { label: 'Presupuesto Formal Proveedor 2', tipo: 'archivo', requerido: false, seccion: 'Documentación de proveedores (hasta 4)' },
+      { label: 'Presupuesto Formal Proveedor 3', tipo: 'archivo', requerido: false, seccion: 'Documentación de proveedores (hasta 4)' },
+      { label: 'Presupuesto Formal Proveedor 4', tipo: 'archivo', requerido: false, seccion: 'Documentación de proveedores (hasta 4)' },
+      { label: 'Constancia de inscripción en ARCA del proveedor', tipo: 'archivo', requerido: true, seccion: 'Documentación de proveedores (hasta 4)' },
+      { label: 'Constancia de CBU del proveedor', tipo: 'archivo', requerido: true, seccion: 'Documentación de proveedores (hasta 4)' },
+    ],
+    detalles: [
+      {
+        titulo: 'BENEFICIARIOS ELEGIBLES',
+        subitems: [
+          'Personas humanas o personas jurídicas consideradas pequeños productores, comerciantes e industriales mineros.',
+          'Deben contar con proyecto con descripción general de la actividad, indicando necesidades y servicios a contratar para formalizar su inscripción en el Registro de Productores, Comerciantes e Industriales Mineros del Ministerio de Minería de San Juan.',
+          'Desarrollar su actividad minera o poseer proyectos en los departamentos de Iglesia, Calingasta, Valle Fértil, Jáchal, Sarmiento y Angaco.',
+          'En el caso de Personas Jurídicas: el objeto social debe ajustarse a la actividad minera del proyecto e ingresar inscripto en el Registro Público de Comercio.',
+        ],
+      },
+      {
+        titulo: 'MONTO A FINANCIAR',
+        texto: 'Hasta $8.000.000,00 por beneficiario. Aporte No Reembolsable.',
+      },
+      {
+        titulo: 'COMPONENTES FINANCIABLES',
+        subitems: [
+          'Contratación de servicios profesionales necesarios para la presentación formal del proyecto en el Registro de Productores, Comerciantes e Industriales Mineros.',
+          'Realización de análisis de muestras necesarios para la presentación formal del proyecto.',
+          'Certificaciones necesarias para la obtención del Registro de Productores, Comerciantes e Industriales Mineros.',
+        ],
+      },
+      {
+        titulo: 'DOCUMENTACIÓN DEL SOLICITANTE',
+        subitems: [
+          'Copia de DNI (frente y dorso), teléfono y correo electrónico.',
+          'Acreditación de domicilio real (factura de servicios, contrato de alquiler, comodato, etc.).',
+          'Constancia de Inscripción en ARCA y Dirección General de Rentas de San Juan (en caso de corresponder).',
+          'Proyecto con descripción general de la actividad a desarrollar, con detalles de minerales a extraer, planificación de acciones y servicios a requerir para su formalización en el Ministerio de Minería.',
+          'Personas Jurídicas: Contrato constitutivo / Estatuto social con sus modificaciones, acta de designación de autoridades vigente con objeto acorde a la actividad minera e inscripción en el Registro Público de Comercio.',
+        ],
+      },
+      {
+        titulo: 'DOCUMENTACIÓN DE LOS PROVEEDORES (hasta 4)',
+        subitems: [
+          'Presupuesto formal emitido a nombre del beneficiario, con detalle de los bienes y/o servicios a adquirir.',
+          'Constancia de inscripción en ARCA del proveedor, con actividad declarada acorde a los bienes o servicios presupuestados.',
+          'Constancia de CBU de la cuenta bancaria del proveedor.',
+        ],
+      },
+      {
+        nota: 'Sólo podrá presentarse UN (1) único proyecto por solicitante.',
+      },
+    ],
+  },
+  {
     id: 4,
     icon: 'Mountain',
     title: 'Desarrollo Minero',
